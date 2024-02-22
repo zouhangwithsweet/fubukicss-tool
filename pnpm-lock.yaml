@@ -17,11 +17,20 @@ dependencies:
   react-feather:
     specifier: ^2.0.10
     version: 2.0.10(react@18.2.0)
+  transform-to-unocss-core:
+    specifier: ^0.0.15
+    version: 0.0.15
   unocss:
     specifier: ^0.58.5
     version: 0.58.5(postcss@8.4.35)(vite@5.1.4)
+  usehooks-ts:
+    specifier: ^2.15.0
+    version: 2.15.0(react@18.2.0)
 
 devDependencies:
+  '@figma/plugin-typings':
+    specifier: ^1.86.0
+    version: 1.86.0
   '@iconify-json/fe':
     specifier: ^1.1.10
     version: 1.1.10
@@ -653,6 +662,10 @@ packages:
   /@eslint/js@8.56.0:
     resolution: {integrity: sha512-gMsVel9D7f2HLkBma9VbtzZRehRogVRfbr++f06nL2vnCGCNlzOD+/MUov/F4p8myyAHspEhVobgjpX64q5m6A==}
     engines: {node: ^12.22.0 || ^14.17.0 || >=16.0.0}
+    dev: true
+
+  /@figma/plugin-typings@1.86.0:
+    resolution: {integrity: sha512-dtdezfZc6h2QLfj1Kd6jrmIdnBrT7Hq7FmLWa9GIuyII8enMjuX1xFidgYehoNWTDdIJOG92zXof1rvROYAgYA==}
     dev: true
 
   /@humanwhocodes/config-array@0.11.14:
@@ -3520,6 +3533,10 @@ packages:
     resolution: {integrity: sha512-TwuEnCnxbc3rAvhf/LbG7tJUDzhqXyFnv3dtzLOPgCG/hODL7WFnsbwktkD7yUV0RrreP/l1PALq/YSg6VvjlA==}
     dev: true
 
+  /lodash.debounce@4.0.8:
+    resolution: {integrity: sha512-FT1yDzDYEoYWhnSGnpE/4Kj1fLZkDFyqRb7fNt6FdYOSxlUWAtp42Eh6Wb0rGIv/m9Bgo7x4GhQbm5Ys4SG5ow==}
+    dev: false
+
   /lodash.kebabcase@4.1.1:
     resolution: {integrity: sha512-N8XRTIMMqqDgSy4VLKPnJ/+hpGZN+PHQiJnSenYqPaVV/NCqEogTnAdZLQiGKhxX+JCs8waWq2t1XHWKOmlY8g==}
     dev: true
@@ -4839,6 +4856,11 @@ packages:
     engines: {node: '>=6'}
     dev: false
 
+  /transform-to-unocss-core@0.0.15:
+    resolution: {integrity: sha512-1m+O0rStCZ4r+vHJe4MUOD61HEX05VBZ36lJqnO0T9BjfQENj+L3gQxo7sDPNWmQRSGgj5QZq1bs5VB3gKtG3w==}
+    hasBin: true
+    dev: false
+
   /ts-api-utils@1.2.1(typescript@5.3.3):
     resolution: {integrity: sha512-RIYA36cJn2WiH9Hy77hdF9r7oEwxAtB/TS9/S4Qd90Ap4z5FSiin5zEiTL44OII1Y3IIlEvxwxFUVgrHSZ/UpA==}
     engines: {node: '>=16'}
@@ -5102,6 +5124,16 @@ packages:
     dependencies:
       punycode: 2.3.1
     dev: true
+
+  /usehooks-ts@2.15.0(react@18.2.0):
+    resolution: {integrity: sha512-2bLQ632044hD1Hp879yAFOPabXfx7SbzEZYnpIiaCw6lTHiuvsNS1sc2UBVycasjvQImD6QsNERQXjKg7OuTaA==}
+    engines: {node: '>=16.15.0'}
+    peerDependencies:
+      react: ^16.8.0  || ^17 || ^18
+    dependencies:
+      lodash.debounce: 4.0.8
+      react: 18.2.0
+    dev: false
 
   /util-deprecate@1.0.2:
     resolution: {integrity: sha512-EPD5q1uXyFxJpCrLnCc1nHnq3gOa6DZBocAIiI2TaSCA7VCJ1UJDMagCzIkXNsUYfD1daK//LTEQ8xiIbrHtcw==}

@@ -7,4 +7,12 @@ export default defineConfig({
   vite: () => ({
     plugins: [react(), UnoCSS()],
   }),
+  manifest: {
+    web_accessible_resources: [
+      {
+        resources: ['/injected.js', '/assets/injected.css'],
+        matches: ['https://figma.com/*', 'https://www.figma.com/*'],
+      },
+    ],
+  },
 })
