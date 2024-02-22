@@ -6,11 +6,12 @@ import './app.css'
 
 export default () => {
   const header = useRef<HTMLElement | null>(null)
+  const initialPosition = JSON.parse(localStorage.getItem(`fubukicss_position`) || 'null')
 
   const [minimized, setMinimized] = useState(false)
   const [isDragging, setIsDragging] = useState(false)
   const [shiftPosition, setShiftPosition] = useState([0, 0])
-  const [position, setPosition] = useState([window.innerWidth - 505, 72])
+  const [position, setPosition] = useState(initialPosition || [window.innerWidth - 505, 72])
 
   function handleDragStart(e: React.MouseEvent<Element, MouseEvent>) {
     const metaPosition = header.current?.getBoundingClientRect()
@@ -21,6 +22,7 @@ export default () => {
   }
 
   function handleDragEnd() {
+    localStorage.setItem(`fubukicss_position`, JSON.stringify(position))
     setIsDragging(false)
   }
 
