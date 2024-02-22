@@ -49,7 +49,9 @@ export default () => {
   async function handleSelectionChange() {
     const node = figma.currentPage?.selection?.[0]
     setName(node?.name)
-    const cssObj = await node.getCSSAsync()
+    const cssObj = await node?.getCSSAsync?.()
+    if (cssObj === undefined) return
+
     const raw = Object.entries(cssObj)
 
     const cssCode = raw.map(([key, value]) => `${key}: ${value.replace(/\/\*.*\*\//g, '').trim()};`).join('<br/>')
@@ -148,12 +150,9 @@ export default () => {
         </div>
         <div
           className={`p-4 bg-white space-y-4`}
-          onMouseMove={(e) => {
-            e.stopPropagation()
-          }}
-          onWheel={(e) => {
-            e.stopPropagation()
-          }}
+          onMouseMove={(e) => e.stopPropagation()}
+          onWheel={(e) => e.stopPropagation()}
+          onClick={(e) => e.stopPropagation()}
         >
           {unoResult?.map((u) => (
             <div className="bg-#f5f5f5 rounded-sm">
@@ -166,10 +165,10 @@ export default () => {
                   onClick={handleCopy(u.code.replaceAll('<br/>', ''))}
                 />
               </div>
-              <div
-                className={`px-4 flex items-center overflow-auto whitespace-nowrap font-['Roboto_Mono'] ${u.title === 'css' ? 'h-auto py-4 lh-4.5' : 'h-10'}`}
+              <code
+                className={`px-4 flex items-center overflow-auto whitespace-nowrap font-['Roboto_Mono'] ${u.title === 'css' ? 'h-auto py-4 lh-4.5 language-css' : 'h-10'}`}
                 dangerouslySetInnerHTML={{ __html: u.code }}
-              ></div>
+              ></code>
             </div>
           ))}
         </div>
