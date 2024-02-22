@@ -47,8 +47,8 @@ export default () => {
   const [unoResult, setUnoResult] = useState<{ title: string; code: string }[]>()
 
   async function handleSelectionChange() {
-    const node = figma.currentPage.selection[0]
-    setName(node.name)
+    const node = figma.currentPage?.selection?.[0]
+    setName(node?.name)
     const cssObj = await node.getCSSAsync()
     const raw = Object.entries(cssObj)
 
@@ -110,7 +110,7 @@ export default () => {
     }
   }, [])
 
-  const [copiedText, copy] = useCopyToClipboard()
+  const [_, copy] = useCopyToClipboard()
 
   const handleCopy = (text: string) => () => {
     copy(text)
@@ -126,7 +126,7 @@ export default () => {
 
   return (
     <div
-      className={`fixed overflow-hidden text-xs text-#000 bg-#fff rounded shadow-md z-1000 antialiased w-80 h-auto`}
+      className={`fixed overflow-hidden text-xs text-#000 bg-#fff rounded shadow-md z-1000 antialiased h-auto transition-width ${minimized ? 'w-50' : 'w-80'}`}
       style={{
         left: position[0],
         top: position[1],
@@ -139,37 +139,40 @@ export default () => {
         minimized={minimized}
         onToggleSize={handleToggleSize}
       />
-      <div className="p-4 flex items-center border-b border-#e5e5e5 border-solid font-600 text-13px">
-        <span className="p-1 hover:bg-#e5e5e5/50 rounded-sm cursor-pointer" onClick={handleCopy(name)}>
-          {name}
-        </span>
-      </div>
-      <div
-        className="p-4 bg-white space-y-4"
-        onMouseMove={(e) => {
-          e.stopPropagation()
-        }}
-        onWheel={(e) => {
-          e.stopPropagation()
-        }}
-      >
-        {unoResult?.map((u) => (
-          <div className="bg-#f5f5f5 rounded-sm">
-            <div className="px-4 h-8 flex-center justify-between border-b border-#e5e5e5 border-solid">
-              <span className="text-#000/50 text-xs">{u.title}</span>
-              <Clipboard
-                size={16}
-                stroke="rgba(0,0,0,0.5)"
-                className="cursor-pointer"
-                onClick={handleCopy(u.code.replaceAll('<br/>', ''))}
-              />
+      {!name && !minimized && <div className="p-4 font-600 text-13px">Select Layer </div>}
+      <div className={`${minimized || !name ? 'hidden' : ''}`}>
+        <div className={`flex p-4 items-center border-b border-#e5e5e5 border-solid font-600 text-13px`}>
+          <span className="p-1 hover:bg-#e5e5e5/50 rounded-sm cursor-pointer" onClick={handleCopy(name)}>
+            {name}
+          </span>
+        </div>
+        <div
+          className={`p-4 bg-white space-y-4`}
+          onMouseMove={(e) => {
+            e.stopPropagation()
+          }}
+          onWheel={(e) => {
+            e.stopPropagation()
+          }}
+        >
+          {unoResult?.map((u) => (
+            <div className="bg-#f5f5f5 rounded-sm">
+              <div className="px-4 h-8 flex-center justify-between border-b border-#e5e5e5 border-solid">
+                <span className="text-#000/50 text-xs">{u.title}</span>
+                <Clipboard
+                  size={16}
+                  stroke="rgba(0,0,0,0.5)"
+                  className="cursor-pointer"
+                  onClick={handleCopy(u.code.replaceAll('<br/>', ''))}
+                />
+              </div>
+              <div
+                className={`px-4 flex items-center overflow-auto whitespace-nowrap font-['Roboto_Mono'] ${u.title === 'css' ? 'h-auto py-4 lh-4.5' : 'h-10'}`}
+                dangerouslySetInnerHTML={{ __html: u.code }}
+              ></div>
             </div>
-            <div
-              className={`px-4 flex items-center overflow-auto whitespace-nowrap font-['Roboto_Mono'] ${u.title === 'css' ? 'h-auto py-4 lh-4.5' : 'h-10'}`}
-              dangerouslySetInnerHTML={{ __html: u.code }}
-            ></div>
-          </div>
-        ))}
+          ))}
+        </div>
       </div>
     </div>
   )

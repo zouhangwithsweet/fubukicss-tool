@@ -19,7 +19,7 @@ const Header = forwardRef(function (
       onMouseDown={onMouseDown}
       onMouseUp={onMouseUp}
       ref={ref}
-      className={`flex items-center gap-2 px-4 py-3 border-b border-#e5e5e5 border-solid cursor-grab`}
+      className={`flex items-center gap-2 border-b border-#e5e5e5 border-solid cursor-grab transition-padding ${minimized ? 'py-2.5 px-3' : 'py-3 px-4'}`}
     >
       <img src={Logo} className="w-5 h-5 rounded" />
       <span className={`flex-1 block font-700 text-sm`}>Fubukicss Tool</span>
