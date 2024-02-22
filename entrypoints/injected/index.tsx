@@ -2,7 +2,7 @@ import ReactDOM from 'react-dom/client'
 
 import App from './App.tsx'
 
-import '@unocss/reset/tailwind.css'
+// import '@unocss/reset/tailwind.css'
 import 'uno.css'
 
 function poll(next: () => void) {
