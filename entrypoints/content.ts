@@ -1,7 +1,7 @@
 import { browser } from 'wxt/browser'
 
 export default defineContentScript({
-  matches: ['https://figma.com/*', 'https://www.figma.com/*'],
+  matches: ['https://figma.com/file/*', 'https://www.figma.com/file/*'],
   runAt: 'document_end',
   main(ctx) {
     const ui = createIntegratedUi(ctx, {
