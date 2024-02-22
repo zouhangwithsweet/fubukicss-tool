@@ -1,0 +1,31 @@
+{
+  "name": "fubukicss-tool",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "wxt",
+    "dev:firefox": "wxt --browser firefox",
+    "build": "wxt build",
+    "build:firefox": "wxt build --browser firefox",
+    "zip": "wxt zip",
+    "zip:firefox": "wxt zip --browser firefox",
+    "postinstall": "wxt prepare"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/react": "^18.2.57",
+    "@types/react-dom": "^18.2.19",
+    "@vitejs/plugin-react": "^4.2.1",
+    "typescript": "^5.3.3",
+    "wxt": "^0.16.11"
+  },
+  "dependencies": {
+    "@unocss/reset": "^0.58.5",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "unocss": "^0.58.5"
+  }
+}
