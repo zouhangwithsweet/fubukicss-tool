@@ -1,27 +1,31 @@
-import './style.css';
-import ReactDOM from 'react-dom/client';
-import App from './App.tsx';
+import ReactDOM from 'react-dom/client'
+
+import App from './App.tsx'
+
+import '@unocss/reset/tailwind.css'
+import 'uno.css'
+import './style.css'
 
 export default defineContentScript({
-  matches: ['*://figma.com/*'],
+  matches: ['https://figma.com/file/*', 'https://www.figma.com/file/*'],
   cssInjectionMode: 'ui',
 
   async main(ctx) {
     const ui = await createShadowRootUi(ctx, {
-      name: 'wxt-react-example',
+      name: 'fubukicss-tool-ui',
       position: 'inline',
       anchor: 'body',
       append: 'first',
       onMount: (container) => {
-        const root = ReactDOM.createRoot(container);
-        root.render(<App />);
-        return root;
+        const root = ReactDOM.createRoot(container)
+        root.render(<App />)
+        return root
       },
       onRemove: (root) => {
-        root?.unmount();
+        root?.unmount()
       },
-    });
+    })
 
-    ui.mount();
+    ui.mount()
   },
-});
+})

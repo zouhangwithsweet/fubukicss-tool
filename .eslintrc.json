@@ -1,0 +1,31 @@
+{
+  "parser": "@typescript-eslint/parser",
+  "parserOptions": {
+    "ecmaVersion": 2021,
+    "sourceType": "module",
+    "ecmaFeatures": {
+      "jsx": true
+    }
+  },
+  "ignorePatterns": ["~icons/**/*.jsx"],
+  "extends": ["plugin:prettier/recommended", "plugin:react-hooks/recommended", "plugin:import/warnings"],
+  "plugins": ["simple-import-sort", "import"],
+  "rules": {
+    "react-hooks/rules-of-hooks": "error",
+    "react-hooks/exhaustive-deps": "error",
+    // suppress errors for missing 'import React' in files
+    "react/react-in-jsx-scope": "off",
+    "@typescript-eslint/explicit-module-boundary-types": 0,
+    "semi": [0, "always"],
+    "simple-import-sort/imports": [
+      "error",
+      {
+        "groups": [["^@?\\w"], ["^"], ["^\\."], ["^\\u0000"]]
+      }
+    ],
+    "simple-import-sort/exports": "error",
+    "import/first": "error",
+    "import/newline-after-import": "error",
+    "import/no-duplicates": "error"
+  }
+}
