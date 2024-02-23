@@ -47,7 +47,7 @@ export const Download = (props: { minimized?: boolean }) => {
         )}
       </div>
       {imageBase64 && show && (
-        <div className="mt-4 p-4 flex-col-center bg-#f5f5f5">
+        <div className="mt-4 p-4 flex-col-center bg-#f5f5f5 rounded-sm">
           <img src={imageBase64} alt="" className="w-full max-w-60 h-auto object-contain" />
         </div>
       )}
