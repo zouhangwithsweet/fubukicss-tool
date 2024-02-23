@@ -1,12 +1,17 @@
-import { useAtom } from 'jotai'
-import { useCallback, useEffect, useRef, useState } from 'react'
+import { useAtom, useAtomValue } from 'jotai'
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import { Clipboard } from 'react-feather'
+import { toTailwindcss } from 'transform-to-tailwindcss-core'
 import { toUnocssClass } from 'transform-to-unocss-core'
 import { useCopyToClipboard } from 'usehooks-ts'
 
-import { currentSelection } from '@/entrypoints/injected/store'
+import { cssEngine, cssUnit, currentSelection } from '@/entrypoints/injected/store'
 
 export const CodeArea = (props: { minimized?: boolean }) => {
+  const engine = useAtomValue(cssEngine)
+  const unit = useAtomValue(cssUnit)
+  const isRem = useMemo(() => unit === 'rem', [unit])
+
   const [name, setName] = useState('')
   const [, setCurrentSelection] = useAtom(currentSelection)
   const [unoResult, setUnoResult] = useState<{ title: string; code: string }[]>()
@@ -30,7 +35,7 @@ export const CodeArea = (props: { minimized?: boolean }) => {
             .replace(/var\(--[\w-]*,\s*(.*)\)/g, (_, $1) => $1)
             .trim()}`,
       )
-      .map((i) => toUnocssClass(i, true)[0])
+      .map((i) => (engine === 'unocss' ? toUnocssClass(i, isRem)[0] : toTailwindcss(i, isRem)))
       .join(' ')
       .replace(/border-(\d+\.\d+|\d+)/g, (_, $1) => `border-${Number($1) * 4}`)
       .replace(/(border-[xylrtb]-)(\d+\.\d+|\d+)/g, (_, $1, $2) => `${$1}${Number($2) * 4}`)
@@ -47,7 +52,7 @@ export const CodeArea = (props: { minimized?: boolean }) => {
             .replace(/var\(--[\w-]*,\s*(.*)\)/g, (_, $1) => $1)
             .trim()}`,
       )
-      .map((i) => toUnocssClass(i, true)[0])
+      .map((i) => (engine === 'unocss' ? toUnocssClass(i, isRem)[0] : toTailwindcss(i, isRem)))
       .filter((i) => ['lh-normal', 'font-not-italic', 'bg-[url(]'].every((item) => !i.startsWith(item)))
       .join(' ')
       .replace(/border-(\d+\.\d+|\d+)/g, (_, $1) => `border-${Number($1) * 4}`)
@@ -56,11 +61,11 @@ export const CodeArea = (props: { minimized?: boolean }) => {
 
     setUnoResult([
       {
-        title: 'unocss',
+        title: engine,
         code: uno,
       },
       {
-        title: 'unocss-mini',
+        title: `${engine}-mini`,
         code: unoMini,
       },
       {
@@ -68,7 +73,11 @@ export const CodeArea = (props: { minimized?: boolean }) => {
         code: cssCode,
       },
     ])
-  }, [setCurrentSelection])
+  }, [engine, isRem, setCurrentSelection])
+
+  useEffect(() => {
+    handleSelectionChange()
+  }, [engine, handleSelectionChange])
 
   useEffect(() => {
     const canvas = document.querySelector('#fullscreen-root canvas')

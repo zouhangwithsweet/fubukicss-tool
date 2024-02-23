@@ -47,7 +47,13 @@ export const Download = (props: { minimized?: boolean }) => {
         )}
       </div>
       {imageBase64 && show && (
-        <div className="mt-4 p-4 flex-col-center bg-#f5f5f5 rounded-sm">
+        <div
+          className="mt-4 p-4 flex-col-center rounded-sm"
+          style={{
+            background:
+              'conic-gradient(#fff .25turn,#f7f7f7 .25turn .5turn,#fff .5turn .75turn,#f7f7f7 .75turn) top left/20px 20px repeat',
+          }}
+        >
           <img src={imageBase64} alt="" className="w-full max-w-60 max-h-210px h-auto object-contain" />
         </div>
       )}
