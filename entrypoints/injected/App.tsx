@@ -54,7 +54,7 @@ export default () => {
 
     const raw = Object.entries(cssObj)
 
-    const cssCode = raw.map(([key, value]) => `${key}: ${value.replace(/\/\*.*\*\//g, '').trim()};`).join('<br/>')
+    const cssCode = raw.map(([key, value]) => `${key}: ${value.replace(/\/\*.*\*\//g, '').trim()};`).join('\n')
 
     const uno = raw
       .map(
@@ -82,7 +82,7 @@ export default () => {
             .trim()}`,
       )
       .map((i) => toUnocssClass(i, true)[0])
-      .filter((i) => !i.startsWith('font-not-italic') && !i.startsWith('lh-normal'))
+      .filter((i) => ['lh-normal', 'font-not-italic', 'bg-[url(]'].every((item) => !i.startsWith(item)))
       .join(' ')
       .replace(/border-(\d+\.\d+|\d+)/g, (_, $1) => `border-${Number($1) * 4}`)
       .replace(/(border-[xylrtb]-)(\d+\.\d+|\d+)/g, (_, $1, $2) => `${$1}${Number($2) * 4}`)
@@ -126,6 +126,15 @@ export default () => {
       })
   }
 
+  const inputRef = useRef<HTMLTextAreaElement | null>(null)
+  useEffect(() => {
+    console.log(name)
+    setTimeout(() => {
+      inputRef.current!.style.height = 'auto'
+      inputRef.current!.style.height = inputRef.current!.scrollHeight - 32 + 'px'
+    }, 0)
+  }, [name])
+
   return (
     <div
       className={`fixed overflow-hidden text-xs text-#000 bg-#fff rounded shadow-md z-1000 antialiased h-auto transition-width ${minimized ? 'w-50' : 'w-80'}`}
@@ -155,7 +164,7 @@ export default () => {
           onClick={(e) => e.stopPropagation()}
         >
           {unoResult?.map((u) => (
-            <div className="bg-#f5f5f5 rounded-sm">
+            <div className="flex flex-col items-stretch bg-#f5f5f5 rounded-sm">
               <div className="px-4 h-8 flex-center justify-between border-b border-#e5e5e5 border-solid">
                 <span className="text-#000/50 text-xs">{u.title}</span>
                 <Clipboard
@@ -165,10 +174,35 @@ export default () => {
                   onClick={handleCopy(u.code.replaceAll('<br/>', ''))}
                 />
               </div>
-              <code
-                className={`px-4 flex items-center overflow-auto whitespace-nowrap font-['Roboto_Mono'] ${u.title === 'css' ? 'h-auto py-4 lh-4.5 language-css' : 'h-10'}`}
-                dangerouslySetInnerHTML={{ __html: u.code }}
-              ></code>
+              {u.title !== 'css' ? (
+                <input
+                  contentEditable
+                  onCut={(e) => e.preventDefault()}
+                  onPaste={(e) => e.preventDefault()}
+                  onSelect={(e) => {
+                    const target = e.target as HTMLInputElement
+                    const selection = target.value.substring(target.selectionStart || 0, target.selectionEnd || 0)
+                    handleCopy(selection)()
+                  }}
+                  className="px-4 h-10 flex items-center overflow-auto whitespace-nowrap font-['Roboto_Mono'] bg-#f5f5f5 cursor-text"
+                  value={u.code}
+                  readOnly
+                ></input>
+              ) : (
+                <textarea
+                  ref={inputRef}
+                  rows={1}
+                  autoComplete="off"
+                  className="px-4 h-auto py-4 lh-4.5 bg-#f5f5f5 cursor-text font-['Roboto_Mono'] resize-none"
+                  value={u.code}
+                  readOnly
+                  onSelect={(e) => {
+                    const target = e.target as HTMLInputElement
+                    const selection = target.value.substring(target.selectionStart || 0, target.selectionEnd || 0)
+                    handleCopy(selection)()
+                  }}
+                ></textarea>
+              )}
             </div>
           ))}
         </div>

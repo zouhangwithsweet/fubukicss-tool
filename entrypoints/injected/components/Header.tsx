@@ -1,7 +1,7 @@
 import { ForwardedRef, forwardRef, MouseEvent } from 'react'
 import { Maximize2, Minimize2 } from 'react-feather'
 
-import Logo from '@/entrypoints/assets/unocss.png'
+import Logo from '@/entrypoints/assets/fubukicss.svg'
 
 interface Props {
   onMouseDown: (e: MouseEvent) => void
