@@ -34,6 +34,7 @@
   },
   "dependencies": {
     "@unocss/reset": "^0.58.5",
+    "jotai": "^2.6.5",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-feather": "^2.0.10",

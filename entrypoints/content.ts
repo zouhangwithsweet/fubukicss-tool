@@ -24,7 +24,7 @@ export default defineContentScript({
 
         container.classList.add('fubuki-css')
 
-        document.body.appendChild(container)
+        root.appendChild(container)
       },
     })
 
