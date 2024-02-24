@@ -53,7 +53,7 @@ export const Colors = memo((props: { minimized?: boolean }) => {
       <div className="flex items-center gap-2">
         <span className="flex-1">Colors</span>
 
-        <Select onValueChange={(e: 'rgb') => setMode(e)}>
+        <Select onValueChange={(e: 'rgb') => setMode(e)} defaultValue={mode}>
           <SelectTrigger className="w-auto h-auto p-0 uppercase [&_span]:uppercase !shadow-[none] text-xs">
             <SelectValue placeholder={mode} className="uppercase" />
           </SelectTrigger>
