@@ -116,7 +116,7 @@ export const CodeArea = (props: { minimized?: boolean }) => {
       {!name && !props.minimized && <div className="p-4 font-600 text-13px">Select Layer </div>}
       <div className={`${props.minimized || !name ? 'hidden' : ''}`}>
         <div className={`flex p-4 items-center border-b border-#e5e5e5 border-solid font-600 text-13px`}>
-          <span className="p-1 hover:bg-#e5e5e5/50 rounded-sm cursor-pointer" onClick={handleCopy(name)}>
+          <span className="p-1 hover:bg-#e5e5e5/50 rounded-sm cursor-pointer truncate" onClick={handleCopy(name)}>
             {name}
           </span>
         </div>
