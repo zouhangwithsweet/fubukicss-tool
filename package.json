@@ -45,6 +45,7 @@
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-feather": "^2.0.10",
+    "shiki": "^1.1.7",
     "tailwind-merge": "^2.2.1",
     "transform-to-tailwindcss-core": "^0.0.14",
     "transform-to-unocss-core": "^0.0.15",
