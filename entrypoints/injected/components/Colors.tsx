@@ -69,7 +69,7 @@ export const Colors = memo((props: { minimized?: boolean }) => {
         </Select>
       </div>
       <div
-        className={`mt-4 flex flex-col max-h-60 overflow-auto scrollbar-hide space-y-.5 ${colors.length === 0 ? 'hidden' : ''}`}
+        className={`mt-4 flex-col max-h-60 overflow-auto scrollbar-hide space-y-.5 ${colors.length === 0 ? 'hidden' : 'flex'}`}
         onMouseMove={(e) => e.stopPropagation()}
         onWheel={(e) => e.stopPropagation()}
         onClick={(e) => e.stopPropagation()}
