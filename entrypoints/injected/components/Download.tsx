@@ -1,11 +1,11 @@
 import { useAtomValue } from 'jotai'
-import { useEffect, useState } from 'react'
+import { memo, useEffect, useState } from 'react'
 
 import { arrayBufferToBase64, arrayBufferToImageFile } from '@/entrypoints/utils/file'
 
 import { currentSelection, exportExt, exportScale } from '../store'
 
-export const Download = (props: { minimized?: boolean }) => {
+export const Download = memo((props: { minimized?: boolean }) => {
   const node = useAtomValue(currentSelection)
   const [imageBase64, setImageBase64] = useState('')
   const scale = useAtomValue(exportScale)
@@ -85,4 +85,4 @@ export const Download = (props: { minimized?: boolean }) => {
       )}
     </div>
   )
-}
+})

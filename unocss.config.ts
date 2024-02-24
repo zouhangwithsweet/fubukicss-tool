@@ -11,6 +11,22 @@ export default defineConfig({
       color: 'zinc',
     }),
   ],
+  rules: [
+    [
+      /^scrollbar-hide$/,
+      ([_]) => {
+        return `.scrollbar-hide{scrollbar-width:none}
+.scrollbar-hide::-webkit-scrollbar{display:none}`
+      },
+    ],
+    [
+      /^scrollbar-default$/,
+      ([_]) => {
+        return `.scrollbar-default{scrollbar-width:auto}
+.scrollbar-default::-webkit-scrollbar{display:block}`
+      },
+    ],
+  ],
   shortcuts: [
     {
       'flex-center': 'flex justify-center items-center',

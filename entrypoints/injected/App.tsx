@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from 'react'
 
 import { CodeArea } from './components/Code'
+import { Colors } from './components/Colors'
 import { Download } from './components/Download'
 import Header from './components/Header'
 
@@ -61,6 +62,8 @@ export default () => {
       <CodeArea minimized={minimized} />
 
       <Download minimized={minimized} />
+
+      <Colors minimized={minimized} />
     </div>
   )
 }

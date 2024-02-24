@@ -1,5 +1,5 @@
 import { useAtom, useAtomValue } from 'jotai'
-import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
+import { memo, useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import { Clipboard } from 'react-feather'
 import { toTailwindcss } from 'transform-to-tailwindcss-core'
 import { toUnocssClass } from 'transform-to-unocss-core'
@@ -7,7 +7,7 @@ import { useCopyToClipboard } from 'usehooks-ts'
 
 import { cssEngine, cssUnit, currentSelection } from '@/entrypoints/injected/store'
 
-export const CodeArea = (props: { minimized?: boolean }) => {
+export const CodeArea = memo((props: { minimized?: boolean }) => {
   const engine = useAtomValue(cssEngine)
   const unit = useAtomValue(cssUnit)
   const isRem = useMemo(() => unit === 'rem', [unit])
@@ -44,7 +44,7 @@ export const CodeArea = (props: { minimized?: boolean }) => {
 
     const unoMini = raw
       .filter(([key]) =>
-        ['font-feature-settings', 'font-family', 'text-transform'].every((item) => !key.startsWith(item)),
+        ['font-feature-settings', 'font-family', 'text-transform'].every((item) => !key?.startsWith(item)),
       )
       .map(
         ([key, value]) =>
@@ -54,7 +54,7 @@ export const CodeArea = (props: { minimized?: boolean }) => {
             .trim()}`,
       )
       .map((i) => (engine === 'unocss' ? toUnocssClass(i, isRem)[0] : toTailwindcss(i, isRem)))
-      .filter((i) => ['lh-normal', 'font-not-italic', 'bg-[url(]'].every((item) => !i.startsWith(item)))
+      .filter((i) => ['lh-normal', 'font-not-italic', 'bg-[url(]'].every((item) => !i?.startsWith(item)))
       .join(' ')
       .replace(/border-(\d+\.\d+|\d+)/g, (_, $1) => `border-${Number($1) * 4}`)
       .replace(/(border-[xylrtb]-)(\d+\.\d+|\d+)/g, (_, $1, $2) => `${$1}${Number($2) * 4}`)
@@ -157,7 +157,7 @@ export const CodeArea = (props: { minimized?: boolean }) => {
                   ref={inputRef}
                   rows={1}
                   autoComplete="off"
-                  className="px-4 h-auto py-4 lh-4.5 bg-#f5f5f5 cursor-text font-['Roboto_Mono'] resize-none"
+                  className="px-4 h-auto py-4 lh-4.5 bg-#f5f5f5 cursor-text font-['Roboto_Mono'] resize-none scrollbar-hide"
                   value={u.code}
                   readOnly
                   onSelect={(e) => {
@@ -174,4 +174,4 @@ export const CodeArea = (props: { minimized?: boolean }) => {
       </div>
     </>
   )
-}
+})

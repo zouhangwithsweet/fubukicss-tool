@@ -1,6 +1,6 @@
 import { CheckIcon } from '@radix-ui/react-icons'
 import { useAtom } from 'jotai'
-import { ForwardedRef, forwardRef, MouseEvent } from 'react'
+import { ForwardedRef, forwardRef, memo, MouseEvent } from 'react'
 import { Maximize2, Minimize2, Settings } from 'react-feather'
 
 import Logo from '@/entrypoints/assets/fubukicss.svg'
@@ -137,4 +137,4 @@ const Header = forwardRef(function (
   )
 })
 
-export default Header
+export default memo(Header)
