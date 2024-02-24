@@ -1,4 +1,4 @@
-export function arrayBufferToImageFile(arrayBuffer: ArrayBuffer, filename: string, type = 'image/jpeg') {
+export function arrayBufferToImageFile(arrayBuffer: ArrayBuffer | string, filename: string, type = 'image/jpg') {
   const blob = new Blob([arrayBuffer], { type }) // 假设图像是JPEG格式
   const url = URL.createObjectURL(blob)
 

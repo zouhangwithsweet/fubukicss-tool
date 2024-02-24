@@ -3,21 +3,32 @@ import { useEffect, useState } from 'react'
 
 import { arrayBufferToBase64, arrayBufferToImageFile } from '@/entrypoints/utils/file'
 
-import { currentSelection } from '../store'
+import { currentSelection, exportExt, exportScale } from '../store'
 
 export const Download = (props: { minimized?: boolean }) => {
   const node = useAtomValue(currentSelection)
   const [imageBase64, setImageBase64] = useState('')
+  const scale = useAtomValue(exportScale)
+  const ext = useAtomValue(exportExt)
+
   const [show, setShow] = useState(false)
 
   useEffect(() => {
     ;(async () => {
       if (node) {
-        const data = await node.exportAsync()
+        const data = await node.exportAsync({
+          format: 'PNG',
+          constraint: {
+            type: 'SCALE',
+            value: 1,
+          },
+        })
         setImageBase64('data:image/png;base64,' + arrayBufferToBase64(data))
+      } else {
+        setImageBase64('')
       }
     })()
-  }, [node])
+  }, [ext, node, scale])
 
   return (
     <div
@@ -37,9 +48,24 @@ export const Download = (props: { minimized?: boolean }) => {
             <span
               className="w-4 h-4 text-#000/50 hover:text-#000 cursor-pointer i-fe:download"
               onClick={async () => {
-                const data = await node?.exportAsync()
+                const data =
+                  ext === 'svg'
+                    ? await node?.exportAsync({
+                        format: 'SVG_STRING',
+                      })
+                    : await node?.exportAsync({
+                        format: ext.toUpperCase() as 'PNG',
+                        constraint: {
+                          type: 'SCALE',
+                          value: scale,
+                        },
+                      })
                 if (data) {
-                  arrayBufferToImageFile(data, node?.name || 'fubukitool.png')
+                  arrayBufferToImageFile(
+                    data,
+                    node?.name ? `${node?.name}.${ext}` : 'fubukitool.png',
+                    `image/${ext === 'svg' ? 'svg+xml' : ext}`,
+                  )
                 }
               }}
             ></span>

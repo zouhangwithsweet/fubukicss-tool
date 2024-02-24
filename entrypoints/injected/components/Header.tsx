@@ -1,10 +1,12 @@
+import { CheckIcon } from '@radix-ui/react-icons'
 import { useAtom } from 'jotai'
 import { ForwardedRef, forwardRef, MouseEvent } from 'react'
 import { Maximize2, Minimize2, Settings } from 'react-feather'
 
 import Logo from '@/entrypoints/assets/fubukicss.svg'
+import { cn } from '@/entrypoints/utils/cn'
 
-import { cssEngine, cssUnit } from '../store'
+import { cssEngine, cssUnit, exportExt, exportScale } from '../store'
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -33,6 +35,8 @@ const Header = forwardRef(function (
 ) {
   const [engine, setEngine] = useAtom(cssEngine)
   const [unit, setUnit] = useAtom(cssUnit)
+  const [ext, setExt] = useAtom(exportExt)
+  const [scale, setScale] = useAtom(exportScale)
 
   return (
     <header
@@ -54,18 +58,23 @@ const Header = forwardRef(function (
         {!minimized && (
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
-              <Settings size={16} className="mr-1 text-#000/50 hover:text-#000 cursor-pointer" />
+              <Settings size={16} className="mr-1.5 text-#000/50 hover:text-#000 cursor-pointer" />
             </DropdownMenuTrigger>
-            <DropdownMenuContent className="w-56 z-1001">
-              <DropdownMenuLabel>CSS Setting</DropdownMenuLabel>
+            <DropdownMenuContent className="w-56 z-1001 border-1 border-solid border-muted">
+              <DropdownMenuLabel>Settings</DropdownMenuLabel>
+
               <DropdownMenuSeparator />
+
               <DropdownMenuGroup>
                 <DropdownMenuSub>
                   <DropdownMenuSubTrigger>{engine}</DropdownMenuSubTrigger>
                   <DropdownMenuPortal>
-                    <DropdownMenuSubContent className="z-1002">
-                      <DropdownMenuItem onClick={() => setEngine('unocss')}>unocss</DropdownMenuItem>
-                      <DropdownMenuItem onClick={() => setEngine('tailwind')}>tailwind</DropdownMenuItem>
+                    <DropdownMenuSubContent className="z-1002 border-1 border-solid border-muted">
+                      {(['unocss', 'tailwind'] as const).map((item) => (
+                        <DropdownMenuItem onClick={() => setEngine(item)} className="flex-center justify-between">
+                          {item} <CheckIcon className={cn('h-4 w-4', item === engine ? '' : 'hidden')} />
+                        </DropdownMenuItem>
+                      ))}
                     </DropdownMenuSubContent>
                   </DropdownMenuPortal>
                 </DropdownMenuSub>
@@ -73,9 +82,46 @@ const Header = forwardRef(function (
                 <DropdownMenuSub>
                   <DropdownMenuSubTrigger>{unit}</DropdownMenuSubTrigger>
                   <DropdownMenuPortal>
-                    <DropdownMenuSubContent className="z-1002">
-                      <DropdownMenuItem onClick={() => setUnit('rem')}>rem</DropdownMenuItem>
-                      <DropdownMenuItem onClick={() => setUnit('px')}>px</DropdownMenuItem>
+                    <DropdownMenuSubContent className="z-1002 border-1 border-solid border-muted">
+                      {(['rem', 'px'] as const).map((item) => (
+                        <DropdownMenuItem onClick={() => setUnit(item)} className="flex-center justify-between">
+                          {item} <CheckIcon className={cn('h-4 w-4', item === unit ? '' : 'hidden')} />
+                        </DropdownMenuItem>
+                      ))}
+                    </DropdownMenuSubContent>
+                  </DropdownMenuPortal>
+                </DropdownMenuSub>
+              </DropdownMenuGroup>
+
+              <DropdownMenuSeparator />
+
+              <DropdownMenuGroup>
+                {/* <DropdownMenuItem disabled>export</DropdownMenuItem> */}
+                <DropdownMenuSub>
+                  <DropdownMenuSubTrigger>{scale}x</DropdownMenuSubTrigger>
+                  <DropdownMenuPortal>
+                    <DropdownMenuSubContent className="z-1002 border-1 border-solid border-muted">
+                      {([1, 1.5, 2, 3, 4] as const).map((item) => (
+                        <DropdownMenuItem className="flex-center justify-between" onClick={() => setScale(item)}>
+                          {item}x <CheckIcon className={cn('h-4 w-4', scale === item ? '' : 'hidden')} />
+                        </DropdownMenuItem>
+                      ))}
+                    </DropdownMenuSubContent>
+                  </DropdownMenuPortal>
+                </DropdownMenuSub>
+
+                <DropdownMenuSub>
+                  <DropdownMenuSubTrigger className="uppercase">{ext}</DropdownMenuSubTrigger>
+                  <DropdownMenuPortal>
+                    <DropdownMenuSubContent className="z-1002 border-1 border-solid border-muted">
+                      {(['png', 'jpg', 'svg'] as const).map((item) => (
+                        <DropdownMenuItem
+                          className="flex-center justify-between uppercase"
+                          onClick={() => setExt(item)}
+                        >
+                          {item} <CheckIcon className={cn('h-4 w-4', ext === item ? '' : 'hidden')} />
+                        </DropdownMenuItem>
+                      ))}
                     </DropdownMenuSubContent>
                   </DropdownMenuPortal>
                 </DropdownMenuSub>

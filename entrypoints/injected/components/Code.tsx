@@ -18,8 +18,9 @@ export const CodeArea = (props: { minimized?: boolean }) => {
 
   const handleSelectionChange = useCallback(async () => {
     const node = figma.currentPage?.selection?.[0]
-    node && setCurrentSelection(node)
-    setName(node?.name)
+    setCurrentSelection(node ?? null)
+    setName(node?.name ?? '')
+
     const cssObj = await node?.getCSSAsync?.()
     if (cssObj === undefined) return
 
