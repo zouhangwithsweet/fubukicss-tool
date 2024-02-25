@@ -23,7 +23,7 @@ jobs:
       - name: Run build task
         run: pnpm build
       - name: zip bundle file
-        run: zip -rj ctx.zip .output/chrome-mv3/
+        run: cd .output/chrome-mv3 && zip -r ctx.zip . && mv ctx.zip ../../
       - name: Upload package
         uses: actions/upload-artifact@v2
         with:
