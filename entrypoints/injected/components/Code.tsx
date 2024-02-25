@@ -148,7 +148,7 @@ export const CodeArea = memo((props: { minimized?: boolean }) => {
                     if (!selection.trim()) return
                     handleCopy(selection)()
                   }}
-                  className="px-4 h-10 flex items-center overflow-auto whitespace-nowrap font-['Roboto_Mono'] bg-#f5f5f5 cursor-text"
+                  className="px-4 h-10 flex items-center overflow-auto whitespace-nowrap font-['Roboto_Mono'] bg-#f5f5f5 cursor-text text-popover-foreground"
                   value={u.code}
                   readOnly
                 ></input>
@@ -158,7 +158,7 @@ export const CodeArea = memo((props: { minimized?: boolean }) => {
                     ref={inputRef}
                     rows={1}
                     autoComplete="off"
-                    className="px-4 h-auto py-4 lh-4.5 bg-#f5f5f5 cursor-text font-['Roboto_Mono'] resize-none scrollbar-hide"
+                    className="px-4 h-auto py-4 lh-4.5 bg-#f5f5f5 cursor-text font-['Roboto_Mono'] text-popover-foreground resize-none scrollbar-hide"
                     value={u.code}
                     readOnly
                     onSelect={(e) => {
