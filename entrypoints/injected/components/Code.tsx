@@ -135,7 +135,7 @@ export const CodeArea = memo((props: { minimized?: boolean }) => {
           onClick={(e) => e.stopPropagation()}
         >
           {unoResult?.map((u) => (
-            <div className="flex flex-col items-stretch bg-#f5f5f5 rounded-sm">
+            <div className="flex flex-col items-stretch bg-#f5f5f5 rounded-sm overflow-hidden">
               <div className="px-4 h-8 flex-center justify-between border-b border-#e5e5e5 border-solid">
                 <span className="text-#000/50 text-xs">{u.title}</span>
                 <Clipboard
