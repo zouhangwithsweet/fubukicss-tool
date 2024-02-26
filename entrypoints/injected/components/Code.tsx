@@ -6,6 +6,7 @@ import { toUnocssClass } from 'transform-to-unocss-core'
 import { useCopyToClipboard } from 'usehooks-ts'
 
 import { cssEngine, cssUnit, currentSelection } from '@/entrypoints/injected/store'
+import { cn } from '@/entrypoints/utils/cn'
 
 export const CodeArea = memo((props: { minimized?: boolean }) => {
   const engine = useAtomValue(cssEngine)
@@ -14,7 +15,7 @@ export const CodeArea = memo((props: { minimized?: boolean }) => {
 
   const [name, setName] = useState('')
   const [, setCurrentSelection] = useAtom(currentSelection)
-  const [unoResult, setUnoResult] = useState<{ title: string; code: string }[]>()
+  const [unoResult, setUnoResult] = useState<{ title: string; code: string; type: string }[]>()
 
   const handleSelectionChange = useCallback(async () => {
     const node = figma.currentPage?.selection?.[0]
@@ -64,14 +65,22 @@ export const CodeArea = memo((props: { minimized?: boolean }) => {
       {
         title: engine,
         code: uno,
+        type: 'class',
       },
       {
         title: `${engine}-mini`,
         code: unoMini,
+        type: 'class',
       },
       {
         title: 'css',
         code: cssCode,
+        type: 'css',
+      },
+      {
+        title: 'layout',
+        code: `width: ${node?.width}px;\nheight: ${node?.height}px;\ntop: ${node?.y}px;\nleft: ${node?.x}px;\n`,
+        type: 'css',
       },
     ])
   }, [engine, isRem, setCurrentSelection])
@@ -104,7 +113,6 @@ export const CodeArea = memo((props: { minimized?: boolean }) => {
 
   const inputRef = useRef<HTMLTextAreaElement | null>(null)
   useEffect(() => {
-    console.log(name)
     setTimeout(() => {
       inputRef.current!.style.height = 'auto'
       inputRef.current!.style.height = inputRef.current!.scrollHeight - 32 + 'px'
@@ -115,7 +123,7 @@ export const CodeArea = memo((props: { minimized?: boolean }) => {
     <>
       {!name && !props.minimized && <div className="p-4 font-600 text-13px">Select Layer </div>}
       <div className={`${props.minimized || !name ? 'hidden' : ''}`}>
-        <div className={`flex p-4 items-center border-b border-#e5e5e5 border-solid font-600 text-13px`}>
+        <div className="flex px-4 py-2 items-center border-b border-#e5e5e5 border-solid font-600 text-13px">
           <span className="p-1 hover:bg-#e5e5e5/50 rounded-sm cursor-pointer truncate" onClick={handleCopy(name)}>
             {name}
           </span>
@@ -137,7 +145,7 @@ export const CodeArea = memo((props: { minimized?: boolean }) => {
                   onClick={handleCopy(u.code.replaceAll('<br/>', ''))}
                 />
               </div>
-              {u.title !== 'css' ? (
+              {u.type !== 'css' ? (
                 <input
                   contentEditable
                   onCut={(e) => e.preventDefault()}
@@ -155,10 +163,13 @@ export const CodeArea = memo((props: { minimized?: boolean }) => {
               ) : (
                 <>
                   <textarea
-                    ref={inputRef}
-                    rows={1}
+                    ref={u.title === 'css' ? inputRef : null}
+                    rows={4}
                     autoComplete="off"
-                    className="px-4 h-auto py-4 lh-4.5 bg-#f5f5f5 cursor-text font-['Roboto_Mono'] text-popover-foreground resize-none scrollbar-hide"
+                    className={cn(
+                      "px-4 h-auto py-4 lh-4.5 bg-#f5f5f5 cursor-text font-['Roboto_Mono'] text-popover-foreground resize-none scrollbar-hide",
+                      u.title === 'layout' ? 'overflow-hidden' : '',
+                    )}
                     value={u.code}
                     readOnly
                     onSelect={(e) => {

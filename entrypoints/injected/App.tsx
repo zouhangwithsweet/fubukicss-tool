@@ -4,6 +4,7 @@ import { CodeArea } from './components/Code'
 import { Colors } from './components/Colors'
 import { Download } from './components/Download'
 import Header from './components/Header'
+import { Layout } from './components/Layout'
 
 export default () => {
   const header = useRef<HTMLElement | null>(null)
