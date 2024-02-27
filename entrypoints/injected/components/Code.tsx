@@ -98,16 +98,10 @@ export const CodeArea = memo((props: { minimized?: boolean }) => {
   }, [handleSelectionChange])
 
   useEffect(() => {
-    const layersClickHandle = (e: Event) => {
-      // hard code specially class prefix
-      if (/dev_handoff_layers.*/.test((e.target as HTMLElement).className)) {
-        handleSelectionChange()
-      }
-    }
-
-    document?.addEventListener('click', layersClickHandle)
+    const leftPanel = document.querySelector('#left-panel-container')
+    leftPanel?.addEventListener('click', handleSelectionChange)
     return () => {
-      document?.removeEventListener('click', layersClickHandle)
+      leftPanel?.removeEventListener('click', handleSelectionChange)
     }
   }, [handleSelectionChange])
 
