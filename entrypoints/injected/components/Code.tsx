@@ -97,6 +97,20 @@ export const CodeArea = memo((props: { minimized?: boolean }) => {
     }
   }, [handleSelectionChange])
 
+  useEffect(() => {
+    const layersClickHandle = (e: Event) => {
+      // hard code specially class prefix
+      if (/dev_handoff_layers.*/.test((e.target as HTMLElement).className)) {
+        handleSelectionChange()
+      }
+    }
+
+    document?.addEventListener('click', layersClickHandle)
+    return () => {
+      document?.removeEventListener('click', layersClickHandle)
+    }
+  }, [handleSelectionChange])
+
   const [_, copy] = useCopyToClipboard()
 
   const handleCopy = (text: string) => () => {
