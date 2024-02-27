@@ -1,3 +1,4 @@
+import { DividerHorizontalIcon } from '@radix-ui/react-icons'
 import { useAtom, useAtomValue } from 'jotai'
 import { memo, useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import { Clipboard } from 'react-feather'
@@ -5,12 +6,13 @@ import { toTailwindcss } from 'transform-to-tailwindcss-core'
 import { toUnocssClass } from 'transform-to-unocss-core'
 import { useCopyToClipboard } from 'usehooks-ts'
 
-import { cssEngine, cssUnit, currentSelection } from '@/entrypoints/injected/store'
+import { cssEngine, cssUnit, currentSelection, expandCode } from '@/entrypoints/injected/store'
 import { cn } from '@/entrypoints/utils/cn'
 
 export const CodeArea = memo((props: { minimized?: boolean }) => {
   const engine = useAtomValue(cssEngine)
   const unit = useAtomValue(cssUnit)
+  const [expand, setExpand] = useAtom(expandCode)
   const isRem = useMemo(() => unit === 'rem', [unit])
 
   const [name, setName] = useState('')
@@ -130,7 +132,7 @@ export const CodeArea = memo((props: { minimized?: boolean }) => {
   return (
     <>
       {!name && !props.minimized && <div className="p-4 font-600 text-13px">Select Layer </div>}
-      <div className={`${props.minimized || !name ? 'hidden' : ''}`}>
+      <div className={`relative ${props.minimized || !name ? 'hidden' : ''}`}>
         <div className="flex px-4 py-2 items-center border-b border-#e5e5e5 border-solid font-600 text-13px">
           <span className="p-1 hover:bg-#e5e5e5/50 rounded-sm cursor-pointer truncate" onClick={handleCopy(name)}>
             {name}
@@ -143,7 +145,12 @@ export const CodeArea = memo((props: { minimized?: boolean }) => {
           onClick={(e) => e.stopPropagation()}
         >
           {unoResult?.map((u) => (
-            <div className="flex flex-col items-stretch bg-#f5f5f5 rounded-sm overflow-hidden">
+            <div
+              className={cn(
+                'flex flex-col items-stretch bg-#f5f5f5 rounded-sm overflow-hidden',
+                !expand && u.type === 'css' ? '!hidden' : '',
+              )}
+            >
               <div className="px-4 h-8 flex-center justify-between border-b border-#e5e5e5 border-solid">
                 <span className="text-#000/50 text-xs">{u.title}</span>
                 <Clipboard
@@ -192,6 +199,10 @@ export const CodeArea = memo((props: { minimized?: boolean }) => {
             </div>
           ))}
         </div>
+        <DividerHorizontalIcon
+          className="absolute bottom-0 left-1/2 -translate-x-1/2 text-#000/50 hover:text-#000 cursor-pointer"
+          onClick={() => setExpand(!expand)}
+        />
       </div>
     </>
   )
