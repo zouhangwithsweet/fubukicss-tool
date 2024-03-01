@@ -1,13 +1,17 @@
 import { DividerHorizontalIcon } from '@radix-ui/react-icons'
+import { TailwindConverter } from 'css-to-tailwindcss'
 import { useAtom, useAtomValue } from 'jotai'
 import { memo, useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import { Clipboard } from 'react-feather'
-import { toTailwindcss } from 'transform-to-tailwindcss-core'
 import { toUnocssClass } from 'transform-to-unocss-core'
 import { useCopyToClipboard } from 'usehooks-ts'
 
 import { cssEngine, cssUnit, currentSelection, expandCode } from '@/entrypoints/injected/store'
 import { cn } from '@/entrypoints/utils/cn'
+
+const convert = new TailwindConverter({
+  remInPx: null,
+})
 
 export const CodeArea = memo((props: { minimized?: boolean }) => {
   const engine = useAtomValue(cssEngine)
@@ -31,37 +35,49 @@ export const CodeArea = memo((props: { minimized?: boolean }) => {
 
     const cssCode = raw.map(([key, value]) => `${key}: ${value.replace(/\/\*.*\*\//g, '').trim()};`).join('\n')
 
-    const uno = raw
-      .map(
-        ([key, value]) =>
-          `${key}: ${value
-            .replace(/\/\*.*\*\//g, '')
-            .replace(/var\(--[\w-]*,\s*(.*)\)/g, (_, $1) => $1)
-            .trim()}`,
-      )
-      .map((i) => (engine === 'unocss' ? toUnocssClass(i, isRem)[0] : toTailwindcss(i, isRem)))
-      .join(' ')
-      .replace(/border-(\d+\.\d+|\d+)/g, (_, $1) => `border-${Number($1) * 4}`)
-      .replace(/(border-[xylrtb]-)(\d+\.\d+|\d+)/g, (_, $1, $2) => `${$1}${Number($2) * 4}`)
-      .replace(/(p[xylrtb])-(\d+\.\d+|\d+)px/g, (_, $1, $2) => `${$1}-${$2 / 4}`)
+    const { nodes } = await convert.convertCSS(`.example {${cssCode}}`)
 
-    const unoMini = raw
-      .filter(([key]) =>
-        ['font-feature-settings', 'font-family', 'text-transform'].every((item) => !key?.startsWith(item)),
-      )
-      .map(
-        ([key, value]) =>
-          `${key}: ${value
-            .replace(/\/\*.*\*\//g, '')
-            .replace(/var\(--[\w-]*,\s*(.*)\)/g, (_, $1) => $1)
-            .trim()}`,
-      )
-      .map((i) => (engine === 'unocss' ? toUnocssClass(i, isRem)[0] : toTailwindcss(i, isRem)))
-      .filter((i) => ['lh-normal', 'font-not-italic', 'bg-[url(]'].every((item) => !i?.startsWith(item)))
-      .join(' ')
-      .replace(/border-(\d+\.\d+|\d+)/g, (_, $1) => `border-${Number($1) * 4}`)
-      .replace(/(border-[xylrtb]-)(\d+\.\d+|\d+)/g, (_, $1, $2) => `${$1}${Number($2) * 4}`)
-      .replace(/(p[xylrtb])-(\d+\.\d+|\d+)px/g, (_, $1, $2) => `${$1}-${$2 / 4}`)
+    const convertResult = nodes.reduce((prev, cur) => {
+      return prev + cur.tailwindClasses.join(' ')
+    }, '')
+
+    const uno =
+      engine === 'unocss'
+        ? raw
+            .map(
+              ([key, value]) =>
+                `${key}: ${value
+                  .replace(/\/\*.*\*\//g, '')
+                  .replace(/var\(--[\w-]*,\s*(.*)\)/g, (_, $1) => $1)
+                  .trim()}`,
+            )
+            .map((i) => toUnocssClass(i, isRem)[0])
+            .join(' ')
+            .replace(/border-(\d+\.\d+|\d+)/g, (_, $1) => `border-${Number($1) * 4}`)
+            .replace(/(border-[xylrtb]-)(\d+\.\d+|\d+)/g, (_, $1, $2) => `${$1}${Number($2) * 4}`)
+            .replace(/(p[xylrtb])-(\d+\.\d+|\d+)px/g, (_, $1, $2) => `${$1}-${$2 / 4}`)
+        : convertResult
+
+    const unoMini =
+      engine === 'unocss'
+        ? raw
+            .filter(([key]) =>
+              ['font-feature-settings', 'font-family', 'text-transform'].every((item) => !key?.startsWith(item)),
+            )
+            .map(
+              ([key, value]) =>
+                `${key}: ${value
+                  .replace(/\/\*.*\*\//g, '')
+                  .replace(/var\(--[\w-]*,\s*(.*)\)/g, (_, $1) => $1)
+                  .trim()}`,
+            )
+            .map((i) => toUnocssClass(i, isRem)[0])
+            .filter((i) => ['lh-normal', 'font-not-italic', 'bg-[url(]'].every((item) => !i?.startsWith(item)))
+            .join(' ')
+            .replace(/border-(\d+\.\d+|\d+)/g, (_, $1) => `border-${Number($1) * 4}`)
+            .replace(/(border-[xylrtb]-)(\d+\.\d+|\d+)/g, (_, $1, $2) => `${$1}${Number($2) * 4}`)
+            .replace(/(p[xylrtb])-(\d+\.\d+|\d+)px/g, (_, $1, $2) => `${$1}-${$2 / 4}`)
+        : convertResult
 
     setUnoResult([
       {

@@ -41,6 +41,8 @@
     "@radix-ui/react-select": "^2.0.0",
     "@unocss/reset": "^0.58.5",
     "clsx": "^2.1.0",
+    "css-to-tailwind-translator": "^1.2.8",
+    "css-to-tailwindcss": "^1.0.5",
     "jotai": "^2.6.5",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
