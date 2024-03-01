@@ -54,7 +54,7 @@ const Header = forwardRef(function (
         ></span>
       )}
       <span className="flex-1 font-700 text-sm">Fubukicss Tool</span>
-      <div className="p-.5 flex-center rounded  bg-#eee">
+      <div className="p-.5 flex-center rounded bg-#eee">
         {!minimized && (
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
@@ -71,7 +71,11 @@ const Header = forwardRef(function (
                   <DropdownMenuPortal>
                     <DropdownMenuSubContent className="z-1002 border-1 border-solid border-muted">
                       {(['unocss', 'tailwind'] as const).map((item) => (
-                        <DropdownMenuItem onClick={() => setEngine(item)} className="flex-center justify-between">
+                        <DropdownMenuItem
+                          key={item}
+                          onClick={() => setEngine(item)}
+                          className="flex-center justify-between"
+                        >
                           {item} <CheckIcon className={cn('h-4 w-4', item === engine ? '' : 'hidden')} />
                         </DropdownMenuItem>
                       ))}
@@ -84,7 +88,11 @@ const Header = forwardRef(function (
                   <DropdownMenuPortal>
                     <DropdownMenuSubContent className="z-1002 border-1 border-solid border-muted">
                       {(['rem', 'px'] as const).map((item) => (
-                        <DropdownMenuItem onClick={() => setUnit(item)} className="flex-center justify-between">
+                        <DropdownMenuItem
+                          key={item}
+                          onClick={() => setUnit(item)}
+                          className="flex-center justify-between"
+                        >
                           {item} <CheckIcon className={cn('h-4 w-4', item === unit ? '' : 'hidden')} />
                         </DropdownMenuItem>
                       ))}
@@ -102,7 +110,11 @@ const Header = forwardRef(function (
                   <DropdownMenuPortal>
                     <DropdownMenuSubContent className="z-1002 border-1 border-solid border-muted">
                       {([1, 1.5, 2, 3, 4] as const).map((item) => (
-                        <DropdownMenuItem className="flex-center justify-between" onClick={() => setScale(item)}>
+                        <DropdownMenuItem
+                          key={item}
+                          className="flex-center justify-between"
+                          onClick={() => setScale(item)}
+                        >
                           {item}x <CheckIcon className={cn('h-4 w-4', scale === item ? '' : 'hidden')} />
                         </DropdownMenuItem>
                       ))}
@@ -116,6 +128,7 @@ const Header = forwardRef(function (
                     <DropdownMenuSubContent className="z-1002 border-1 border-solid border-muted">
                       {(['png', 'jpg', 'svg'] as const).map((item) => (
                         <DropdownMenuItem
+                          key={item}
                           className="flex-center justify-between uppercase"
                           onClick={() => setExt(item)}
                         >

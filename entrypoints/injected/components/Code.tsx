@@ -22,7 +22,7 @@ export const CodeArea = memo((props: { minimized?: boolean }) => {
   const handleSelectionChange = useCallback(async () => {
     const node = figma.currentPage?.selection?.[0]
     setCurrentSelection(node ?? null)
-    setName((node.type === 'TEXT' ? node.characters : node?.name) ?? '')
+    setName((node?.type === 'TEXT' ? node?.characters : node?.name) ?? '')
 
     const cssObj = await node?.getCSSAsync?.()
     if (cssObj === undefined) return
@@ -114,7 +114,7 @@ export const CodeArea = memo((props: { minimized?: boolean }) => {
       .then(() => {
         figma.notify('Copied to clipboard')
       })
-      .catch((error: any) => {
+      .catch(() => {
         figma.notify('Failed to copy!', {
           error: true,
         })
@@ -124,8 +124,11 @@ export const CodeArea = memo((props: { minimized?: boolean }) => {
   const inputRef = useRef<HTMLTextAreaElement | null>(null)
   useEffect(() => {
     setTimeout(() => {
-      inputRef.current!.style.height = 'auto'
-      inputRef.current!.style.height = inputRef.current!.scrollHeight - 32 + 'px'
+      if (!inputRef.current) {
+        return
+      }
+      inputRef.current.style.height = 'auto'
+      inputRef.current.style.height = inputRef.current.scrollHeight - 32 + 'px'
     }, 0)
   }, [name])
 
@@ -146,6 +149,7 @@ export const CodeArea = memo((props: { minimized?: boolean }) => {
         >
           {unoResult?.map((u) => (
             <div
+              key={u.title}
               className={cn(
                 'flex flex-col items-stretch bg-#f5f5f5 rounded-sm overflow-hidden',
                 !expand && u.type === 'css' ? '!hidden' : '',
