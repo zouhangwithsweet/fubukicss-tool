@@ -139,7 +139,7 @@ export const CodeArea = memo((props: { minimized?: boolean }) => {
           </span>
         </div>
         <div
-          className={`p-4 bg-white space-y-4`}
+          className="p-4 bg-white space-y-4 js-fullscreen-prevent-event-capture"
           onMouseMove={(e) => e.stopPropagation()}
           onWheel={(e) => e.stopPropagation()}
           onClick={(e) => e.stopPropagation()}
