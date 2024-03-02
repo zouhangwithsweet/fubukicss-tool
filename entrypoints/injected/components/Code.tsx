@@ -156,7 +156,13 @@ export const CodeArea = memo((props: { minimized?: boolean }) => {
                   onClick={() => (index === 0 ? setAtomicExpand(!atomicExpand) : setExpand(!expand))}
                 >
                   <span className="text-#000/30 text-xs">{u.type}</span>
-                  <ChevronDownIcon className="block ml-auto text-#000/50 hover:text-#000 cursor-pointer" />
+                  <ChevronDownIcon
+                    className={cn(
+                      'block ml-auto text-#000/50 hover:text-#000 cursor-pointer rotate-180',
+                      index === 0 && !atomicExpand ? 'rotate-0' : '',
+                      index !== 0 && !expand ? 'rotate-0' : '',
+                    )}
+                  />
                 </div>
               ) : (
                 <span
