@@ -92,6 +92,7 @@ export const Colors = memo((props: { minimized?: boolean }) => {
       >
         {colors.slice(0, showMore ? colors.length : 3).map((c, index) => (
           <div
+            key={`${formatColor(c)}_${index}`}
             className="shrink-0 h-7.5 flex items-center p-1 box-border hover:bg-#e5e5e5/50 rounded-sm cursor-pointer"
             onClick={handleCopy(formatColor(c))}
           >
