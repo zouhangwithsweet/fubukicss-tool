@@ -14,3 +14,5 @@ export const exportScale = atomWithStorage<1 | 1.5 | 2 | 3 | 4>('fubuki_export_s
 export const colorMode = atomWithStorage<'rgb' | 'hex' | 'hsl'>('fubuki_export_color_mode', 'hex')
 
 export const expandCode = atomWithStorage<boolean>('fubuki_expand_code', true)
+
+export const expandAtomic = atomWithStorage<boolean>('fubuki_expand_atomic', true)

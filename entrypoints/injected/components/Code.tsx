@@ -1,4 +1,4 @@
-import { DividerHorizontalIcon } from '@radix-ui/react-icons'
+import { ChevronDownIcon, DividerHorizontalIcon } from '@radix-ui/react-icons'
 import { useAtom, useAtomValue } from 'jotai'
 import { memo, useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import { Clipboard } from 'react-feather'
@@ -6,13 +6,14 @@ import { toTailwindcss } from 'transform-to-tailwindcss-core'
 import { toUnocssClass } from 'transform-to-unocss-core'
 import { useCopyToClipboard } from 'usehooks-ts'
 
-import { cssEngine, cssUnit, currentSelection, expandCode } from '@/entrypoints/injected/store'
+import { cssEngine, cssUnit, currentSelection, expandAtomic, expandCode } from '@/entrypoints/injected/store'
 import { cn } from '@/entrypoints/utils/cn'
 
 export const CodeArea = memo((props: { minimized?: boolean }) => {
   const engine = useAtomValue(cssEngine)
   const unit = useAtomValue(cssUnit)
   const [expand, setExpand] = useAtom(expandCode)
+  const [atomicExpand, setAtomicExpand] = useAtom(expandAtomic)
   const isRem = useMemo(() => unit === 'rem', [unit])
 
   const [name, setName] = useState('')
@@ -142,71 +143,75 @@ export const CodeArea = memo((props: { minimized?: boolean }) => {
           </span>
         </div>
         <div
-          className="p-4 bg-white space-y-4 js-fullscreen-prevent-event-capture"
+          className="px-4 py-2 bg-white"
           onMouseMove={(e) => e.stopPropagation()}
           onWheel={(e) => e.stopPropagation()}
           onClick={(e) => e.stopPropagation()}
         >
-          {unoResult?.map((u) => (
-            <div
-              key={u.title}
-              className={cn(
-                'flex flex-col items-stretch bg-#f5f5f5 rounded-sm overflow-hidden',
-                !expand && u.type === 'css' ? '!hidden' : '',
-              )}
-            >
-              <div className="px-4 h-8 flex-center justify-between border-b border-#e5e5e5 border-solid">
-                <span className="text-#000/50 text-xs">{u.title}</span>
-                <Clipboard
-                  size={16}
-                  stroke="rgba(0,0,0,0.5)"
-                  className="cursor-pointer"
-                  onClick={handleCopy(u.code.replaceAll('<br/>', ''))}
-                />
-              </div>
-              {u.type !== 'css' ? (
-                <input
-                  contentEditable
-                  onCut={(e) => e.preventDefault()}
-                  onPaste={(e) => e.preventDefault()}
-                  onSelect={(e) => {
-                    const target = e.target as HTMLInputElement
-                    const selection = target.value.substring(target.selectionStart || 0, target.selectionEnd || 0)
-                    if (!selection.trim()) return
-                    handleCopy(selection)()
-                  }}
-                  className="px-4 h-10 flex items-center overflow-auto whitespace-nowrap font-['Roboto_Mono'] bg-#f5f5f5 cursor-text text-popover-foreground"
-                  value={u.code}
-                  readOnly
-                ></input>
+          {unoResult?.map((u, index) => (
+            <>
+              {!(index % 2) ? (
+                <div
+                  className="flex-center"
+                  onClick={() => (index === 0 ? setAtomicExpand(!atomicExpand) : setExpand(!expand))}
+                >
+                  <span className="text-#000/30 text-xs">{u.type}</span>
+                  <ChevronDownIcon className="block ml-auto text-#000/50 hover:text-#000 cursor-pointer" />
+                </div>
               ) : (
-                <>
-                  <textarea
-                    ref={u.title === 'css' ? inputRef : null}
-                    rows={4}
-                    autoComplete="off"
-                    className={cn(
-                      "px-4 h-auto py-4 lh-4.5 bg-#f5f5f5 cursor-text font-['Roboto_Mono'] text-popover-foreground resize-none scrollbar-hide",
-                      u.title === 'layout' ? 'overflow-hidden' : '',
-                    )}
+                <span
+                  className={cn(
+                    'block mx-auto h-3',
+                    u.type === 'css' && !expand ? '!hidden' : '',
+                    u.type === 'class' && !atomicExpand ? '!hidden' : '',
+                  )}
+                ></span>
+              )}
+              <div
+                key={u.title}
+                className={cn(
+                  'flex flex-col items-stretch bg-#f5f5f5 rounded-sm overflow-hidden',
+                  u.type === 'css' && !expand ? '!hidden' : '',
+                  u.type === 'class' && !atomicExpand ? '!hidden' : '',
+                )}
+              >
+                <div className="px-4 h-8 flex-center justify-between border-b border-#e5e5e5 border-solid">
+                  <span className="text-#000/50 text-xs">{u.title}</span>
+                  <Clipboard
+                    size={16}
+                    stroke="rgba(0,0,0,0.5)"
+                    className="cursor-pointer"
+                    onClick={handleCopy(u.code.replaceAll('<br/>', ''))}
+                  />
+                </div>
+                {u.type !== 'css' ? (
+                  <input
+                    contentEditable
+                    onCut={(e) => e.preventDefault()}
+                    onPaste={(e) => e.preventDefault()}
+                    className="px-4 h-10 flex items-center overflow-auto whitespace-nowrap font-['Roboto_Mono'] bg-#f5f5f5 cursor-text text-popover-foreground"
                     value={u.code}
                     readOnly
-                    onSelect={(e) => {
-                      const target = e.target as HTMLInputElement
-                      const selection = target.value.substring(target.selectionStart || 0, target.selectionEnd || 0)
-                      if (!selection.trim()) return
-                      handleCopy(selection)()
-                    }}
-                  ></textarea>
-                </>
-              )}
-            </div>
+                  ></input>
+                ) : (
+                  <>
+                    <textarea
+                      ref={u.title === 'css' ? inputRef : null}
+                      rows={4}
+                      autoComplete="off"
+                      className={cn(
+                        "px-4 h-auto py-4 lh-4.5 bg-#f5f5f5 cursor-text font-['Roboto_Mono'] text-popover-foreground resize-none scrollbar-hide",
+                        u.title === 'layout' ? 'overflow-hidden' : '',
+                      )}
+                      value={u.code}
+                      readOnly
+                    ></textarea>
+                  </>
+                )}
+              </div>
+            </>
           ))}
         </div>
-        <DividerHorizontalIcon
-          className="absolute bottom-0 left-1/2 -translate-x-1/2 text-#000/50 hover:text-#000 cursor-pointer"
-          onClick={() => setExpand(!expand)}
-        />
       </div>
     </>
   )

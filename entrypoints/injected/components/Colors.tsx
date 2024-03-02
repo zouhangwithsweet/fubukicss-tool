@@ -111,7 +111,7 @@ export const Colors = memo((props: { minimized?: boolean }) => {
           </div>
         ))}
         <ChevronDownIcon
-          className={`mx-auto w-5 h-5 shrink-0 text-#000/50 hover:text-#000 cursor-pointer transition-transform ${colors.length > 3 ? '' : 'hidden'} ${showMore ? 'rotate-180' : ''}`}
+          className={`mx-auto shrink-0 text-#000/50 hover:text-#000 cursor-pointer transition-transform ${colors.length > 3 ? '' : 'hidden'} ${showMore ? 'rotate-180' : ''}`}
           onClick={() => setShowMore(!showMore)}
         ></ChevronDownIcon>
       </div>
