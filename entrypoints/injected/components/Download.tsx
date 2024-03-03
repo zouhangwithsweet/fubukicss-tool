@@ -63,41 +63,34 @@ export const Download = memo((props: { minimized?: boolean }) => {
     >
       <div className="flex items-center gap-2">
         <span className="flex-1 font-600">Export</span>
-        {imageBase64 && (
-          <>
-            <span
-              className="flex items-center gap-.5 text-xs text-#000/50 cursor-pointer"
-              onClick={() => setShow(!show)}
-            >
-              <span className={`w-3 h-3 ${show ? 'rotate-90' : ''} i-fe:play`}></span>
-              preview
-            </span>
-            <span
-              className="w-4 h-4 text-#000/50 hover:text-#000 cursor-pointer i-fe:download"
-              onClick={async () => {
-                const data =
-                  ext === 'svg'
-                    ? await node?.exportAsync({
-                        format: 'SVG_STRING',
-                      })
-                    : await node?.exportAsync({
-                        format: ext.toUpperCase() as 'PNG',
-                        constraint: {
-                          type: 'SCALE',
-                          value: scale,
-                        },
-                      })
-                if (data) {
-                  arrayBufferToImageFile(
-                    data,
-                    node?.name ? `${node?.name}.${ext}` : 'fubukitool.png',
-                    `image/${ext === 'svg' ? 'svg+xml' : ext}`,
-                  )
-                }
-              }}
-            ></span>
-          </>
-        )}
+        <span className="flex items-center gap-.5 text-xs text-#000/50 cursor-pointer" onClick={() => setShow(!show)}>
+          <span className={`w-3 h-3 ${show ? 'rotate-90' : ''} i-fe:play`}></span>
+          preview
+        </span>
+        <span
+          className="w-4 h-4 text-#000/50 hover:text-#000 cursor-pointer i-fe:download"
+          onClick={async () => {
+            const data =
+              ext === 'svg'
+                ? await node?.exportAsync({
+                    format: 'SVG_STRING',
+                  })
+                : await node?.exportAsync({
+                    format: ext.toUpperCase() as 'PNG',
+                    constraint: {
+                      type: 'SCALE',
+                      value: scale,
+                    },
+                  })
+            if (data) {
+              arrayBufferToImageFile(
+                data,
+                node?.name ? `${node?.name}.${ext}` : 'fubukitool.png',
+                `image/${ext === 'svg' ? 'svg+xml' : ext}`,
+              )
+            }
+          }}
+        ></span>
       </div>
       {imageBase64 && show && (
         <div
