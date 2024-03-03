@@ -32,7 +32,7 @@ export const Download = memo((props: { minimized?: boolean }) => {
 
   useEffect(() => {
     ;(async () => {
-      if (node) {
+      if (node && show) {
         const data = await node.exportAsync({
           format: 'PNG',
           constraint: {
@@ -55,7 +55,7 @@ export const Download = memo((props: { minimized?: boolean }) => {
         setImageBase64('')
       }
     })()
-  }, [ext, node, scale])
+  }, [ext, node, scale, show])
 
   return (
     <div
