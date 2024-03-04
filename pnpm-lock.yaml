@@ -39,8 +39,8 @@ dependencies:
     specifier: ^2.2.1
     version: 2.2.1
   transform-to-tailwindcss-core:
-    specifier: ^0.0.14
-    version: 0.0.14
+    specifier: ^0.0.15
+    version: 0.0.15
   transform-to-unocss-core:
     specifier: ^0.0.15
     version: 0.0.15
@@ -5537,8 +5537,8 @@ packages:
     resolution: {integrity: sha512-sf4i37nQ2LBx4m3wB74y+ubopq6W/dIzXg0FDGjsYnZHVa1Da8FH853wlL2gtUhg+xJXjfk3kUZS3BRoQeoQBQ==}
     engines: {node: '>=6'}
 
-  /transform-to-tailwindcss-core@0.0.14:
-    resolution: {integrity: sha512-0YTMtyoL+rvsc5wBxCZiWBRdGfa34z3/FHeNxC4rfjkq4SiEPYRP6hBp243/CNivmXeN6iRMIWg5yzq5/vkkgg==}
+  /transform-to-tailwindcss-core@0.0.15:
+    resolution: {integrity: sha512-GoUWQ0Oa71dQoK0aB2lndIcAMLW6/BeE/m4eKTKYb2PJ1bigifWF9SHxgqskyYO+91OadkqtnG5gb1mAKL5jvw==}
     hasBin: true
     dev: false
 
