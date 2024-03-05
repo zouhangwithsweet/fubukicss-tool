@@ -2,15 +2,15 @@
 
 A browser extension to get CSS from Figma by one step.
 
-# Usage
+## Usage
 
 check it on chrome store [fubukicss-tool](https://chrome.google.com/webstore/detail/behnfolmiinfhphfdolomedncdnogcim)
 
-# Motivation
+## Motivation
 
 Due to the recent introduction of charges for Figma's dev mode, which restricts the direct export of CSS, I've developed this browser extension.
 
-# Features
+## Features
 
 - [x] Export Figma styles to CSS
 - [x] Export Figma styles to tailwindcss / unocss
@@ -19,7 +19,7 @@ Due to the recent introduction of charges for Figma's dev mode, which restricts 
 
 ![image](https://pbs.twimg.com/media/GHtXze9aAAAZr1I?format=png&name=900x900)
 
-# Development
+## Development
 
 Install dependencies
 ```bash
@@ -36,7 +36,7 @@ Build
 pnpm build
 ```
 
-# Credits
+## Credits
 
 - [figma-viewer-chrome-plugin](https://github.com/leadream/figma-viewer-chrome-plugin)
 - [transform-to-unocss-core](https://github.com/Simon-He95/transform-to-unocss-core)
