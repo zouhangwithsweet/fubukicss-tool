@@ -8,6 +8,7 @@ export default defineConfig({
     plugins: [react(), UnoCSS()],
   }),
   manifest: {
+    description: 'one step to get css from figma',
     web_accessible_resources: [
       {
         resources: ['/injected.js', '/assets/injected.css'],
