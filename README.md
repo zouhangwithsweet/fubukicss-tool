@@ -1,6 +1,6 @@
 # fubukicss-tool
 
-A browser extension to get CSS from Figma by one step.
+A browser extension to get CSS from Figma in one step.
 
 ## Usage
 
