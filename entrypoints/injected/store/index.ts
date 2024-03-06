@@ -18,3 +18,5 @@ export const expandCode = atomWithStorage<boolean>('fubuki_expand_code', true)
 export const expandAtomic = atomWithStorage<boolean>('fubuki_expand_atomic', true)
 
 export const keepAltKeyPressing = atomWithStorage<boolean>('fubuki_keep_alt_key_pressing', false)
+
+export const keepMetaKeyPressing = atomWithStorage<boolean>('fubuki_keep_meta_key_pressing', false)

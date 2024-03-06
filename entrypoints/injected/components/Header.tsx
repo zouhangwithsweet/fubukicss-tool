@@ -5,9 +5,9 @@ import { Maximize2, Minimize2, Settings } from 'react-feather'
 
 import Logo from '@/entrypoints/assets/fubukicss.svg'
 import { cn } from '@/entrypoints/utils/cn'
-import { toggleCustomState } from '@/entrypoints/utils/key'
+import { toggleAltPress, toggleMetaPress } from '@/entrypoints/utils/key'
 
-import { cssEngine, cssUnit, exportExt, exportScale, keepAltKeyPressing } from '../store'
+import { cssEngine, cssUnit, exportExt, exportScale, keepAltKeyPressing, keepMetaKeyPressing } from '../store'
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -39,25 +39,29 @@ const Header = forwardRef(function (
   const [ext, setExt] = useAtom(exportExt)
   const [scale, setScale] = useAtom(exportScale)
   const [altPressing, setAltPressing] = useAtom(keepAltKeyPressing)
+  const [metaPressing, setMetaPressing] = useAtom(keepMetaKeyPressing)
 
   useEffect(() => {
-    toggleCustomState(altPressing)
+    toggleAltPress(altPressing)
+    toggleMetaPress(metaPressing)
 
     let isScrolling: number
     const wheelHandler = function (event: WheelEvent) {
       if (!altPressing) return
 
       clearTimeout(isScrolling)
-      toggleCustomState(false)
+      toggleAltPress(false)
+      toggleMetaPress(false)
       isScrolling = setTimeout(function () {
-        toggleCustomState(altPressing)
+        toggleAltPress(altPressing)
+        toggleMetaPress(metaPressing)
       }, 300)
     }
     window.addEventListener('wheel', wheelHandler, false)
     return () => {
       window.removeEventListener('wheel', wheelHandler, false)
     }
-  }, [altPressing])
+  }, [altPressing, metaPressing])
 
   return (
     <header
@@ -165,14 +169,29 @@ const Header = forwardRef(function (
 
               <DropdownMenuGroup>
                 <DropdownMenuItem>
-                  option/alt
+                  Measure to selection
                   <Switch
                     className="ml-auto scale-86"
                     checked={altPressing}
                     onCheckedChange={(e) => {
                       setAltPressing(e)
 
-                      toggleCustomState(e)
+                      toggleAltPress(e)
+                    }}
+                    onClick={(e) => {
+                      e.stopPropagation()
+                    }}
+                  />
+                </DropdownMenuItem>
+                <DropdownMenuItem>
+                  Deep select
+                  <Switch
+                    className="ml-auto scale-86"
+                    checked={metaPressing}
+                    onCheckedChange={(e) => {
+                      setMetaPressing(e)
+
+                      toggleMetaPress(e)
                     }}
                     onClick={(e) => {
                       e.stopPropagation()
