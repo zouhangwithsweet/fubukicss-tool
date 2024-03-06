@@ -103,7 +103,7 @@ export const Download = memo((props: { minimized?: boolean }) => {
           <img src={imageBase64} alt="" className="w-full max-w-60 max-h-210px h-auto object-contain" />
         </div>
       )}
-      {node?.type === 'VECTOR' && (
+      {node?.type === 'VECTOR' && svgString && (
         <div className="flex flex-col items-stretch bg-#f5f5f5 rounded-sm overflow-hidden">
           <div className="px-4 h-8 flex-center justify-between border-b border-#e5e5e5 border-solid">
             <span className="text-#000/50 text-xs">svg</span>

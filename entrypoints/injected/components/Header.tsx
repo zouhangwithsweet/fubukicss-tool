@@ -1,12 +1,13 @@
 import { CheckIcon } from '@radix-ui/react-icons'
 import { useAtom } from 'jotai'
-import { ForwardedRef, forwardRef, memo, MouseEvent } from 'react'
+import { ForwardedRef, forwardRef, memo, MouseEvent, useEffect } from 'react'
 import { Maximize2, Minimize2, Settings } from 'react-feather'
 
 import Logo from '@/entrypoints/assets/fubukicss.svg'
 import { cn } from '@/entrypoints/utils/cn'
+import { toggleCustomState } from '@/entrypoints/utils/key'
 
-import { cssEngine, cssUnit, exportExt, exportScale } from '../store'
+import { cssEngine, cssUnit, exportExt, exportScale, keepAltKeyPressing } from '../store'
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -15,12 +16,12 @@ import {
   DropdownMenuLabel,
   DropdownMenuPortal,
   DropdownMenuSeparator,
-  DropdownMenuShortcut,
   DropdownMenuSub,
   DropdownMenuSubContent,
   DropdownMenuSubTrigger,
   DropdownMenuTrigger,
 } from '../ui/dropdown-menu'
+import { Switch } from '../ui/switch'
 
 interface Props {
   onMouseDown: (e: MouseEvent) => void
@@ -37,6 +38,11 @@ const Header = forwardRef(function (
   const [unit, setUnit] = useAtom(cssUnit)
   const [ext, setExt] = useAtom(exportExt)
   const [scale, setScale] = useAtom(exportScale)
+  const [altPressing, setAltPressing] = useAtom(keepAltKeyPressing)
+
+  useEffect(() => {
+    toggleCustomState(altPressing)
+  }, [altPressing])
 
   return (
     <header
@@ -138,6 +144,26 @@ const Header = forwardRef(function (
                     </DropdownMenuSubContent>
                   </DropdownMenuPortal>
                 </DropdownMenuSub>
+              </DropdownMenuGroup>
+
+              <DropdownMenuSeparator />
+
+              <DropdownMenuGroup>
+                <DropdownMenuItem>
+                  option/alt
+                  <Switch
+                    className="ml-auto scale-86"
+                    checked={altPressing}
+                    onCheckedChange={(e) => {
+                      setAltPressing(e)
+
+                      toggleCustomState(e)
+                    }}
+                    onClick={(e) => {
+                      e.stopPropagation()
+                    }}
+                  />
+                </DropdownMenuItem>
               </DropdownMenuGroup>
             </DropdownMenuContent>
           </DropdownMenu>
