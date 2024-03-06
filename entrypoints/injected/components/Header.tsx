@@ -42,6 +42,21 @@ const Header = forwardRef(function (
 
   useEffect(() => {
     toggleCustomState(altPressing)
+
+    let isScrolling: number
+    const wheelHandler = function (event: WheelEvent) {
+      if (!altPressing) return
+
+      clearTimeout(isScrolling)
+      toggleCustomState(false)
+      isScrolling = setTimeout(function () {
+        toggleCustomState(altPressing)
+      }, 300)
+    }
+    window.addEventListener('wheel', wheelHandler, false)
+    return () => {
+      window.removeEventListener('wheel', wheelHandler, false)
+    }
   }, [altPressing])
 
   return (
