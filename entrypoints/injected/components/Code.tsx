@@ -152,7 +152,7 @@ export const CodeArea = memo((props: { minimized?: boolean }) => {
             <>
               {!(index % 2) ? (
                 <div
-                  className="flex-center"
+                  className="flex-center cursor-pointer"
                   onClick={() => (index === 0 ? setAtomicExpand(!atomicExpand) : setExpand(!expand))}
                 >
                   <span className="text-#000/30 text-11px">{u.type}</span>
