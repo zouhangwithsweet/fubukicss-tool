@@ -1,12 +1,13 @@
 import { CheckIcon } from '@radix-ui/react-icons'
 import { useAtom } from 'jotai'
-import { ForwardedRef, forwardRef, memo, MouseEvent } from 'react'
+import { ForwardedRef, forwardRef, memo, MouseEvent, useEffect } from 'react'
 import { Maximize2, Minimize2, Settings } from 'react-feather'
 
 import Logo from '@/entrypoints/assets/fubukicss.svg'
 import { cn } from '@/entrypoints/utils/cn'
+import { toggleAltPress, toggleMetaPress } from '@/entrypoints/utils/key'
 
-import { cssEngine, cssUnit, exportExt, exportScale } from '../store'
+import { cssEngine, cssUnit, exportExt, exportScale, keepAltKeyPressing, keepMetaKeyPressing } from '../store'
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -15,12 +16,12 @@ import {
   DropdownMenuLabel,
   DropdownMenuPortal,
   DropdownMenuSeparator,
-  DropdownMenuShortcut,
   DropdownMenuSub,
   DropdownMenuSubContent,
   DropdownMenuSubTrigger,
   DropdownMenuTrigger,
 } from '../ui/dropdown-menu'
+import { Switch } from '../ui/switch'
 
 interface Props {
   onMouseDown: (e: MouseEvent) => void
@@ -37,6 +38,27 @@ const Header = forwardRef(function (
   const [unit, setUnit] = useAtom(cssUnit)
   const [ext, setExt] = useAtom(exportExt)
   const [scale, setScale] = useAtom(exportScale)
+  const [altPressing, setAltPressing] = useAtom(keepAltKeyPressing)
+  const [metaPressing, setMetaPressing] = useAtom(keepMetaKeyPressing)
+
+  useEffect(() => {
+    toggleAltPress(altPressing)
+    toggleMetaPress(metaPressing)
+
+    const canvas = document.querySelector('#fullscreen-root canvas')
+    let isScrolling: number
+    const wheelHandler = function () {
+      clearTimeout(isScrolling)
+      toggleMetaPress(false)
+      isScrolling = setTimeout(function () {
+        toggleMetaPress(metaPressing)
+      }, 300)
+    }
+    canvas?.addEventListener('wheel', wheelHandler, false)
+    return () => {
+      canvas?.removeEventListener('wheel', wheelHandler, false)
+    }
+  }, [altPressing, metaPressing])
 
   return (
     <header
@@ -138,6 +160,41 @@ const Header = forwardRef(function (
                     </DropdownMenuSubContent>
                   </DropdownMenuPortal>
                 </DropdownMenuSub>
+              </DropdownMenuGroup>
+
+              <DropdownMenuSeparator />
+
+              <DropdownMenuGroup>
+                <DropdownMenuItem>
+                  Measure to selection
+                  <Switch
+                    className="ml-auto scale-86"
+                    checked={altPressing}
+                    onCheckedChange={(e) => {
+                      setAltPressing(e)
+
+                      toggleAltPress(e)
+                    }}
+                    onClick={(e) => {
+                      e.stopPropagation()
+                    }}
+                  />
+                </DropdownMenuItem>
+                <DropdownMenuItem>
+                  Deep select
+                  <Switch
+                    className="ml-auto scale-86"
+                    checked={metaPressing}
+                    onCheckedChange={(e) => {
+                      setMetaPressing(e)
+
+                      toggleMetaPress(e)
+                    }}
+                    onClick={(e) => {
+                      e.stopPropagation()
+                    }}
+                  />
+                </DropdownMenuItem>
               </DropdownMenuGroup>
             </DropdownMenuContent>
           </DropdownMenu>
