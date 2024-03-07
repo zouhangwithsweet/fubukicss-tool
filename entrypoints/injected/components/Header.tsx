@@ -47,8 +47,6 @@ const Header = forwardRef(function (
 
     let isScrolling: number
     const wheelHandler = function (event: WheelEvent) {
-      if (!altPressing) return
-
       clearTimeout(isScrolling)
       toggleMetaPress(false)
       isScrolling = setTimeout(function () {
