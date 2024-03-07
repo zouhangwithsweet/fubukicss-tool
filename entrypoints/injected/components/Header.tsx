@@ -50,10 +50,8 @@ const Header = forwardRef(function (
       if (!altPressing) return
 
       clearTimeout(isScrolling)
-      toggleAltPress(false)
       toggleMetaPress(false)
       isScrolling = setTimeout(function () {
-        toggleAltPress(altPressing)
         toggleMetaPress(metaPressing)
       }, 300)
     }
