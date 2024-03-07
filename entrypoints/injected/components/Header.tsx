@@ -45,17 +45,18 @@ const Header = forwardRef(function (
     toggleAltPress(altPressing)
     toggleMetaPress(metaPressing)
 
+    const canvas = document.querySelector('#fullscreen-root canvas')
     let isScrolling: number
-    const wheelHandler = function (event: WheelEvent) {
+    const wheelHandler = function () {
       clearTimeout(isScrolling)
       toggleMetaPress(false)
       isScrolling = setTimeout(function () {
         toggleMetaPress(metaPressing)
       }, 300)
     }
-    window.addEventListener('wheel', wheelHandler, false)
+    canvas?.addEventListener('wheel', wheelHandler, false)
     return () => {
-      window.removeEventListener('wheel', wheelHandler, false)
+      canvas?.removeEventListener('wheel', wheelHandler, false)
     }
   }, [altPressing, metaPressing])
 
