@@ -5,6 +5,7 @@ A browser extension to get CSS from Figma in one step.
 ## Usage
 
 Check it on chrome store [fubukicss-tool](https://chrome.google.com/webstore/detail/behnfolmiinfhphfdolomedncdnogcim)
+or download zip file from here [fubukicss-stage](https://fubukicss.zouhangoo7241.workers.dev/)
 
 ## Motivation
 
