@@ -43,7 +43,7 @@ const Header = forwardRef(function (
       onMouseDown={onMouseDown}
       onMouseUp={onMouseUp}
       ref={ref}
-      className={`flex items-center gap-2 border-b border-#e5e5e5 border-solid cursor-grab active:cursor-grabbing transition-padding ${minimized ? 'py-2.5 px-3' : 'py-3 px-4'}`}
+      className={`flex items-center gap-2 border-b border-#e5e5e5 border-solid cursor-grab active:cursor-grabbing transition-padding ${minimized ? 'py-2.5 px-3' : 'py-3 px-4'} sticky top-0 bg-#fff z-2`}
     >
       {engine === 'unocss' ? (
         <img src={Logo} className="w-5 h-5 rounded cursor-pointer" onClick={() => setEngine('tailwind')} />
