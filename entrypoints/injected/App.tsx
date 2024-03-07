@@ -46,7 +46,7 @@ export default () => {
 
   return (
     <div
-      className={`fixed overflow-hidden text-xs text-#000 bg-popover rounded border-1 border-#e5e5e5 border-solid shadow-md z-10 antialiased h-auto transition-width !font-['Inter'] js-fullscreen-prevent-event-capture ${minimized ? 'w-50' : 'w-80'}`}
+      className={`fixed text-xs text-#000 bg-popover rounded border-1 border-#e5e5e5 border-solid shadow-md z-10 antialiased h-auto transition-width !font-['Inter'] js-fullscreen-prevent-event-capture ${minimized ? 'w-50' : 'w-80'} max-h-[calc(100vh-50px)] overflow-y-scroll scrollbar-hide`}
       style={{
         left: position[0],
         top: position[1],

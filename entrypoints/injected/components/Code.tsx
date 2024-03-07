@@ -137,7 +137,7 @@ export const CodeArea = memo((props: { minimized?: boolean }) => {
     <>
       {!name && !props.minimized && <div className="p-4 font-600 text-13px">Select Layer </div>}
       <div className={`relative ${props.minimized || !name ? 'hidden' : ''}`}>
-        <div className="flex px-4 py-2 items-center border-b border-#e5e5e5 border-solid font-600 text-13px">
+        <div className="flex px-4 py-2 items-center border-b border-#e5e5e5 border-solid font-600 text-13px sticky top-45px bg-#fff z-2">
           <span className="p-1 hover:bg-#e5e5e5/50 rounded-sm cursor-pointer truncate" onClick={handleCopy(name)}>
             {name}
           </span>
