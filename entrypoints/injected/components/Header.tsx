@@ -76,7 +76,12 @@ const Header = forwardRef(function (
         ></span>
       )}
       <span className="flex-1 font-700 text-sm">Fubukicss Tool</span>
-      <div className="p-.5 flex-center rounded bg-#eee">
+      <div
+        className="p-.5 flex-center rounded bg-#eee"
+        onMouseDown={(e) => {
+          e.stopPropagation()
+        }}
+      >
         {!minimized && (
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
