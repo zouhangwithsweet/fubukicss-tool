@@ -1,6 +1,6 @@
 import { CheckIcon } from '@radix-ui/react-icons'
 import { useAtom } from 'jotai'
-import { ForwardedRef, forwardRef, memo, MouseEvent, useEffect } from 'react'
+import { ForwardedRef, forwardRef, memo, MouseEvent, useEffect, useCallback } from 'react'
 import { Maximize2, Minimize2, Settings } from 'react-feather'
 
 import Logo from '@/entrypoints/assets/fubukicss.svg'
@@ -61,12 +61,12 @@ const Header = forwardRef(function (
   }, [altPressing, metaPressing])
   // The DropdownMenuTrigger has been disabled from opening the menu when holding down the Ctrl key
   // https://github.com/radix-ui/primitives/blob/main/packages/react/dropdown-menu/src/DropdownMenu.tsx#L119
-  const onMouseEnter = function () {
+  const onMouseEnter = useCallback(() => {
     toggleMetaPress(false)
-  }
-  const onMouseLeave = function () {
+  }, [])
+  const onMouseLeave = useCallback(() => {
     toggleMetaPress(metaPressing)
-  }
+  }, [metaPressing])
   return (
     <header
       onMouseDown={onMouseDown}
