@@ -59,7 +59,14 @@ const Header = forwardRef(function (
       canvas?.removeEventListener('wheel', wheelHandler, false)
     }
   }, [altPressing, metaPressing])
-
+  // The DropdownMenuTrigger has been disabled from opening the menu when holding down the Ctrl key
+  // https://github.com/radix-ui/primitives/blob/main/packages/react/dropdown-menu/src/DropdownMenu.tsx#L119
+  const onMouseEnter = function () {
+    toggleMetaPress(false)
+  }
+  const onMouseLeave = function () {
+    toggleMetaPress(metaPressing)
+  }
   return (
     <header
       onMouseDown={onMouseDown}
@@ -85,7 +92,11 @@ const Header = forwardRef(function (
         {!minimized && (
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
-              <Settings size={16} className="mr-1.5 text-#000/50 hover:text-#000 cursor-pointer" />
+              <Settings
+                onMouseEnter={onMouseEnter}
+                onMouseLeave={onMouseLeave}
+                size={16}
+                className="mr-1.5 text-#000/50 hover:text-#000 cursor-pointer" />
             </DropdownMenuTrigger>
             <DropdownMenuContent className="w-56 z-1001 border-1 border-solid border-muted">
               <DropdownMenuLabel className="cursor-default">Settings</DropdownMenuLabel>

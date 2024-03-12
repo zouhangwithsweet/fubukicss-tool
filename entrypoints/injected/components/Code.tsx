@@ -1,6 +1,6 @@
 import { ChevronDownIcon, DividerHorizontalIcon } from '@radix-ui/react-icons'
 import { useAtom, useAtomValue } from 'jotai'
-import { memo, useCallback, useEffect, useMemo, useRef, useState } from 'react'
+import { Fragment, memo, useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import { Clipboard } from 'react-feather'
 import { toTailwindcss } from 'transform-to-tailwindcss-core'
 import { toUnocssClass } from 'transform-to-unocss-core'
@@ -149,7 +149,7 @@ export const CodeArea = memo((props: { minimized?: boolean }) => {
           onClick={(e) => e.stopPropagation()}
         >
           {unoResult?.map((u, index) => (
-            <>
+            <Fragment key={u.title}>
               {!(index % 2) ? (
                 <div
                   className="flex-center cursor-pointer"
@@ -174,7 +174,6 @@ export const CodeArea = memo((props: { minimized?: boolean }) => {
                 ></span>
               )}
               <div
-                key={u.title}
                 className={cn(
                   'flex flex-col items-stretch bg-#f5f5f5 rounded-sm overflow-hidden',
                   u.type === 'css' && !expand ? '!hidden' : '',
@@ -215,7 +214,7 @@ export const CodeArea = memo((props: { minimized?: boolean }) => {
                   </>
                 )}
               </div>
-            </>
+            </Fragment>
           ))}
         </div>
       </div>
