@@ -47,16 +47,38 @@ const Header = forwardRef(function (
 
     const canvas = document.querySelector('#fullscreen-root canvas')
     let isScrolling: number
+    let isPressSpace: boolean = false
     const wheelHandler = function () {
       clearTimeout(isScrolling)
       toggleMetaPress(false)
       isScrolling = setTimeout(function () {
-        toggleMetaPress(metaPressing)
+        // Ensure that pressing the space does not trigger metaPressing
+        !isPressSpace && toggleMetaPress(metaPressing)
       }, 300)
     }
+    const spaceHandler = function (e: KeyboardEvent) {
+      const { type, code } = e
+      if (code === 'Space') {
+        if (type === 'keyup') {
+          isPressSpace = false
+          toggleAltPress(altPressing)
+          toggleMetaPress(metaPressing)
+          return
+        }
+        if (type === 'keydown' && !isPressSpace) {
+          isPressSpace = true
+          toggleAltPress(false)
+          toggleMetaPress(false)
+        }
+      }
+    }
     canvas?.addEventListener('wheel', wheelHandler, false)
+    document.addEventListener('keydown', spaceHandler, false)
+    document.addEventListener('keyup', spaceHandler, false)
     return () => {
       canvas?.removeEventListener('wheel', wheelHandler, false)
+      document.removeEventListener('keydown', spaceHandler, false)
+      document.removeEventListener('keyup', spaceHandler, false)
     }
   }, [altPressing, metaPressing])
   // The DropdownMenuTrigger has been disabled from opening the menu when holding down the Ctrl key
