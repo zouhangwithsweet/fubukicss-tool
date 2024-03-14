@@ -1,6 +1,6 @@
 import { CheckIcon } from '@radix-ui/react-icons'
 import { useAtom } from 'jotai'
-import { ForwardedRef, forwardRef, memo, MouseEvent, useEffect, useCallback } from 'react'
+import { ForwardedRef, forwardRef, memo, MouseEvent, useCallback, useEffect } from 'react'
 import { Maximize2, Minimize2, Settings } from 'react-feather'
 
 import Logo from '@/entrypoints/assets/fubukicss.svg'
@@ -96,7 +96,8 @@ const Header = forwardRef(function (
                 onMouseEnter={onMouseEnter}
                 onMouseLeave={onMouseLeave}
                 size={16}
-                className="mr-1.5 text-#000/50 hover:text-#000 cursor-pointer" />
+                className="mr-1.5 text-#000/50 hover:text-#000 cursor-pointer"
+              />
             </DropdownMenuTrigger>
             <DropdownMenuContent className="w-56 z-1001 border-1 border-solid border-muted">
               <DropdownMenuLabel className="cursor-default">Settings</DropdownMenuLabel>
