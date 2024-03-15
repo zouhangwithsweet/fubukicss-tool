@@ -1,6 +1,6 @@
 import { CheckIcon } from '@radix-ui/react-icons'
 import { useAtom } from 'jotai'
-import { ForwardedRef, forwardRef, memo, MouseEvent, useEffect, useCallback } from 'react'
+import { ForwardedRef, forwardRef, memo, MouseEvent, useCallback, useEffect } from 'react'
 import { Maximize2, Minimize2, Settings } from 'react-feather'
 
 import Logo from '@/entrypoints/assets/fubukicss.svg'
@@ -47,16 +47,38 @@ const Header = forwardRef(function (
 
     const canvas = document.querySelector('#fullscreen-root canvas')
     let isScrolling: number
+    let isPressSpace: boolean = false
     const wheelHandler = function () {
       clearTimeout(isScrolling)
       toggleMetaPress(false)
       isScrolling = setTimeout(function () {
-        toggleMetaPress(metaPressing)
+        // Ensure that pressing the space does not trigger metaPressing
+        !isPressSpace && toggleMetaPress(metaPressing)
       }, 300)
     }
+    const spaceHandler = function (e: KeyboardEvent) {
+      const { type, code } = e
+      if (code === 'Space') {
+        if (type === 'keyup') {
+          isPressSpace = false
+          toggleAltPress(altPressing)
+          toggleMetaPress(metaPressing)
+          return
+        }
+        if (type === 'keydown' && !isPressSpace) {
+          isPressSpace = true
+          toggleAltPress(false)
+          toggleMetaPress(false)
+        }
+      }
+    }
     canvas?.addEventListener('wheel', wheelHandler, false)
+    document.addEventListener('keydown', spaceHandler, false)
+    document.addEventListener('keyup', spaceHandler, false)
     return () => {
       canvas?.removeEventListener('wheel', wheelHandler, false)
+      document.removeEventListener('keydown', spaceHandler, false)
+      document.removeEventListener('keyup', spaceHandler, false)
     }
   }, [altPressing, metaPressing])
   // The DropdownMenuTrigger has been disabled from opening the menu when holding down the Ctrl key
@@ -96,7 +118,8 @@ const Header = forwardRef(function (
                 onMouseEnter={onMouseEnter}
                 onMouseLeave={onMouseLeave}
                 size={16}
-                className="mr-1.5 text-#000/50 hover:text-#000 cursor-pointer" />
+                className="mr-1.5 text-#000/50 hover:text-#000 cursor-pointer"
+              />
             </DropdownMenuTrigger>
             <DropdownMenuContent className="w-56 z-1001 border-1 border-solid border-muted">
               <DropdownMenuLabel className="cursor-default">Settings</DropdownMenuLabel>
