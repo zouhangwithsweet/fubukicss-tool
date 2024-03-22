@@ -43,6 +43,7 @@
     "@unocss/reset": "^0.58.5",
     "clsx": "^2.1.0",
     "jotai": "^2.6.5",
+    "p-wait-for": "^5.0.2",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-feather": "^2.0.10",
