@@ -1,6 +1,6 @@
 # fubukicss-tool
 
-A browser extension to **get TailwindCSS/Unocss/CSS from Figma in one step.**
+A browser extension to **get TailwindCSS/UnoCSS/CSS from Figma in one step.**
 
 ## Usage
 
