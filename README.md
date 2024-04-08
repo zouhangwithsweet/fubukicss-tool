@@ -4,6 +4,8 @@ A browser extension to **get TailwindCSS/UnoCSS/CSS from Figma in one step.**
 
 ## Usage
 
+> ❗️ If it doesnot work, please check [here](https://github.com/zouhangwithsweet/fubukicss-tool/issues/11)
+
 Check it on chrome store [fubukicss-tool](https://chrome.google.com/webstore/detail/behnfolmiinfhphfdolomedncdnogcim)
 or download zip file from here [fubukicss-stage](https://fubukicss.zouhangoo7241.workers.dev/)
 
