@@ -137,13 +137,13 @@ export const CodeArea = memo((props: { minimized?: boolean }) => {
     <>
       {!name && !props.minimized && <div className="p-4 font-600 text-13px">Select Layer </div>}
       <div className={`relative ${props.minimized || !name ? 'hidden' : ''}`}>
-        <div className="flex px-4 py-2 items-center border-b border-#e5e5e5 border-solid font-600 text-13px sticky top-45px bg-#fff z-2">
+        <div className="flex px-4 py-2 items-center border-b border-$color-border border-solid font-600 text-13px sticky top-45px text-$color-text bg-$color-bg z-2">
           <span className="p-1 hover:bg-#e5e5e5/50 rounded-sm cursor-pointer truncate" onClick={handleCopy(name)}>
             {name}
           </span>
         </div>
         <div
-          className="px-4 py-2 bg-white"
+          className="px-4 py-2 text-$color-text bg-$color-bg"
           onMouseMove={(e) => e.stopPropagation()}
           onWheel={(e) => e.stopPropagation()}
           onClick={(e) => e.stopPropagation()}
@@ -158,7 +158,7 @@ export const CodeArea = memo((props: { minimized?: boolean }) => {
                   <span className="text-#000/30 text-11px">{u.type}</span>
                   <ChevronDownIcon
                     className={cn(
-                      'block ml-auto text-#000/50 hover:text-#000 cursor-pointer rotate-180',
+                      'block ml-auto text-$color-text-secondary hover:text-#000 cursor-pointer rotate-180',
                       index === 0 && !atomicExpand ? 'rotate-0' : '',
                       index !== 0 && !expand ? 'rotate-0' : '',
                     )}
@@ -175,17 +175,16 @@ export const CodeArea = memo((props: { minimized?: boolean }) => {
               )}
               <div
                 className={cn(
-                  'flex flex-col items-stretch bg-#f5f5f5 rounded-sm overflow-hidden',
+                  'flex flex-col items-stretch bg-$color-bg-secondary rounded-sm overflow-hidden',
                   u.type === 'css' && !expand ? '!hidden' : '',
                   u.type === 'class' && !atomicExpand ? '!hidden' : '',
                 )}
               >
-                <div className="px-4 h-8 flex-center justify-between border-b border-#e5e5e5 border-solid">
-                  <span className="text-#000/50 text-xs">{u.title}</span>
+                <div className="px-4 h-8 flex-center justify-between border-b border-$color-border border-solid">
+                  <span className="text-$color-text-secondary text-xs">{u.title}</span>
                   <Clipboard
                     size={16}
-                    stroke="rgba(0,0,0,0.5)"
-                    className="cursor-pointer"
+                    className="cursor-pointer text-$color-text-secondary hover:text-$color-text"
                     onClick={handleCopy(u.code.replaceAll('<br/>', ''))}
                   />
                 </div>
@@ -194,7 +193,7 @@ export const CodeArea = memo((props: { minimized?: boolean }) => {
                     contentEditable
                     onCut={(e) => e.preventDefault()}
                     onPaste={(e) => e.preventDefault()}
-                    className="px-4 h-10 flex items-center overflow-auto whitespace-nowrap font-['Roboto_Mono'] bg-#f5f5f5 cursor-text text-popover-foreground"
+                    className="px-4 h-10 flex items-center overflow-auto whitespace-nowrap font-['Roboto_Mono'] bg-$color-bg-secondary cursor-text text-$color-text"
                     value={u.code}
                     readOnly
                   ></input>
@@ -205,7 +204,7 @@ export const CodeArea = memo((props: { minimized?: boolean }) => {
                       rows={4}
                       autoComplete="off"
                       className={cn(
-                        "px-4 h-auto py-4 lh-4.5 bg-#f5f5f5 cursor-text font-['Roboto_Mono'] text-popover-foreground resize-none scrollbar-hide",
+                        "px-4 h-auto py-4 lh-4.5 bg-$color-bg-secondary cursor-text font-['Roboto_Mono'] text-$color-text resize-none scrollbar-hide",
                         u.title === 'layout' ? 'overflow-hidden' : '',
                       )}
                       value={u.code}

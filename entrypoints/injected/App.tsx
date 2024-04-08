@@ -46,11 +46,12 @@ export default () => {
 
   return (
     <div
-      className={`fixed text-xs text-#000 bg-popover rounded border-1 border-#e5e5e5 border-solid shadow-md z-10 antialiased h-auto transition-width !font-['Inter'] js-fullscreen-prevent-event-capture ${minimized ? 'w-50' : 'w-80'} max-h-[calc(100vh-50px)] overflow-y-scroll scrollbar-hide`}
+      className={`fixed text-xs text-$color-text bg-$color-bg rounded border-1 border-$color-border border-solid shadow-md z-10 antialiased h-auto transition-width !font-['Inter'] js-fullscreen-prevent-event-capture ${minimized ? 'w-50' : 'w-80'} max-h-[calc(100vh-50px)] overflow-y-scroll scrollbar-hide`}
       style={{
         left: position[0],
         top: position[1],
       }}
+      tabIndex={-1}
     >
       <Header
         ref={header}

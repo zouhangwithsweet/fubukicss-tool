@@ -64,13 +64,13 @@ export const Colors = memo((props: { minimized?: boolean }) => {
 
   return (
     <div
-      className={`${props.minimized ? 'hidden' : 'block'} p-4 border-t border-#e5e5e5 border-solid font-600 text-13px`}
+      className={`${props.minimized ? 'hidden' : 'block'} p-4 border-t border-$color-border border-solid font-600 text-13px`}
     >
       <div className="flex items-center gap-2">
         <span className="flex-1">Colors</span>
 
         <Select onValueChange={(e: 'rgb') => setMode(e)} value={mode}>
-          <SelectTrigger className="w-auto h-auto p-0 uppercase [&_span]:uppercase !shadow-[none] text-xs text-popover-foreground">
+          <SelectTrigger className="w-auto h-auto p-0 uppercase [&_span]:uppercase !shadow-[none] text-xs text-$color-text">
             <SelectValue placeholder={mode} className="uppercase" />
           </SelectTrigger>
           <SelectContent className="z-1002 border-1 border-solid border-muted">
@@ -106,12 +106,12 @@ export const Colors = memo((props: { minimized?: boolean }) => {
               type="text"
               readOnly
               value={formatColor(c)}
-              className="ml-4 w-full font-400 text-xs font-['Inter'] bg-transparent text-popover-foreground"
+              className="ml-4 w-full font-400 text-xs font-['Inter'] bg-transparent text-$color-text"
             />
           </div>
         ))}
         <ChevronDownIcon
-          className={`mx-auto shrink-0 text-#000/50 hover:text-#000 cursor-pointer transition-transform ${colors.length > 3 ? '' : 'hidden'} ${showMore ? 'rotate-180' : ''}`}
+          className={`mx-auto shrink-0 text-$color-text-secondary hover:text-#000 cursor-pointer transition-transform ${colors.length > 3 ? '' : 'hidden'} ${showMore ? 'rotate-180' : ''}`}
           onClick={() => setShowMore(!showMore)}
         ></ChevronDownIcon>
       </div>

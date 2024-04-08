@@ -94,7 +94,7 @@ const Header = forwardRef(function (
       onMouseDown={onMouseDown}
       onMouseUp={onMouseUp}
       ref={ref}
-      className={`flex items-center gap-2 border-b border-#e5e5e5 border-solid cursor-grab active:cursor-grabbing transition-padding ${minimized ? 'py-2.5 px-3' : 'py-3 px-4'} sticky top-0 bg-#fff z-2`}
+      className={`flex items-center gap-2 border-b border-$color-border border-solid cursor-grab active:cursor-grabbing transition-padding ${minimized ? 'py-2.5 px-3' : 'py-3 px-4'} sticky top-0 bg-$color-bg z-2`}
     >
       {engine === 'unocss' ? (
         <img src={Logo} className="w-5 h-5 rounded cursor-pointer" onClick={() => setEngine('tailwind')} />
@@ -118,7 +118,7 @@ const Header = forwardRef(function (
                 onMouseEnter={onMouseEnter}
                 onMouseLeave={onMouseLeave}
                 size={16}
-                className="mr-1.5 text-#000/50 hover:text-#000 cursor-pointer"
+                className="mr-1.5 text-$color-text-secondary hover:text-$color-text cursor-pointer"
               />
             </DropdownMenuTrigger>
             <DropdownMenuContent className="w-56 z-1001 border-1 border-solid border-muted">
@@ -238,7 +238,10 @@ const Header = forwardRef(function (
             </DropdownMenuContent>
           </DropdownMenu>
         )}
-        <span className="flex-center text-#000/50 cursor-pointer hover:text-#000" onClick={onToggleSize}>
+        <span
+          className="flex-center text-$color-text-secondary cursor-pointer hover:text-$color-text"
+          onClick={onToggleSize}
+        >
           {minimized ? <Maximize2 size={16} /> : <Minimize2 size={16} />}
         </span>
       </div>
