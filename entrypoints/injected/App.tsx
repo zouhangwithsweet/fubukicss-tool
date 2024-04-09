@@ -35,6 +35,7 @@ export default () => {
   useEffect(() => {
     function moving(e: MouseEvent) {
       if (isDragging) {
+        // TODO Math.max with 0
         setPosition([e.pageX - shiftPosition[0], e.pageY - shiftPosition[1]])
       }
     }
