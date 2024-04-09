@@ -71,7 +71,7 @@ export const Download = memo((props: { minimized?: boolean }) => {
           preview
         </span>
         <span
-          className="w-4 h-4 text-$color-text-secondary hover:text-#000 cursor-pointer i-fe:download"
+          className="w-4 h-4 text-$color-text-secondary hover:text-$color-text cursor-pointer i-fe:download"
           onClick={async () => {
             const data =
               ext === 'svg'

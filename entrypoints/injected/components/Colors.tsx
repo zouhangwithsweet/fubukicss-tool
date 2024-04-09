@@ -73,7 +73,7 @@ export const Colors = memo((props: { minimized?: boolean }) => {
           <SelectTrigger className="w-auto h-auto p-0 uppercase [&_span]:uppercase !shadow-[none] text-xs text-$color-text">
             <SelectValue placeholder={mode} className="uppercase" />
           </SelectTrigger>
-          <SelectContent className="z-1002 border-1 border-solid border-muted">
+          <SelectContent className="z-1002 border-1 border-solid border-border">
             <SelectGroup>
               {(['rgb', 'hex', 'hsl'] as const).map((m) => (
                 <SelectItem key={m} value={m} className="w-30 uppercase text-xs">
@@ -97,7 +97,7 @@ export const Colors = memo((props: { minimized?: boolean }) => {
             onClick={handleCopy(formatColor(c))}
           >
             <span
-              className="w-4 h-4 shrink-0 rounded-sm border-1 border-muted border-solid box-border"
+              className="w-4 h-4 shrink-0 rounded-sm border-1 border-border border-solid box-border"
               style={{
                 backgroundColor: formatColor(c),
               }}
@@ -111,7 +111,7 @@ export const Colors = memo((props: { minimized?: boolean }) => {
           </div>
         ))}
         <ChevronDownIcon
-          className={`mx-auto shrink-0 text-$color-text-secondary hover:text-#000 cursor-pointer transition-transform ${colors.length > 3 ? '' : 'hidden'} ${showMore ? 'rotate-180' : ''}`}
+          className={`mx-auto shrink-0 text-$color-text-secondary hover:text-$color-text cursor-pointer transition-transform ${colors.length > 3 ? '' : 'hidden'} ${showMore ? 'rotate-180' : ''}`}
           onClick={() => setShowMore(!showMore)}
         ></ChevronDownIcon>
       </div>

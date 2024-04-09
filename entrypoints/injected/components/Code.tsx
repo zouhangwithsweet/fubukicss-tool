@@ -155,10 +155,10 @@ export const CodeArea = memo((props: { minimized?: boolean }) => {
                   className="flex-center cursor-pointer"
                   onClick={() => (index === 0 ? setAtomicExpand(!atomicExpand) : setExpand(!expand))}
                 >
-                  <span className="text-#000/30 text-11px">{u.type}</span>
+                  <span className="text-$color-text-secondary text-11px">{u.type}</span>
                   <ChevronDownIcon
                     className={cn(
-                      'block ml-auto text-$color-text-secondary hover:text-#000 cursor-pointer rotate-180',
+                      'block ml-auto text-$color-text-secondary hover:text-$color-text cursor-pointer rotate-180',
                       index === 0 && !atomicExpand ? 'rotate-0' : '',
                       index !== 0 && !expand ? 'rotate-0' : '',
                     )}
