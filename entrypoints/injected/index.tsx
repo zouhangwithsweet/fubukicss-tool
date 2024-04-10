@@ -7,11 +7,16 @@ import App from './App.tsx'
 // import '@unocss/reset/tailwind.css'
 import 'uno.css'
 
+const sleep = (ms: number) => new Promise<true>((resolve) => setTimeout(() => resolve(true), ms))
+
 export default defineUnlistedScript(() => {
   window.onload = async function () {
-    const figmaReady = !!(window as any).figma && getCanvas() != null && getObjectsPanel() != null
-    const tempadReady = document.querySelector('tempad') != null
-    await waitFor(() => figmaReady || tempadReady)
+    await waitFor(
+      () =>
+        (!!(window as any).figma && getCanvas() != null && getObjectsPanel() != null) ||
+        document.querySelector('tempad')?.querySelector('header') != null,
+    )
+    await waitFor(() => sleep(1000))
 
     window.fubukicss_figma = (window as any).figma || (mockFigma as any)
 
