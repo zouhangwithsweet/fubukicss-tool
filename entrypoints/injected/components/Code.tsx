@@ -21,7 +21,7 @@ export const CodeArea = memo((props: { minimized?: boolean }) => {
   const [unoResult, setUnoResult] = useState<{ title: string; code: string; type: string }[]>()
 
   const handleSelectionChange = useCallback(async () => {
-    const node = figma.currentPage?.selection?.[0]
+    const node = window.fubukicss_figma?.currentPage?.selection?.[0]
     setCurrentSelection(node ?? null)
     setName((node?.type === 'TEXT' ? node?.characters : node?.name) ?? '')
 
@@ -113,10 +113,10 @@ export const CodeArea = memo((props: { minimized?: boolean }) => {
   const handleCopy = (text: string) => () => {
     copy(text)
       .then(() => {
-        figma.notify('Copied to clipboard')
+        window.fubukicss_figma?.notify('Copied to clipboard')
       })
       .catch(() => {
-        figma.notify('Failed to copy!', {
+        window.fubukicss_figma?.notify('Failed to copy!', {
           error: true,
         })
       })

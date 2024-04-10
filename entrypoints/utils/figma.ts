@@ -11,3 +11,50 @@ export function getObjectsPanel() {
   // Similar to `getCanvas()`.
   return document.querySelector('[data-testid="objects-panel"]') as HTMLElement
 }
+
+const selection = {
+  getCSSAsync() {
+    return Object.fromEntries(
+      document
+        .querySelector('tempad')
+        ?.querySelector('code')
+        ?.textContent?.split('\n')
+        .map((i) => i.replace(/\;|\s/g, '').split(':')) || [],
+    )
+  },
+  characters: {
+    get() {
+      return document.querySelector('.tp-ellipsis')?.textContent || ''
+    },
+  },
+  name: {
+    get() {
+      return document.querySelector('.tp-ellipsis')?.textContent || ''
+    },
+  },
+}
+
+Object.defineProperty(selection, 'characters', {
+  get() {
+    return document.querySelector('.tp-ellipsis')?.textContent || ''
+  },
+})
+
+Object.defineProperty(selection, 'name', {
+  get() {
+    return document.querySelector('.tp-ellipsis')?.textContent || ''
+  },
+})
+
+export const mockFigma = {
+  isFubukicss: true,
+  notify(message: string, options?: { error?: boolean }) {
+    console.log(message)
+  },
+  getSelectionColors() {
+    return { paints: [], styles: [] }
+  },
+  currentPage: {
+    selection: [selection],
+  },
+}

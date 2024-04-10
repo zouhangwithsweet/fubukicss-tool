@@ -32,8 +32,8 @@ export const Colors = memo((props: { minimized?: boolean }) => {
   )
 
   useEffect(() => {
-    if (figma) {
-      const res = figma.getSelectionColors()
+    if (window.fubukicss_figma) {
+      const res = window.fubukicss_figma?.getSelectionColors()
       setPaints(res?.paints || [])
     }
   }, [node])
@@ -43,10 +43,10 @@ export const Colors = memo((props: { minimized?: boolean }) => {
   const handleCopy = (text: string) => () => {
     copy(text)
       .then(() => {
-        figma.notify('Copied to clipboard')
+        window.fubukicss_figma?.notify('Copied to clipboard')
       })
       .catch((error: any) => {
-        figma.notify('Failed to copy!', {
+        window.fubukicss_figma?.notify('Failed to copy!', {
           error: true,
         })
       })

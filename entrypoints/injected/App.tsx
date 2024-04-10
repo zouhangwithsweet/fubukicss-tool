@@ -64,9 +64,13 @@ export default () => {
 
       <CodeArea minimized={minimized} />
 
-      <Download minimized={minimized} />
+      {!(window.fubukicss_figma as any)?.isFubukicss && (
+        <>
+          <Download minimized={minimized} />
 
-      <Colors minimized={minimized} />
+          <Colors minimized={minimized} />
+        </>
+      )}
     </div>
   )
 }
