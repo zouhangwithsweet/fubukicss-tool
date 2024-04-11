@@ -4,7 +4,12 @@ A browser extension to **get TailwindCSS/UnoCSS/CSS from Figma in one step.**
 
 ## Usage
 
-> ❗️ If it doesnot work, please check [here](https://github.com/zouhangwithsweet/fubukicss-tool/issues/11)
+> [!IMPORTANT]
+> <img height="200" alt="image" align="right" src="https://github.com/ecomfe/tempad-dev/assets/1726061/ac185c15-b7b1-4deb-984b-45027a84650c">
+>
+> On March 19, Figma removed the `window.figma` in view-only mode pages (which the Fubukicss extension relies on to function properly). After our proactive communication, the Figma team promised to re-add the `window.figma` interface within a few weeks. During the waiting period, Fubukicss cannot work properly in view-only mode. You can use it in edit mode by using the “Duplicate to your drafts” feature and use it in edit mode.
+>
+> You can follow [this post](https://forum.figma.com/t/figma-removed-window-figma-on-view-only-pages-today/67292) to get the latest updates.
 
 Check it on chrome store [fubukicss-tool](https://chrome.google.com/webstore/detail/behnfolmiinfhphfdolomedncdnogcim)
 or download zip file from here [fubukicss-stage](https://fubukicss.zouhangoo7241.workers.dev/)
