@@ -16,7 +16,7 @@ export default defineUnlistedScript(() => {
         (!!(window as any).figma && getCanvas() != null && getObjectsPanel() != null) ||
         document.querySelector('tempad')?.querySelector('header') != null,
     )
-    await waitFor(() => sleep(1000))
+    await waitFor(() => sleep(50))
 
     window.fubukicss_figma = (window as any).figma || (mockFigma as any)
 
