@@ -23,6 +23,6 @@ export default defineUnlistedScript(() => {
     const app = document.createElement('div')
     const root = ReactDOM.createRoot(app)
     root.render(<App />)
-    document.querySelector('.fubuki-css')!.append(app)
+    document.querySelector('fubukicss')!.append(app)
   }
 })
