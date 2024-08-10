@@ -5,6 +5,7 @@ export default defineContentScript({
   runAt: 'document_end',
   main(ctx) {
     const ui = createIntegratedUi(ctx, {
+      tag: 'fubukicss',
       position: 'inline',
       onMount: (root) => {
         // Append children to the container
@@ -19,12 +20,8 @@ export default defineContentScript({
         styleEl.setAttribute('rel', 'stylesheet')
         styleEl.setAttribute('href', browser.runtime.getURL('assets/injected.css' as any))
 
-        container.appendChild(styleEl)
-        container.appendChild(script)
-
-        container.classList.add('fubuki-css')
-
-        root.appendChild(container)
+        root.appendChild(styleEl)
+        root.appendChild(script)
       },
     })
 
