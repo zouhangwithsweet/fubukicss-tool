@@ -13,7 +13,7 @@ export default defineContentScript({
         script.src = browser.runtime.getURL('/injected.js')
         script.onload = function () {
           console.log('🔍 script injected')
-          // script.remove()
+          script.remove()
         }
         const styleEl = document.createElement('link')
         styleEl.setAttribute('rel', 'stylesheet')
