@@ -1,7 +1,7 @@
 import waitFor from 'p-wait-for'
 import ReactDOM from 'react-dom/client'
 
-import { getCanvas, getObjectsPanel, mockFigma } from '../utils/figma.ts'
+import { getCanvas, getLeftPanel, mockFigma } from '../utils/figma.ts'
 import App from './App.tsx'
 
 // import '@unocss/reset/tailwind.css'
@@ -11,14 +11,10 @@ const sleep = (ms: number) => new Promise<true>((resolve) => setTimeout(() => re
 
 export default defineUnlistedScript(() => {
   window.onload = async function () {
-    await waitFor(
-      () =>
-        (!!(window as any).figma && getCanvas() != null && getObjectsPanel() != null) ||
-        document.querySelector('tempad')?.querySelector('header') != null,
-    )
+    await waitFor(() => !!(window as any).figma && getCanvas() !== null && getLeftPanel() !== null)
     await waitFor(() => sleep(50))
 
-    window.fubukicss_figma = (window as any).figma || (mockFigma as any)
+    window.fubukicss_figma = (window as any).figma
 
     const app = document.createElement('div')
     const root = ReactDOM.createRoot(app)

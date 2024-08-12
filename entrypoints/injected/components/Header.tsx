@@ -24,16 +24,11 @@ import {
 import { Switch } from '../ui/switch'
 
 interface Props {
-  onMouseDown: (e: MouseEvent) => void
-  onMouseUp: (e: MouseEvent) => void
   minimized: boolean
   onToggleSize: () => void
 }
 
-const Header = forwardRef(function (
-  { onMouseDown, onMouseUp, minimized, onToggleSize }: Props,
-  ref: ForwardedRef<HTMLElement>,
-) {
+const Header = forwardRef(function ({ minimized, onToggleSize }: Props, ref: ForwardedRef<HTMLElement>) {
   const [engine, setEngine] = useAtom(cssEngine)
   const [unit, setUnit] = useAtom(cssUnit)
   const [ext, setExt] = useAtom(exportExt)
@@ -91,8 +86,6 @@ const Header = forwardRef(function (
   }, [metaPressing])
   return (
     <header
-      onMouseDown={onMouseDown}
-      onMouseUp={onMouseUp}
       ref={ref}
       className={`flex items-center gap-2 border-b border-$color-border border-solid cursor-grab active:cursor-grabbing transition-padding ${minimized ? 'py-2.5 px-3' : 'py-3 px-4'} sticky top-0 bg-$color-bg z-2`}
     >
@@ -112,131 +105,135 @@ const Header = forwardRef(function (
         }}
       >
         {!minimized && (
-          <DropdownMenu>
-            <DropdownMenuTrigger asChild>
-              <Settings
-                onMouseEnter={onMouseEnter}
-                onMouseLeave={onMouseLeave}
-                size={16}
-                className="mr-1.5 text-$color-text-secondary hover:text-$color-text cursor-pointer"
-              />
-            </DropdownMenuTrigger>
-            <DropdownMenuContent className="w-56 z-1001 border-1 border-solid border-border">
-              <DropdownMenuLabel className="cursor-default">Settings</DropdownMenuLabel>
+          <>
+            {altPressing && <span className="i-mdi:alpha-a-box w-4 h-4 text-$color-bg-brand"></span>}
+            {metaPressing && <span className="i-mdi:alpha-m-box w-4 h-4 text-$color-bg-brand"></span>}
+            <DropdownMenu>
+              <DropdownMenuTrigger asChild>
+                <Settings
+                  onMouseEnter={onMouseEnter}
+                  onMouseLeave={onMouseLeave}
+                  size={16}
+                  className="mr-1.5 text-$color-text-secondary hover:text-$color-text cursor-pointer"
+                />
+              </DropdownMenuTrigger>
+              <DropdownMenuContent className="w-56 z-1001 border-1 border-solid border-border">
+                <DropdownMenuLabel className="cursor-default">Settings</DropdownMenuLabel>
 
-              <DropdownMenuSeparator />
+                <DropdownMenuSeparator />
 
-              <DropdownMenuGroup>
-                <DropdownMenuSub>
-                  <DropdownMenuSubTrigger>{engine}</DropdownMenuSubTrigger>
-                  <DropdownMenuPortal>
-                    <DropdownMenuSubContent className="z-1002 border-1 border-solid border-border">
-                      {(['unocss', 'tailwind'] as const).map((item) => (
-                        <DropdownMenuItem
-                          key={item}
-                          onClick={() => setEngine(item)}
-                          className="flex-center justify-between"
-                        >
-                          {item} <CheckIcon className={cn('h-4 w-4', item === engine ? '' : 'hidden')} />
-                        </DropdownMenuItem>
-                      ))}
-                    </DropdownMenuSubContent>
-                  </DropdownMenuPortal>
-                </DropdownMenuSub>
+                <DropdownMenuGroup>
+                  <DropdownMenuSub>
+                    <DropdownMenuSubTrigger>{engine}</DropdownMenuSubTrigger>
+                    <DropdownMenuPortal>
+                      <DropdownMenuSubContent className="z-1002 border-1 border-solid border-border">
+                        {(['unocss', 'tailwind'] as const).map((item) => (
+                          <DropdownMenuItem
+                            key={item}
+                            onClick={() => setEngine(item)}
+                            className="flex-center justify-between"
+                          >
+                            {item} <CheckIcon className={cn('h-4 w-4', item === engine ? '' : 'hidden')} />
+                          </DropdownMenuItem>
+                        ))}
+                      </DropdownMenuSubContent>
+                    </DropdownMenuPortal>
+                  </DropdownMenuSub>
 
-                <DropdownMenuSub>
-                  <DropdownMenuSubTrigger>{unit}</DropdownMenuSubTrigger>
-                  <DropdownMenuPortal>
-                    <DropdownMenuSubContent className="z-1002 border-1 border-solid border-border">
-                      {(['rem', 'px'] as const).map((item) => (
-                        <DropdownMenuItem
-                          key={item}
-                          onClick={() => setUnit(item)}
-                          className="flex-center justify-between"
-                        >
-                          {item} <CheckIcon className={cn('h-4 w-4', item === unit ? '' : 'hidden')} />
-                        </DropdownMenuItem>
-                      ))}
-                    </DropdownMenuSubContent>
-                  </DropdownMenuPortal>
-                </DropdownMenuSub>
-              </DropdownMenuGroup>
+                  <DropdownMenuSub>
+                    <DropdownMenuSubTrigger>{unit}</DropdownMenuSubTrigger>
+                    <DropdownMenuPortal>
+                      <DropdownMenuSubContent className="z-1002 border-1 border-solid border-border">
+                        {(['rem', 'px'] as const).map((item) => (
+                          <DropdownMenuItem
+                            key={item}
+                            onClick={() => setUnit(item)}
+                            className="flex-center justify-between"
+                          >
+                            {item} <CheckIcon className={cn('h-4 w-4', item === unit ? '' : 'hidden')} />
+                          </DropdownMenuItem>
+                        ))}
+                      </DropdownMenuSubContent>
+                    </DropdownMenuPortal>
+                  </DropdownMenuSub>
+                </DropdownMenuGroup>
 
-              <DropdownMenuSeparator />
+                <DropdownMenuSeparator />
 
-              <DropdownMenuGroup>
-                {/* <DropdownMenuItem disabled>export</DropdownMenuItem> */}
-                <DropdownMenuSub>
-                  <DropdownMenuSubTrigger>{scale}x</DropdownMenuSubTrigger>
-                  <DropdownMenuPortal>
-                    <DropdownMenuSubContent className="z-1002 border-1 border-solid border-border">
-                      {([1, 1.5, 2, 3, 4] as const).map((item) => (
-                        <DropdownMenuItem
-                          key={item}
-                          className="flex-center justify-between"
-                          onClick={() => setScale(item)}
-                        >
-                          {item}x <CheckIcon className={cn('h-4 w-4', scale === item ? '' : 'hidden')} />
-                        </DropdownMenuItem>
-                      ))}
-                    </DropdownMenuSubContent>
-                  </DropdownMenuPortal>
-                </DropdownMenuSub>
+                <DropdownMenuGroup>
+                  {/* <DropdownMenuItem disabled>export</DropdownMenuItem> */}
+                  <DropdownMenuSub>
+                    <DropdownMenuSubTrigger>{scale}x</DropdownMenuSubTrigger>
+                    <DropdownMenuPortal>
+                      <DropdownMenuSubContent className="z-1002 border-1 border-solid border-border">
+                        {([1, 1.5, 2, 3, 4] as const).map((item) => (
+                          <DropdownMenuItem
+                            key={item}
+                            className="flex-center justify-between"
+                            onClick={() => setScale(item)}
+                          >
+                            {item}x <CheckIcon className={cn('h-4 w-4', scale === item ? '' : 'hidden')} />
+                          </DropdownMenuItem>
+                        ))}
+                      </DropdownMenuSubContent>
+                    </DropdownMenuPortal>
+                  </DropdownMenuSub>
 
-                <DropdownMenuSub>
-                  <DropdownMenuSubTrigger className="uppercase">{ext}</DropdownMenuSubTrigger>
-                  <DropdownMenuPortal>
-                    <DropdownMenuSubContent className="z-1002 border-1 border-solid border-border">
-                      {(['png', 'jpg', 'svg'] as const).map((item) => (
-                        <DropdownMenuItem
-                          key={item}
-                          className="flex-center justify-between uppercase"
-                          onClick={() => setExt(item)}
-                        >
-                          {item} <CheckIcon className={cn('h-4 w-4', ext === item ? '' : 'hidden')} />
-                        </DropdownMenuItem>
-                      ))}
-                    </DropdownMenuSubContent>
-                  </DropdownMenuPortal>
-                </DropdownMenuSub>
-              </DropdownMenuGroup>
+                  <DropdownMenuSub>
+                    <DropdownMenuSubTrigger className="uppercase">{ext}</DropdownMenuSubTrigger>
+                    <DropdownMenuPortal>
+                      <DropdownMenuSubContent className="z-1002 border-1 border-solid border-border">
+                        {(['png', 'jpg', 'svg'] as const).map((item) => (
+                          <DropdownMenuItem
+                            key={item}
+                            className="flex-center justify-between uppercase"
+                            onClick={() => setExt(item)}
+                          >
+                            {item} <CheckIcon className={cn('h-4 w-4', ext === item ? '' : 'hidden')} />
+                          </DropdownMenuItem>
+                        ))}
+                      </DropdownMenuSubContent>
+                    </DropdownMenuPortal>
+                  </DropdownMenuSub>
+                </DropdownMenuGroup>
 
-              <DropdownMenuSeparator />
+                <DropdownMenuSeparator />
 
-              <DropdownMenuGroup>
-                <DropdownMenuItem>
-                  Measure to selection
-                  <Switch
-                    className="ml-auto scale-86"
-                    checked={altPressing}
-                    onCheckedChange={(e) => {
-                      setAltPressing(e)
+                <DropdownMenuGroup>
+                  <DropdownMenuItem>
+                    Measure to selection
+                    <Switch
+                      className="ml-auto scale-86"
+                      checked={altPressing}
+                      onCheckedChange={(e) => {
+                        setAltPressing(e)
 
-                      toggleAltPress(e)
-                    }}
-                    onClick={(e) => {
-                      e.stopPropagation()
-                    }}
-                  />
-                </DropdownMenuItem>
-                <DropdownMenuItem>
-                  Deep select
-                  <Switch
-                    className="ml-auto scale-86"
-                    checked={metaPressing}
-                    onCheckedChange={(e) => {
-                      setMetaPressing(e)
+                        toggleAltPress(e)
+                      }}
+                      onClick={(e) => {
+                        e.stopPropagation()
+                      }}
+                    />
+                  </DropdownMenuItem>
+                  <DropdownMenuItem>
+                    Deep select
+                    <Switch
+                      className="ml-auto scale-86"
+                      checked={metaPressing}
+                      onCheckedChange={(e) => {
+                        setMetaPressing(e)
 
-                      toggleMetaPress(e)
-                    }}
-                    onClick={(e) => {
-                      e.stopPropagation()
-                    }}
-                  />
-                </DropdownMenuItem>
-              </DropdownMenuGroup>
-            </DropdownMenuContent>
-          </DropdownMenu>
+                        toggleMetaPress(e)
+                      }}
+                      onClick={(e) => {
+                        e.stopPropagation()
+                      }}
+                    />
+                  </DropdownMenuItem>
+                </DropdownMenuGroup>
+              </DropdownMenuContent>
+            </DropdownMenu>
+          </>
         )}
         <span
           className="flex-center text-$color-text-secondary cursor-pointer hover:text-$color-text"

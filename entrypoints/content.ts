@@ -9,7 +9,6 @@ export default defineContentScript({
       position: 'inline',
       onMount: (root) => {
         // Append children to the container
-        const container = document.createElement('div')
         const script = document.createElement('script')
         script.src = browser.runtime.getURL('/injected.js')
         script.onload = function () {
