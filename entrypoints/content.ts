@@ -25,6 +25,8 @@ export default defineContentScript({
     })
 
     // Call mount to add the UI to the DOM
-    ui.mount()
+    window.setTimeout(() => {
+      ui.mount()
+    }, 0)
   },
 })
