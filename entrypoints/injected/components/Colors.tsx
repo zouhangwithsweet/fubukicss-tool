@@ -7,6 +7,7 @@ import { figmaRGBToHex, figmaRGBToHSL, figmaRGBToWebRGB } from '@/entrypoints/ut
 
 import { colorMode, currentSelection } from '../store'
 import { Select, SelectContent, SelectGroup, SelectItem, SelectLabel, SelectTrigger, SelectValue } from '../ui/select'
+import { CopyContent } from './CopyContent'
 
 export const Colors = memo((props: { minimized?: boolean }) => {
   const node = useAtomValue(currentSelection)
@@ -29,6 +30,20 @@ export const Colors = memo((props: { minimized?: boolean }) => {
         )
         .filter((p) => p !== null),
     [mode, paints],
+  )
+  const colorVars = useMemo(
+    () =>
+      paints
+        .filter((p) => p.type === 'SOLID')
+        .filter((p) => 'boundVariables' in p)
+        .map((p) => {
+          if ('boundVariables' in p) {
+            return window.fubukicss_figma.variables.getVariableById(p.boundVariables?.color?.id!)
+          }
+          return null
+        })
+        .filter((p) => p !== null),
+    [paints],
   )
 
   useEffect(() => {
@@ -93,7 +108,7 @@ export const Colors = memo((props: { minimized?: boolean }) => {
         {[...new Set(colors.slice(0, showMore ? colors.length : 3))].map((c, index) => (
           <div
             key={`${formatColor(c)}_${index}`}
-            className="shrink-0 h-7.5 flex items-center p-1 box-border hover:bg-#e5e5e5/50 rounded-sm cursor-pointer"
+            className="shrink-0 h-7.5 flex items-center p-1 box-border rounded-sm cursor-pointer"
             onClick={handleCopy(formatColor(c))}
           >
             <span
@@ -106,8 +121,15 @@ export const Colors = memo((props: { minimized?: boolean }) => {
               type="text"
               readOnly
               value={formatColor(c)}
-              className="ml-4 w-full font-400 text-xs font-['Inter'] bg-transparent text-$color-text"
+              className="ml-4 w-full font-400 text-xs font-['Inter'] bg-transparent text-$color-text hover:underline"
             />
+            {colorVars[index]?.name && (
+              <CopyContent>
+                <span className="font-400 text-xs font-['Inter'] bg-transparent text-$color-text">
+                  {colorVars[index]?.name.split('/').join('-').toLocaleLowerCase()}
+                </span>
+              </CopyContent>
+            )}
           </div>
         ))}
         <ChevronDownIcon
