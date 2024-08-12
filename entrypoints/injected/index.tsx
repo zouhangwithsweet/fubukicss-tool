@@ -19,7 +19,6 @@ export default defineUnlistedScript(() => {
     const app = document.createElement('div')
     const root = ReactDOM.createRoot(app)
     root.render(<App />)
-    console.log(app, document.querySelector('fubukicss'))
     document.querySelector('fubukicss')!.append(app)
   }
 })
