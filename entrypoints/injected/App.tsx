@@ -1,4 +1,4 @@
-import { motion } from 'framer-motion'
+import { motion, useDragControls } from 'framer-motion'
 import { useEffect, useRef, useState } from 'react'
 
 import { CodeArea } from './components/Code'
@@ -15,8 +15,11 @@ export default () => {
     setMinimized(!minimized)
   }
 
+  const controls = useDragControls()
+  function startDrag(event: React.PointerEvent<Element> | PointerEvent) {
+    controls.start(event)
+  }
   const container = useRef<HTMLBodyElement | null>(null)
-
   useEffect(() => {
     container.current = document.querySelector('body')!
   }, [])
@@ -26,11 +29,14 @@ export default () => {
       drag
       dragMomentum={false}
       dragConstraints={container}
-      dragElastic={false}
+      dragElastic={true}
+      dragPropagation={false}
+      dragListener={false}
+      dragControls={controls}
       className={`fixed top-10 right-20 text-xs text-$color-text bg-$color-bg rounded border-1 border-$color-border border-solid shadow-md z-10 antialiased h-auto transition-width !font-['Inter'] js-fullscreen-prevent-event-capture ${minimized ? 'w-50' : 'w-80'} max-h-[calc(100vh-50px)] overflow-y-scroll scrollbar-hide`}
       tabIndex={-1}
     >
-      <Header ref={header} minimized={minimized} onToggleSize={handleToggleSize} />
+      <Header startDrag={startDrag} ref={header} minimized={minimized} onToggleSize={handleToggleSize} />
 
       <CodeArea minimized={minimized} />
 

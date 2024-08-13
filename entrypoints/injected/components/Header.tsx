@@ -1,6 +1,7 @@
 import { CheckIcon } from '@radix-ui/react-icons'
+import { motion } from 'framer-motion'
 import { useAtom } from 'jotai'
-import { ForwardedRef, forwardRef, memo, MouseEvent, useCallback, useEffect } from 'react'
+import { ForwardedRef, forwardRef, memo, useCallback, useEffect } from 'react'
 import { Maximize2, Minimize2, Settings } from 'react-feather'
 
 import Logo from '@/entrypoints/assets/fubukicss.svg'
@@ -26,9 +27,10 @@ import { Switch } from '../ui/switch'
 interface Props {
   minimized: boolean
   onToggleSize: () => void
+  startDrag: (e: React.PointerEvent<Element> | PointerEvent) => void
 }
 
-const Header = forwardRef(function ({ minimized, onToggleSize }: Props, ref: ForwardedRef<HTMLElement>) {
+const Header = forwardRef(function ({ minimized, onToggleSize, startDrag }: Props, ref: ForwardedRef<HTMLElement>) {
   const [engine, setEngine] = useAtom(cssEngine)
   const [unit, setUnit] = useAtom(cssUnit)
   const [ext, setExt] = useAtom(exportExt)
@@ -84,8 +86,10 @@ const Header = forwardRef(function ({ minimized, onToggleSize }: Props, ref: For
   const onMouseLeave = useCallback(() => {
     toggleMetaPress(metaPressing)
   }, [metaPressing])
+
   return (
-    <header
+    <motion.header
+      onPointerDown={startDrag}
       ref={ref}
       className={`flex items-center gap-2 border-b border-$color-border border-solid cursor-grab active:cursor-grabbing transition-padding ${minimized ? 'py-2.5 px-3' : 'py-3 px-4'} sticky top-0 bg-$color-bg z-2`}
     >
@@ -242,7 +246,7 @@ const Header = forwardRef(function ({ minimized, onToggleSize }: Props, ref: For
           {minimized ? <Maximize2 size={16} /> : <Minimize2 size={16} />}
         </span>
       </div>
-    </header>
+    </motion.header>
   )
 })
 
