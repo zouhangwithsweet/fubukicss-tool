@@ -51,14 +51,14 @@ importers:
         specifier: ^2.2.1
         version: 2.2.1
       transform-to-tailwindcss-core:
-        specifier: ^0.0.18
-        version: 0.0.18
+        specifier: ^0.0.19
+        version: 0.0.19
       transform-to-unocss-core:
-        specifier: ^0.0.29
-        version: 0.0.29
+        specifier: ^0.0.31
+        version: 0.0.31
       unocss:
         specifier: ^0.58.5
-        version: 0.58.5(postcss@8.4.41)(rollup@4.20.0)(vite@5.4.0(@types/node@22.2.0))
+        version: 0.58.5(postcss@8.4.41)(rollup@4.20.0)(vite@5.4.0(@types/node@22.3.0))
       usehooks-ts:
         specifier: ^2.15.0
         version: 2.15.0(react@18.2.0)
@@ -86,7 +86,7 @@ importers:
         version: 7.0.2(eslint@8.56.0)(typescript@5.3.3)
       '@vitejs/plugin-react':
         specifier: ^4.2.1
-        version: 4.2.1(vite@5.4.0(@types/node@22.2.0))
+        version: 4.2.1(vite@5.4.0(@types/node@22.3.0))
       eslint:
         specifier: ^8.56.0
         version: 8.56.0
@@ -113,13 +113,13 @@ importers:
         version: 5.3.3
       unocss-preset-animations:
         specifier: ^1.0.1
-        version: 1.0.1(@unocss/preset-wind@0.61.9)(unocss@0.58.5(postcss@8.4.41)(rollup@4.20.0)(vite@5.4.0(@types/node@22.2.0)))
+        version: 1.0.1(@unocss/preset-wind@0.62.1)(unocss@0.58.5(postcss@8.4.41)(rollup@4.20.0)(vite@5.4.0(@types/node@22.3.0)))
       unocss-preset-shadcn:
         specifier: ^0.2.3
-        version: 0.2.3(unocss-preset-animations@1.0.1(@unocss/preset-wind@0.61.9)(unocss@0.58.5(postcss@8.4.41)(rollup@4.20.0)(vite@5.4.0(@types/node@22.2.0))))(unocss@0.58.5(postcss@8.4.41)(rollup@4.20.0)(vite@5.4.0(@types/node@22.2.0)))
+        version: 0.2.3(unocss-preset-animations@1.0.1(@unocss/preset-wind@0.62.1)(unocss@0.58.5(postcss@8.4.41)(rollup@4.20.0)(vite@5.4.0(@types/node@22.3.0))))(unocss@0.58.5(postcss@8.4.41)(rollup@4.20.0)(vite@5.4.0(@types/node@22.3.0)))
       wxt:
         specifier: ^0.19.4
-        version: 0.19.4(@types/node@22.2.0)(rollup@4.20.0)
+        version: 0.19.4(@types/node@22.3.0)(rollup@4.20.0)
 
 packages:
 
@@ -1190,6 +1190,9 @@ packages:
   '@types/node@22.2.0':
     resolution: {integrity: sha512-bm6EG6/pCpkxDf/0gDNDdtDILMOHgaQBVOJGdwsqClnxA3xL6jtMv76rLBc006RVMWbmaf0xbmom4Z/5o2nRkQ==}
 
+  '@types/node@22.3.0':
+    resolution: {integrity: sha512-nrWpWVaDZuaVc5X84xJ0vNrLvomM205oQyLsRt7OHNZbSHslcWsvgFR7O7hire2ZonjLrWBbedmotmIlJDVd6g==}
+
   '@types/prop-types@15.7.11':
     resolution: {integrity: sha512-ga8y9v9uyeiLdpKddhxYQkxNDrfvuPrlFb0N1qnZZByvcElJaXthF1UhvCh9TLWJBEHeNtdnbysW7Y6Uq8CVng==}
 
@@ -1262,14 +1265,14 @@ packages:
   '@unocss/core@0.58.5':
     resolution: {integrity: sha512-qbPqL+46hf1/UelQOwUwpAuvm6buoss43DPYHOPdfNJ+NTWkSpATQMF0JKT04QE0QRQbHNSHdMe9ariG+IIlCw==}
 
-  '@unocss/core@0.61.9':
-    resolution: {integrity: sha512-2W1YZQIWXcueGdbXU/ZCqn/8yQhWk8e8kAHFkVlbc9rictkd2UmPB9nIZ8Ii1tMwt6F0TT6vfHbLJEGCV08o2g==}
+  '@unocss/core@0.62.1':
+    resolution: {integrity: sha512-v257k6T6GByPbsXkCzglV0cMVfaQZmvKKQEFsx34VOJ7jLVwh3QCj0seSP8j4rWSIWxqQJnox3KaVrKVp7aJbg==}
 
   '@unocss/extractor-arbitrary-variants@0.58.5':
     resolution: {integrity: sha512-KJQX0OJKzy4YjJo09h2la2Q+cn5IJ1JdyPVJJkzovHnv7jSBWzsfct+bj/6a+SJ4p4JBIqEJz3M/qxHv4EPJyA==}
 
-  '@unocss/extractor-arbitrary-variants@0.61.9':
-    resolution: {integrity: sha512-ii42/hKbhgeBBOy86729t6/HeGmxUcHM8FprPeb/v/DfYsCkjDvMYVynX3FN/K5pR2WV+HHp6TQS7GbTmRIN0g==}
+  '@unocss/extractor-arbitrary-variants@0.62.1':
+    resolution: {integrity: sha512-K27s8yh+h3VBuvdoXkM8D2rJsfLT0KAPwEkur1AEK/rN/6n2+xm15/llKJXQmc9pMq7zK072a7EKPax4FMMv4g==}
 
   '@unocss/inspector@0.58.5':
     resolution: {integrity: sha512-cbJlIHEZ14puTtttf7sl+VZFDscV1DJiSseh9sSe0xJ/1NVBT9Bvkm09/1tnpLYAgF5gfa1CaCcjKmURgYzKrA==}
@@ -1289,8 +1292,8 @@ packages:
   '@unocss/preset-mini@0.58.5':
     resolution: {integrity: sha512-WqD31fKUAN28OCUOyi1uremmLk0eTMqtCizjbbXsY/DP6RKYUT7trFAtppTcHWFhSQcknb4FURfAZppACsTVQQ==}
 
-  '@unocss/preset-mini@0.61.9':
-    resolution: {integrity: sha512-qhagWfdM7ytRWf4wFfrAcdeCUCVD9wDVrM+9evAmuOnMXWEiVZCjfwhjjFu+8lM7g+38n+gi7VcrNuTiZ8fHBA==}
+  '@unocss/preset-mini@0.62.1':
+    resolution: {integrity: sha512-5YWj7+5F0caGJlG8Wyqqq0VJrvuVilP8i92PSFlrPPY8Nj9qHyGrFowyJ0MRGqei6K3nHWZWFx0Wo1Ligy376g==}
 
   '@unocss/preset-tagify@0.58.5':
     resolution: {integrity: sha512-UB9IXi8vA/SzmmRLMWR7bzeBpxpiRo7y9xk3ruvDddYlsyiwIeDIMwG23YtcA6q41FDQvkrmvTxUEH9LFlv6aA==}
@@ -1307,8 +1310,8 @@ packages:
   '@unocss/preset-wind@0.58.5':
     resolution: {integrity: sha512-54RkjLmlqMUlC8o8nDCVzB25D1zzK4eth+/3uQzt739qU0U92NxuZKY21ADj9Rp/mVhKBV5FKuXPjmYc6yTQRQ==}
 
-  '@unocss/preset-wind@0.61.9':
-    resolution: {integrity: sha512-AzbjJrNL9Rb2BzTiREyssd8v7KFVVLERQ/PNILGzo6yYelYMl4AhKXZ3jgxWEsIABArVa3UkGBigG4h/L+2JHA==}
+  '@unocss/preset-wind@0.62.1':
+    resolution: {integrity: sha512-6U8VsQrhbxdYoeYtMYMfcQiJE5sxanyxobjm5PO62uJx23cmUNEL0GUNsNxJOm9r/W8HlUyamnutuvxw06Qf1A==}
 
   '@unocss/reset@0.58.5':
     resolution: {integrity: sha512-2wMrkCj3SSb5hrx9TKs5jZa34QIRkHv9FotbJutAPo7o8hx+XXn56ogzdoUrcFPJZJUx2R2nyOVbSlGMIjtFtw==}
@@ -1317,8 +1320,8 @@ packages:
     resolution: {integrity: sha512-w0sGJoeUGwMWLVFLEE9PDiv/fQcQqZnTIIQLYNCjTdqXDRlwTp9ACW0h47x/hAAIXdOtEOOBuTfjGD79GznUmA==}
     engines: {node: '>=14'}
 
-  '@unocss/rule-utils@0.61.9':
-    resolution: {integrity: sha512-54Hw0nF+3ga70ETo3kes4He62wdsB4dHMgEiD/DEmJzyVY3ZuG/sIVAgkxjMQDo5w4SSYU/Ys1QaY+IQmeJHFQ==}
+  '@unocss/rule-utils@0.62.1':
+    resolution: {integrity: sha512-UZuk8wg0bzylEtkwH7UaOQcTIr10w0HOE/6lfpuUcLIdgbKRWAg6999JPxNowAaB7mJSO1MY3yiTn2ZpAHrl7g==}
     engines: {node: '>=14'}
 
   '@unocss/scope@0.58.5':
@@ -3561,12 +3564,12 @@ packages:
     resolution: {integrity: sha512-sf4i37nQ2LBx4m3wB74y+ubopq6W/dIzXg0FDGjsYnZHVa1Da8FH853wlL2gtUhg+xJXjfk3kUZS3BRoQeoQBQ==}
     engines: {node: '>=6'}
 
-  transform-to-tailwindcss-core@0.0.18:
-    resolution: {integrity: sha512-OhkIyF08ck0FO0ek5nOGc6fWAosiRSrLxJYToHSg9CTy/Lr4G8Qfy4Q27k+pQeHeEYNcPmLBe8CLgokxzK9VGg==}
+  transform-to-tailwindcss-core@0.0.19:
+    resolution: {integrity: sha512-HIpGM1qQVuUL1KjDd2AD1PBbHnh0Us7UW5dx0SJkdqR8enlm0h8ccCrvtp2wa8GZuSQKnnIbjvYmjRjqH72k6w==}
     hasBin: true
 
-  transform-to-unocss-core@0.0.29:
-    resolution: {integrity: sha512-36tyl2IQ2vHtR0LOgE2S+4APVOTB80eSu2hyDB9rOZcsmivA3ZyhzBA8ISQ4ODQc23ZVyns0WxLPxk676AwY+Q==}
+  transform-to-unocss-core@0.0.31:
+    resolution: {integrity: sha512-hWvfbnFKAOQ6upqvWvsMWhHMEjjP9G1Gq8xrFUvARphOH0oyj48OHckxzJWrawXyzWgCN5nUA6wU0hKnM+xr7g==}
     hasBin: true
 
   ts-api-utils@1.2.1:
@@ -3648,6 +3651,9 @@ packages:
 
   undici-types@6.13.0:
     resolution: {integrity: sha512-xtFJHudx8S2DSoujjMd1WeWvn7KKWFRESZTMeL1RptAYERu29D6jphMjjY+vn96jvN3kVPDNxU/E13VTaXj6jg==}
+
+  undici-types@6.18.2:
+    resolution: {integrity: sha512-5ruQbENj95yDYJNS3TvcaxPMshV7aizdv/hWYjGIKoANWKjhWNBsr2YEuYZKodQulB1b8l7ILOuDQep3afowQQ==}
 
   unimport@3.10.0:
     resolution: {integrity: sha512-/UvKRfWx3mNDWwWQhR62HsoM3wxHwYdTq8ellZzMOHnnw4Dp8tovgthyW7DjTrbjDL+i4idOp06voz2VKlvrLw==}
@@ -4891,6 +4897,11 @@ snapshots:
     dependencies:
       undici-types: 6.13.0
 
+  '@types/node@22.3.0':
+    dependencies:
+      undici-types: 6.18.2
+    optional: true
+
   '@types/prop-types@15.7.11': {}
 
   '@types/react-dom@18.2.19':
@@ -4954,13 +4965,13 @@ snapshots:
 
   '@ungap/structured-clone@1.2.0': {}
 
-  '@unocss/astro@0.58.5(rollup@4.20.0)(vite@5.4.0(@types/node@22.2.0))':
+  '@unocss/astro@0.58.5(rollup@4.20.0)(vite@5.4.0(@types/node@22.3.0))':
     dependencies:
       '@unocss/core': 0.58.5
       '@unocss/reset': 0.58.5
-      '@unocss/vite': 0.58.5(rollup@4.20.0)(vite@5.4.0(@types/node@22.2.0))
+      '@unocss/vite': 0.58.5(rollup@4.20.0)(vite@5.4.0(@types/node@22.3.0))
     optionalDependencies:
-      vite: 5.4.0(@types/node@22.2.0)
+      vite: 5.4.0(@types/node@22.3.0)
     transitivePeerDependencies:
       - rollup
 
@@ -4989,15 +5000,15 @@ snapshots:
 
   '@unocss/core@0.58.5': {}
 
-  '@unocss/core@0.61.9': {}
+  '@unocss/core@0.62.1': {}
 
   '@unocss/extractor-arbitrary-variants@0.58.5':
     dependencies:
       '@unocss/core': 0.58.5
 
-  '@unocss/extractor-arbitrary-variants@0.61.9':
+  '@unocss/extractor-arbitrary-variants@0.62.1':
     dependencies:
-      '@unocss/core': 0.61.9
+      '@unocss/core': 0.62.1
 
   '@unocss/inspector@0.58.5':
     dependencies:
@@ -5034,11 +5045,11 @@ snapshots:
       '@unocss/extractor-arbitrary-variants': 0.58.5
       '@unocss/rule-utils': 0.58.5
 
-  '@unocss/preset-mini@0.61.9':
+  '@unocss/preset-mini@0.62.1':
     dependencies:
-      '@unocss/core': 0.61.9
-      '@unocss/extractor-arbitrary-variants': 0.61.9
-      '@unocss/rule-utils': 0.61.9
+      '@unocss/core': 0.62.1
+      '@unocss/extractor-arbitrary-variants': 0.62.1
+      '@unocss/rule-utils': 0.62.1
 
   '@unocss/preset-tagify@0.58.5':
     dependencies:
@@ -5067,11 +5078,11 @@ snapshots:
       '@unocss/preset-mini': 0.58.5
       '@unocss/rule-utils': 0.58.5
 
-  '@unocss/preset-wind@0.61.9':
+  '@unocss/preset-wind@0.62.1':
     dependencies:
-      '@unocss/core': 0.61.9
-      '@unocss/preset-mini': 0.61.9
-      '@unocss/rule-utils': 0.61.9
+      '@unocss/core': 0.62.1
+      '@unocss/preset-mini': 0.62.1
+      '@unocss/rule-utils': 0.62.1
 
   '@unocss/reset@0.58.5': {}
 
@@ -5080,9 +5091,9 @@ snapshots:
       '@unocss/core': 0.58.5
       magic-string: 0.30.7
 
-  '@unocss/rule-utils@0.61.9':
+  '@unocss/rule-utils@0.62.1':
     dependencies:
-      '@unocss/core': 0.61.9
+      '@unocss/core': 0.62.1
       magic-string: 0.30.11
 
   '@unocss/scope@0.58.5': {}
@@ -5114,7 +5125,7 @@ snapshots:
     dependencies:
       '@unocss/core': 0.58.5
 
-  '@unocss/vite@0.58.5(rollup@4.20.0)(vite@5.4.0(@types/node@22.2.0))':
+  '@unocss/vite@0.58.5(rollup@4.20.0)(vite@5.4.0(@types/node@22.3.0))':
     dependencies:
       '@ampproject/remapping': 2.2.1
       '@rollup/pluginutils': 5.1.0(rollup@4.20.0)
@@ -5126,18 +5137,18 @@ snapshots:
       chokidar: 3.6.0
       fast-glob: 3.3.2
       magic-string: 0.30.7
-      vite: 5.4.0(@types/node@22.2.0)
+      vite: 5.4.0(@types/node@22.3.0)
     transitivePeerDependencies:
       - rollup
 
-  '@vitejs/plugin-react@4.2.1(vite@5.4.0(@types/node@22.2.0))':
+  '@vitejs/plugin-react@4.2.1(vite@5.4.0(@types/node@22.3.0))':
     dependencies:
       '@babel/core': 7.23.9
       '@babel/plugin-transform-react-jsx-self': 7.23.3(@babel/core@7.23.9)
       '@babel/plugin-transform-react-jsx-source': 7.23.3(@babel/core@7.23.9)
       '@types/babel__core': 7.20.5
       react-refresh: 0.14.0
-      vite: 5.4.0(@types/node@22.2.0)
+      vite: 5.4.0(@types/node@22.3.0)
     transitivePeerDependencies:
       - supports-color
 
@@ -7503,9 +7514,9 @@ snapshots:
 
   totalist@3.0.1: {}
 
-  transform-to-tailwindcss-core@0.0.18: {}
+  transform-to-tailwindcss-core@0.0.19: {}
 
-  transform-to-unocss-core@0.0.29: {}
+  transform-to-unocss-core@0.0.31: {}
 
   ts-api-utils@1.2.1(typescript@5.3.3):
     dependencies:
@@ -7596,6 +7607,9 @@ snapshots:
 
   undici-types@6.13.0: {}
 
+  undici-types@6.18.2:
+    optional: true
+
   unimport@3.10.0(rollup@4.20.0):
     dependencies:
       '@rollup/pluginutils': 5.1.0(rollup@4.20.0)
@@ -7622,19 +7636,19 @@ snapshots:
 
   universalify@2.0.1: {}
 
-  unocss-preset-animations@1.0.1(@unocss/preset-wind@0.61.9)(unocss@0.58.5(postcss@8.4.41)(rollup@4.20.0)(vite@5.4.0(@types/node@22.2.0))):
+  unocss-preset-animations@1.0.1(@unocss/preset-wind@0.62.1)(unocss@0.58.5(postcss@8.4.41)(rollup@4.20.0)(vite@5.4.0(@types/node@22.3.0))):
     dependencies:
-      '@unocss/preset-wind': 0.61.9
-      unocss: 0.58.5(postcss@8.4.41)(rollup@4.20.0)(vite@5.4.0(@types/node@22.2.0))
+      '@unocss/preset-wind': 0.62.1
+      unocss: 0.58.5(postcss@8.4.41)(rollup@4.20.0)(vite@5.4.0(@types/node@22.3.0))
 
-  unocss-preset-shadcn@0.2.3(unocss-preset-animations@1.0.1(@unocss/preset-wind@0.61.9)(unocss@0.58.5(postcss@8.4.41)(rollup@4.20.0)(vite@5.4.0(@types/node@22.2.0))))(unocss@0.58.5(postcss@8.4.41)(rollup@4.20.0)(vite@5.4.0(@types/node@22.2.0))):
+  unocss-preset-shadcn@0.2.3(unocss-preset-animations@1.0.1(@unocss/preset-wind@0.62.1)(unocss@0.58.5(postcss@8.4.41)(rollup@4.20.0)(vite@5.4.0(@types/node@22.3.0))))(unocss@0.58.5(postcss@8.4.41)(rollup@4.20.0)(vite@5.4.0(@types/node@22.3.0))):
     dependencies:
-      unocss: 0.58.5(postcss@8.4.41)(rollup@4.20.0)(vite@5.4.0(@types/node@22.2.0))
-      unocss-preset-animations: 1.0.1(@unocss/preset-wind@0.61.9)(unocss@0.58.5(postcss@8.4.41)(rollup@4.20.0)(vite@5.4.0(@types/node@22.2.0)))
+      unocss: 0.58.5(postcss@8.4.41)(rollup@4.20.0)(vite@5.4.0(@types/node@22.3.0))
+      unocss-preset-animations: 1.0.1(@unocss/preset-wind@0.62.1)(unocss@0.58.5(postcss@8.4.41)(rollup@4.20.0)(vite@5.4.0(@types/node@22.3.0)))
 
-  unocss@0.58.5(postcss@8.4.41)(rollup@4.20.0)(vite@5.4.0(@types/node@22.2.0)):
+  unocss@0.58.5(postcss@8.4.41)(rollup@4.20.0)(vite@5.4.0(@types/node@22.3.0)):
     dependencies:
-      '@unocss/astro': 0.58.5(rollup@4.20.0)(vite@5.4.0(@types/node@22.2.0))
+      '@unocss/astro': 0.58.5(rollup@4.20.0)(vite@5.4.0(@types/node@22.3.0))
       '@unocss/cli': 0.58.5(rollup@4.20.0)
       '@unocss/core': 0.58.5
       '@unocss/extractor-arbitrary-variants': 0.58.5
@@ -7653,9 +7667,9 @@ snapshots:
       '@unocss/transformer-compile-class': 0.58.5
       '@unocss/transformer-directives': 0.58.5
       '@unocss/transformer-variant-group': 0.58.5
-      '@unocss/vite': 0.58.5(rollup@4.20.0)(vite@5.4.0(@types/node@22.2.0))
+      '@unocss/vite': 0.58.5(rollup@4.20.0)(vite@5.4.0(@types/node@22.3.0))
     optionalDependencies:
-      vite: 5.4.0(@types/node@22.2.0)
+      vite: 5.4.0(@types/node@22.3.0)
     transitivePeerDependencies:
       - postcss
       - rollup
@@ -7721,13 +7735,13 @@ snapshots:
 
   uuid@8.3.2: {}
 
-  vite-node@2.0.5(@types/node@22.2.0):
+  vite-node@2.0.5(@types/node@22.3.0):
     dependencies:
       cac: 6.7.14
       debug: 4.3.6
       pathe: 1.1.2
       tinyrainbow: 1.2.0
-      vite: 5.4.0(@types/node@22.2.0)
+      vite: 5.4.0(@types/node@22.3.0)
     transitivePeerDependencies:
       - '@types/node'
       - less
@@ -7739,13 +7753,13 @@ snapshots:
       - supports-color
       - terser
 
-  vite@5.4.0(@types/node@22.2.0):
+  vite@5.4.0(@types/node@22.3.0):
     dependencies:
       esbuild: 0.21.5
       postcss: 8.4.41
       rollup: 4.20.0
     optionalDependencies:
-      '@types/node': 22.2.0
+      '@types/node': 22.3.0
       fsevents: 2.3.3
 
   watchpack@2.4.1:
@@ -7856,7 +7870,7 @@ snapshots:
 
   ws@8.18.0: {}
 
-  wxt@0.19.4(@types/node@22.2.0)(rollup@4.20.0):
+  wxt@0.19.4(@types/node@22.3.0)(rollup@4.20.0):
     dependencies:
       '@aklinker1/rollup-plugin-visualizer': 5.12.0(rollup@4.20.0)
       '@types/webextension-polyfill': 0.10.7
@@ -7895,8 +7909,8 @@ snapshots:
       prompts: 2.4.2
       publish-browser-extension: 2.1.3
       unimport: 3.10.0(rollup@4.20.0)
-      vite: 5.4.0(@types/node@22.2.0)
-      vite-node: 2.0.5(@types/node@22.2.0)
+      vite: 5.4.0(@types/node@22.3.0)
+      vite-node: 2.0.5(@types/node@22.3.0)
       web-ext-run: 0.2.1
       webextension-polyfill: 0.12.0
     transitivePeerDependencies:
