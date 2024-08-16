@@ -126,7 +126,7 @@ export const Download = memo((props: { minimized?: boolean }) => {
                 fillStyle: 'hachure',
                 fillWeight: 1,
                 hachureAngle: -41,
-                hachureGap: 4,
+                hachureGap: 1,
                 curveStepCount: 9,
                 curveFitting: 0.95,
                 disableMultiStroke: false,
