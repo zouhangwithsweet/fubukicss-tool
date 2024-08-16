@@ -1,11 +1,23 @@
 import { useAtomValue } from 'jotai'
 import { memo, useEffect, useState } from 'react'
 import { Clipboard } from 'react-feather'
+import SVG from 'react-inlinesvg'
+import { RoughSVG } from 'react-rough-fiber'
 import { useCopyToClipboard } from 'usehooks-ts'
 
 import { arrayBufferToBase64, arrayBufferToImageFile } from '@/entrypoints/utils/file'
 
 import { currentSelection, exportExt, exportScale } from '../store'
+
+function isSVG(node: SceneNode, depth: number = 0): boolean {
+  if (depth >= 4) return true // Max depth reached, assume it's SVG
+
+  if ('children' in node && node.children.length > 0) {
+    return node.children.every((child) => isSVG(child, depth + 1))
+  } else {
+    return ['VECTOR', 'ELLIPSE', 'RECTANGLE', 'POLYGON', 'POLYLINE', 'STAR', 'LINE'].includes(node.type)
+  }
+}
 
 export const Download = memo((props: { minimized?: boolean }) => {
   const node = useAtomValue(currentSelection)
@@ -32,30 +44,30 @@ export const Download = memo((props: { minimized?: boolean }) => {
 
   useEffect(() => {
     ;(async () => {
-      if (node && show) {
-        const data = await node.exportAsync({
-          format: 'PNG',
-          constraint: {
-            type: 'SCALE',
-            value: 1,
-          },
-        })
-        setImageBase64('data:image/png;base64,' + arrayBufferToBase64(data))
-        setSvgString('')
-
-        if (node.type === 'VECTOR') {
+      if (node) {
+        if (isSVG(node)) {
           const svgData = await node.exportAsync({
             format: 'SVG_STRING',
           })
           const svgBase64 = 'data:image/svg+xml;base64,' + btoa(svgData)
           setImageBase64(svgBase64)
           setSvgString(svgData)
+        } else {
+          const data = await node.exportAsync({
+            format: 'PNG',
+            constraint: {
+              type: 'SCALE',
+              value: 1,
+            },
+          })
+          setImageBase64('data:image/png;base64,' + arrayBufferToBase64(data))
+          setSvgString('')
         }
       } else {
         setImageBase64('')
       }
     })()
-  }, [ext, node, scale, show])
+  }, [ext, node, scale])
 
   return (
     <div
@@ -103,10 +115,37 @@ export const Download = memo((props: { minimized?: boolean }) => {
               'conic-gradient(#fff .25turn,#f7f7f7 .25turn .5turn,#fff .5turn .75turn,#f7f7f7 .75turn) top left/20px 20px repeat',
           }}
         >
-          <img src={imageBase64} alt="" className="w-full max-w-60 max-h-210px h-auto object-contain" />
+          {svgString ? (
+            // todo
+            <RoughSVG
+              className="[&>svg]:min-w-20 p-5"
+              options={{
+                roughness: 1,
+                bowing: 1,
+                seed: 0,
+                fillStyle: 'hachure',
+                fillWeight: 1,
+                hachureAngle: -41,
+                hachureGap: 4,
+                curveStepCount: 9,
+                curveFitting: 0.95,
+                disableMultiStroke: false,
+                disableMultiStrokeFill: false,
+                simplification: 0,
+                dashOffset: 4,
+                dashGap: 4,
+                zigzagOffset: 4,
+                preserveVertices: false,
+              }}
+            >
+              <SVG src={svgString} height="auto" />
+            </RoughSVG>
+          ) : (
+            <img src={imageBase64} alt="" className="w-full max-w-60 max-h-210px h-auto object-contain" />
+          )}
         </div>
       )}
-      {node?.type === 'VECTOR' && svgString && (
+      {svgString && (
         <div className="flex flex-col items-stretch bg-#f5f5f5 rounded-sm overflow-hidden">
           <div className="px-4 h-8 flex-center justify-between border-b border-$color-border border-solid">
             <span className="text-$color-text-secondary text-xs">svg</span>
