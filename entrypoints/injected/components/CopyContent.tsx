@@ -13,10 +13,10 @@ export const CopyContent: FC<PropsWithChildren> = (props) => {
 
     copy(text)
       .then(() => {
-        window.fubukicss_figma?.notify('Copied to clipboard')
+        figma?.notify('Copied to clipboard')
       })
       .catch((error: any) => {
-        window.fubukicss_figma?.notify('Failed to copy!', {
+        figma?.notify('Failed to copy!', {
           error: true,
         })
       })

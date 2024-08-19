@@ -37,16 +37,9 @@ export default () => {
       tabIndex={-1}
     >
       <Header startDrag={startDrag} ref={header} minimized={minimized} onToggleSize={handleToggleSize} />
-
       <CodeArea minimized={minimized} />
-
-      {!(window.fubukicss_figma as any)?.isFubukicss && (
-        <>
-          <Download minimized={minimized} />
-
-          <Colors minimized={minimized} />
-        </>
-      )}
+      <Download minimized={minimized} />
+      <Colors minimized={minimized} />
     </motion.div>
   )
 }

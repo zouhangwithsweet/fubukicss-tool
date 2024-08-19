@@ -38,7 +38,7 @@ export const Colors = memo((props: { minimized?: boolean }) => {
         .filter((p) => 'boundVariables' in p)
         .map((p) => {
           if ('boundVariables' in p) {
-            return window.fubukicss_figma.variables.getVariableById(p.boundVariables?.color?.id!)
+            return figma.variables.getVariableById(p.boundVariables?.color?.id!)
           }
           return null
         })
@@ -47,8 +47,8 @@ export const Colors = memo((props: { minimized?: boolean }) => {
   )
 
   useEffect(() => {
-    if (window.fubukicss_figma) {
-      const res = window.fubukicss_figma?.getSelectionColors()
+    if (figma) {
+      const res = figma?.getSelectionColors()
       setPaints(res?.paints || [])
     }
   }, [node])
@@ -58,10 +58,10 @@ export const Colors = memo((props: { minimized?: boolean }) => {
   const handleCopy = (text: string) => () => {
     copy(text)
       .then(() => {
-        window.fubukicss_figma?.notify('Copied to clipboard')
+        figma?.notify('Copied to clipboard')
       })
       .catch((error: any) => {
-        window.fubukicss_figma?.notify('Failed to copy!', {
+        figma?.notify('Failed to copy!', {
           error: true,
         })
       })

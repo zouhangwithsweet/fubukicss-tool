@@ -14,8 +14,6 @@ export default defineUnlistedScript(() => {
     await waitFor(() => !!(window as any).figma && getCanvas() !== null && getLeftPanel() !== null)
     await waitFor(() => sleep(50))
 
-    window.fubukicss_figma = (window as any).figma
-
     const app = document.createElement('div')
     const root = ReactDOM.createRoot(app)
     root.render(<App />)

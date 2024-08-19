@@ -35,10 +35,10 @@ export const Download = memo((props: { minimized?: boolean }) => {
   const handleCopy = (text: string) => () => {
     copy(text)
       .then(() => {
-        window.fubukicss_figma?.notify('Copied to clipboard')
+        figma?.notify('Copied to clipboard')
       })
       .catch(() => {
-        window.fubukicss_figma?.notify('Failed to copy!', {
+        figma?.notify('Failed to copy!', {
           error: true,
         })
       })
