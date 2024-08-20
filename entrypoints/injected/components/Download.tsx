@@ -164,13 +164,9 @@ export const Download = memo((props: { minimized?: boolean }) => {
               onClick={handleCopy(svgString)}
             />
           </div>
-          <textarea
-            value={svgString}
-            readOnly
-            rows={0}
-            autoComplete="off"
-            className="px-4 h-auto py-4 lh-4.5 bg-#f5f5f5 cursor-text font-['Roboto_Mono'] text-$color-text resize-none scrollbar-hide"
-          ></textarea>
+          <span className="px-4 h-auto py-4 lh-4.5 max-h-14 overflow-y-auto bg-#f5f5f5 cursor-text font-['Roboto_Mono'] text-$color-text resize-none scrollbar-hide">
+            {svgString}
+          </span>
         </div>
       )}
     </div>
