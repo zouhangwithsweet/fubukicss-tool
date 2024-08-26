@@ -47,12 +47,6 @@ importers:
       react-inlinesvg:
         specifier: ^4.1.3
         version: 4.1.3(react@18.2.0)
-      react-reconciler:
-        specifier: ^0.29.2
-        version: 0.29.2(react@18.2.0)
-      react-rough-fiber:
-        specifier: ^0.0.5
-        version: 0.0.5(react-dom@18.2.0(react@18.2.0))(react-reconciler@0.29.2(react@18.2.0))(react@18.2.0)
       shiki:
         specifier: ^1.1.7
         version: 1.1.7
@@ -3194,12 +3188,6 @@ packages:
   react-is@16.13.1:
     resolution: {integrity: sha512-24e6ynE2H+OKt4kqsOvNd8kBpV65zoxbA4BVsEOB3ARVWQki/DHzaUoC5KuON/BiccDaCCTZBuOcfZs70kR8bQ==}
 
-  react-reconciler@0.29.2:
-    resolution: {integrity: sha512-zZQqIiYgDCTP/f1N/mAR10nJGrPD2ZR+jDSEsKWJHYC7Cm2wodlwbR3upZRdC3cjIjSlTLNVyO7Iu0Yy7t2AYg==}
-    engines: {node: '>=0.10.0'}
-    peerDependencies:
-      react: ^18.3.1
-
   react-refresh@0.14.0:
     resolution: {integrity: sha512-wViHqhAd8OHeLS/IRMJjTSDHF3U9eWi62F/MledQGPdJGDhodXJ9PBLNGr6WWL7qlH12Mt3TyTpbS+hGXMjCzQ==}
     engines: {node: '>=0.10.0'}
@@ -3223,13 +3211,6 @@ packages:
     peerDependenciesMeta:
       '@types/react':
         optional: true
-
-  react-rough-fiber@0.0.5:
-    resolution: {integrity: sha512-shWkzQIJu1hJWmbp2va7dr8tmjELb3QqwCB2S/tw22HWet4UBeQmSfM6UmP0vZz7hU56T2BP5BrSzcEKaxkJLw==}
-    peerDependencies:
-      react: '>=17.0.0'
-      react-dom: '>=17.0.0'
-      react-reconciler: '>=0.26.2'
 
   react-style-singleton@2.2.1:
     resolution: {integrity: sha512-ZWj0fHEMyWkHzKYUr2Bs/4zU6XLmq9HsgBURm7g5pAVfyn49DgUiNgY2d4lXRlYSiCif9YBGpQleewkcqddc7g==}
@@ -3352,9 +3333,6 @@ packages:
 
   scheduler@0.23.0:
     resolution: {integrity: sha512-CtuThmgHNg7zIZWAXi3AsyIzA3n4xx7aNyjwC2VJldO2LMVDhFK+63xGqq6CsJH4rTAt6/M+N4GhZiDYPx9eUw==}
-
-  scheduler@0.23.2:
-    resolution: {integrity: sha512-UOShsPwz7NrMUqhR6t0hWjFduvOzbtv7toDH1/hIrfRNIDBnnBWd0CwJTGvTpngVlmwGCdP9/Zl/tVrDqcuYzQ==}
 
   scule@1.3.0:
     resolution: {integrity: sha512-6FtHJEvt+pVMIB9IBY+IcCJ6Z5f1iQnytgyfKMhDKgmzYG+TeH/wx1y3l27rshSbLiSanrR9ffZDrEsmjlQF2g==}
@@ -7156,12 +7134,6 @@ snapshots:
 
   react-is@16.13.1: {}
 
-  react-reconciler@0.29.2(react@18.2.0):
-    dependencies:
-      loose-envify: 1.4.0
-      react: 18.2.0
-      scheduler: 0.23.2
-
   react-refresh@0.14.0: {}
 
   react-remove-scroll-bar@2.3.5(@types/react@18.2.57)(react@18.2.0):
@@ -7182,12 +7154,6 @@ snapshots:
       use-sidecar: 1.1.2(@types/react@18.2.57)(react@18.2.0)
     optionalDependencies:
       '@types/react': 18.2.57
-
-  react-rough-fiber@0.0.5(react-dom@18.2.0(react@18.2.0))(react-reconciler@0.29.2(react@18.2.0))(react@18.2.0):
-    dependencies:
-      react: 18.2.0
-      react-dom: 18.2.0(react@18.2.0)
-      react-reconciler: 0.29.2(react@18.2.0)
 
   react-style-singleton@2.2.1(@types/react@18.2.57)(react@18.2.0):
     dependencies:
@@ -7333,10 +7299,6 @@ snapshots:
   sax@1.4.1: {}
 
   scheduler@0.23.0:
-    dependencies:
-      loose-envify: 1.4.0
-
-  scheduler@0.23.2:
     dependencies:
       loose-envify: 1.4.0
 

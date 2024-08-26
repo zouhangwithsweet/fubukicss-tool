@@ -3,7 +3,6 @@ import { useAtomValue } from 'jotai'
 import { memo, useEffect, useState } from 'react'
 import { Clipboard } from 'react-feather'
 import SVG from 'react-inlinesvg'
-import { RoughSVG } from 'react-rough-fiber'
 import { useCopyToClipboard } from 'usehooks-ts'
 
 import { arrayBufferToBase64, arrayBufferToImageFile } from '@/entrypoints/utils/file'
@@ -22,7 +21,6 @@ function isSVG(node: SceneNode, depth: number = 0): boolean {
 
 export const Download = memo((props: { minimized?: boolean }) => {
   const node = useAtomValue(currentSelection)
-  const [rough, setRough] = useState(false)
   const [imageBase64, setImageBase64] = useState('')
   const [svgString, setSvgString] = useState('')
   const scale = useAtomValue(exportScale)
@@ -118,39 +116,9 @@ export const Download = memo((props: { minimized?: boolean }) => {
           }}
         >
           {svgString ? (
-            rough ? (
-              <RoughSVG
-                className="[&>svg]:min-w-20 p-5"
-                options={{
-                  roughness: 1,
-                  bowing: 1,
-                  seed: 0,
-                  fillStyle: 'hachure',
-                  fillWeight: 1,
-                  hachureAngle: -41,
-                  hachureGap: 1,
-                  curveStepCount: 9,
-                  curveFitting: 0.95,
-                  disableMultiStroke: false,
-                  disableMultiStrokeFill: false,
-                  simplification: 0,
-                  dashOffset: 4,
-                  dashGap: 4,
-                  zigzagOffset: 4,
-                  preserveVertices: false,
-                }}
-              >
-                <SVG src={svgString} height="auto" />
-              </RoughSVG>
-            ) : (
-              <SVG src={svgString} height="auto" className="min-w-20 p-5 max-h-210px" />
-            )
+            <SVG src={svgString} height="auto" className="min-w-20 p-5 max-h-210px" />
           ) : (
             <img src={imageBase64} alt="" className="w-full max-w-60 max-h-210px h-auto object-contain" />
-          )}
-
-          {svgString && (
-            <ColorWheelIcon className="absolute bottom-3 right-3 cursor-pointer" onClick={() => setRough(!rough)} />
           )}
         </div>
       )}
