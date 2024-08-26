@@ -116,7 +116,7 @@ export const Download = memo((props: { minimized?: boolean }) => {
           }}
         >
           {svgString ? (
-            <SVG src={svgString} height="100%" className="min-w-20 p-5 max-h-210px" />
+            <SVG src={svgString} height="100%" className="min-w-20 p-5 max-h-210px max-w-60" />
           ) : (
             <img src={imageBase64} alt="" className="w-full max-w-60 max-h-210px h-auto object-contain" />
           )}
