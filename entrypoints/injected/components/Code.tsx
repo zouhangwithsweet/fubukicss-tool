@@ -6,7 +6,14 @@ import { toTailwindcss } from 'transform-to-tailwindcss-core'
 import { toUnocssClass } from 'transform-to-unocss-core'
 import { useCopyToClipboard } from 'usehooks-ts'
 
-import { cssEngine, cssUnit, currentSelection, expandAtomic, expandCode } from '@/entrypoints/injected/store'
+import {
+  cssEngine,
+  cssUnit,
+  currentSelection,
+  expandAtomic,
+  expandCode,
+  prefixAtom,
+} from '@/entrypoints/injected/store'
 import { cn } from '@/entrypoints/utils/cn'
 
 export const CodeArea = memo((props: { minimized?: boolean }) => {
@@ -14,6 +21,7 @@ export const CodeArea = memo((props: { minimized?: boolean }) => {
   const unit = useAtomValue(cssUnit)
   const [expand, setExpand] = useAtom(expandCode)
   const [atomicExpand, setAtomicExpand] = useAtom(expandAtomic)
+  const prefix = useAtomValue(prefixAtom)
   const isRem = useMemo(() => unit === 'rem', [unit])
 
   const [name, setName] = useState('')
@@ -41,6 +49,7 @@ export const CodeArea = memo((props: { minimized?: boolean }) => {
             .trim()}`,
       )
       .map((i) => (engine === 'unocss' ? toUnocssClass(i, isRem)[0] : toTailwindcss(i, isRem)))
+      .map((i) => `${prefix}${i}`)
       .join(' ')
       .replace(/border-(\d+\.\d+|\d+)/g, (_, $1) => `border-${Number($1) * 4}`)
       .replace(/(border-[xylrtb]-)(\d+\.\d+|\d+)/g, (_, $1, $2) => `${$1}${Number($2) * 4}`)
@@ -59,6 +68,7 @@ export const CodeArea = memo((props: { minimized?: boolean }) => {
       )
       .map((i) => (engine === 'unocss' ? toUnocssClass(i, isRem)[0] : toTailwindcss(i, isRem)))
       .filter((i) => ['lh-normal', 'font-not-italic', 'bg-[url(]'].every((item) => !i?.startsWith(item)))
+      .map((i) => `${prefix}${i}`)
       .join(' ')
       .replace(/border-(\d+\.\d+|\d+)/g, (_, $1) => `border-${Number($1) * 4}`)
       .replace(/(border-[xylrtb]-)(\d+\.\d+|\d+)/g, (_, $1, $2) => `${$1}${Number($2) * 4}`)
@@ -86,7 +96,7 @@ export const CodeArea = memo((props: { minimized?: boolean }) => {
         type: 'css',
       },
     ])
-  }, [engine, isRem, setCurrentSelection])
+  }, [engine, isRem, prefix, setCurrentSelection])
 
   useEffect(() => {
     handleSelectionChange()

@@ -8,7 +8,15 @@ import Logo from '@/entrypoints/assets/fubukicss.svg'
 import { cn } from '@/entrypoints/utils/cn'
 import { toggleAltPress, toggleMetaPress } from '@/entrypoints/utils/key'
 
-import { cssEngine, cssUnit, exportExt, exportScale, keepAltKeyPressing, keepMetaKeyPressing } from '../store'
+import {
+  cssEngine,
+  cssUnit,
+  exportExt,
+  exportScale,
+  keepAltKeyPressing,
+  keepMetaKeyPressing,
+  prefixAtom,
+} from '../store'
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -37,6 +45,7 @@ const Header = forwardRef(function ({ minimized, onToggleSize, startDrag }: Prop
   const [scale, setScale] = useAtom(exportScale)
   const [altPressing, setAltPressing] = useAtom(keepAltKeyPressing)
   const [metaPressing, setMetaPressing] = useAtom(keepMetaKeyPressing)
+  const [prefix, setPrefix] = useAtom(prefixAtom)
 
   useEffect(() => {
     toggleAltPress(altPressing)
@@ -121,7 +130,7 @@ const Header = forwardRef(function ({ minimized, onToggleSize, startDrag }: Prop
                   className="mr-1.5 text-$color-text-secondary hover:text-$color-text cursor-pointer"
                 />
               </DropdownMenuTrigger>
-              <DropdownMenuContent className="w-56 z-1001 border-1 border-solid border-border">
+              <DropdownMenuContent className="w-56 z-1001 border-1 border-solid border-border font-['Inter']">
                 <DropdownMenuLabel className="cursor-default">Settings</DropdownMenuLabel>
 
                 <DropdownMenuSeparator />
@@ -232,6 +241,21 @@ const Header = forwardRef(function ({ minimized, onToggleSize, startDrag }: Prop
                       onClick={(e) => {
                         e.stopPropagation()
                       }}
+                    />
+                  </DropdownMenuItem>
+                </DropdownMenuGroup>
+
+                <DropdownMenuSeparator />
+
+                <DropdownMenuGroup>
+                  <DropdownMenuItem>
+                    Prefix
+                    <input
+                      type="text"
+                      className="ml-auto w-16 px-2 py-0.5 text-xs border border-$color-border border-solid rounded bg-$color-bg focus:outline-none focus:ring-1 focus:ring-$color-bg-brand"
+                      value={prefix}
+                      onChange={(e) => setPrefix(e.target.value)}
+                      onClick={(e) => e.stopPropagation()}
                     />
                   </DropdownMenuItem>
                 </DropdownMenuGroup>
