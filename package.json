@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "wxt",
     "dev:firefox": "wxt --browser firefox",
-    "build": "wxt build",
+    "build": "wxt build && pnpm run build:plugin",
     "build:firefox": "wxt build --browser firefox",
     "zip": "wxt zip",
     "zip:firefox": "wxt zip --browser firefox",
