@@ -3,13 +3,13 @@ import { definePlugin } from '@tempad-dev/plugins'
 import { transformToAtomic } from '../core/index'
 
 export default definePlugin({
-  name: 'fubukicss',
+  name: '@fubukicss/unocss',
   code: {
     css: {
-      title: 'unocss',
-      lang: 'rust' as 'css',
-      transform({ style }) {
-        return transformToAtomic(style, { engine: 'unocss', isRem: true, prefix: '' }).uno
+      title: 'UnoCSS',
+      lang: 'text' as 'css',
+      transform({ style, options: { useRem } }) {
+        return transformToAtomic(style, { engine: 'unocss', isRem: useRem, prefix: '' }).uno
       },
     },
     js: false,
