@@ -3,7 +3,7 @@ import { definePlugin } from '@tempad-dev/plugins'
 import { transformToAtomic } from '../core/index'
 
 export default definePlugin({
-  name: 'core',
+  name: 'fubukicss',
   code: {
     css: {
       title: 'unocss',
