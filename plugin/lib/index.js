@@ -1087,7 +1087,7 @@ const transformToAtomic = (style, options) => {
 //#endregion
 //#region plugin/index.ts
 var plugin_default = definePlugin({
-	name: "core",
+	name: "fubukicss",
 	code: {
 		css: {
 			title: "unocss",
