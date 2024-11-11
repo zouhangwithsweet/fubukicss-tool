@@ -1,11 +1,10 @@
-import { ChevronDownIcon, DividerHorizontalIcon } from '@radix-ui/react-icons'
+import { ChevronDownIcon } from '@radix-ui/react-icons'
 import { useAtom, useAtomValue } from 'jotai'
 import { Fragment, memo, useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import { Clipboard } from 'react-feather'
-import { toTailwindcss } from 'transform-to-tailwindcss-core'
-import { toUnocssClass } from 'transform-to-unocss-core'
 import { useCopyToClipboard } from 'usehooks-ts'
 
+import { transformToAtomic } from '@/core'
 import {
   cssEngine,
   cssUnit,
@@ -36,43 +35,7 @@ export const CodeArea = memo((props: { minimized?: boolean }) => {
     const cssObj = await node?.getCSSAsync?.()
     if (cssObj === undefined) return
 
-    const raw = Object.entries(cssObj)
-
-    const cssCode = raw.map(([key, value]) => `${key}: ${value.replace(/\/\*.*\*\//g, '').trim()};`).join('\n')
-
-    const uno = raw
-      .map(
-        ([key, value]) =>
-          `${key}: ${value
-            .replace(/\/\*.*\*\//g, '')
-            .replace(/var\(--[\w-]*,\s*(.*)\)/g, (_, $1) => $1)
-            .trim()}`,
-      )
-      .map((i) => (engine === 'unocss' ? toUnocssClass(i, isRem)[0] : toTailwindcss(i, isRem)))
-      .map((i) => `${prefix}${i}`)
-      .join(' ')
-      .replace(/border-(\d+\.\d+|\d+)/g, (_, $1) => `border-${Number($1) * 4}`)
-      .replace(/(border-[xylrtb]-)(\d+\.\d+|\d+)/g, (_, $1, $2) => `${$1}${Number($2) * 4}`)
-      .replace(/(p[xylrtb])-(\d+\.\d+|\d+)px/g, (_, $1, $2) => `${$1}-${$2 / 4}`)
-
-    const unoMini = raw
-      .filter(([key]) =>
-        ['font-feature-settings', 'font-family', 'text-transform'].every((item) => !key?.startsWith(item)),
-      )
-      .map(
-        ([key, value]) =>
-          `${key}: ${value
-            .replace(/\/\*.*\*\//g, '')
-            .replace(/var\(--[\w-]*,\s*(.*)\)/g, (_, $1) => $1)
-            .trim()}`,
-      )
-      .map((i) => (engine === 'unocss' ? toUnocssClass(i, isRem)[0] : toTailwindcss(i, isRem)))
-      .filter((i) => ['lh-normal', 'font-not-italic', 'bg-[url(]'].every((item) => !i?.startsWith(item)))
-      .map((i) => `${prefix}${i}`)
-      .join(' ')
-      .replace(/border-(\d+\.\d+|\d+)/g, (_, $1) => `border-${Number($1) * 4}`)
-      .replace(/(border-[xylrtb]-)(\d+\.\d+|\d+)/g, (_, $1, $2) => `${$1}${Number($2) * 4}`)
-      .replace(/(p[xylrtb])-(\d+\.\d+|\d+)px/g, (_, $1, $2) => `${$1}-${$2 / 4}`)
+    const { cssCode, uno, unoMini } = transformToAtomic(cssObj, { engine, isRem, prefix })
 
     setUnoResult([
       {

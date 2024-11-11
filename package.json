@@ -10,7 +10,8 @@
     "build:firefox": "wxt build --browser firefox",
     "zip": "wxt zip",
     "zip:firefox": "wxt zip --browser firefox",
-    "postinstall": "wxt prepare"
+    "postinstall": "wxt prepare",
+    "build:plugin": "rolldown -c rolldown.config.mjs"
   },
   "keywords": [],
   "author": "",
@@ -20,6 +21,7 @@
     "@iconify-json/fe": "^1.1.10",
     "@iconify-json/logos": "^1.1.42",
     "@iconify-json/mdi": "^1.1.68",
+    "@tempad-dev/plugins": "^0.1.0",
     "@types/react": "^18.2.57",
     "@types/react-dom": "^18.2.19",
     "@typescript-eslint/parser": "^7.0.2",
@@ -31,6 +33,7 @@
     "eslint-plugin-react-hooks": "^4.6.0",
     "eslint-plugin-simple-import-sort": "^12.0.0",
     "prettier": "^3.2.5",
+    "rolldown": "0.14.0-snapshot-a07909e-20241111003354",
     "typescript": "^5.3.3",
     "unocss-preset-animations": "^1.0.1",
     "unocss-preset-shadcn": "^0.2.3",
