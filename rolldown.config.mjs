@@ -5,5 +5,6 @@ export default defineConfig({
   output: {
     format: 'esm',
     dir: './plugin/lib',
+    minify: true,
   },
 })

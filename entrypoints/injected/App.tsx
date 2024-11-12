@@ -34,7 +34,7 @@ export default () => {
       dragPropagation={false}
       dragListener={false}
       dragControls={controls}
-      className={`fubukicss-panel fixed top-10 right-20 text-xs text-$color-text bg-$color-bg rounded border-1 border-$color-border border-solid shadow-md z-10 antialiased h-auto transition-width !font-['Inter'] js-fullscreen-prevent-event-capture ${minimized ? 'w-50' : 'w-80'} max-h-[calc(100vh-50px)] overflow-y-scroll scrollbar-hide select-none`}
+      className={`fubukicss-panel fixed top-10 right-20 text-xs text-$color-text bg-$color-bg rounded border-1 border-$color-border border-solid shadow-md z-10 antialiased h-auto transition-width font-[Inter] js-fullscreen-prevent-event-capture ${minimized ? 'w-50' : 'w-80'} max-h-[calc(100vh-50px)] overflow-y-scroll scrollbar-hide select-none`}
       tabIndex={-1}
       onDragEnd={() => {
         const dom = document.querySelector('.fubukicss-panel') as HTMLDivElement

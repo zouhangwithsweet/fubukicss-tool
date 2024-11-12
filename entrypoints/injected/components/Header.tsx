@@ -112,7 +112,7 @@ const Header = forwardRef(function ({ minimized, onToggleSize, startDrag }: Prop
       )}
       <span className="flex-1 font-700 text-sm">Fubukicss Tool</span>
       <div
-        className="p-.5 flex-center rounded bg-#eee"
+        className="p-.5 flex-center rounded"
         onMouseDown={(e) => {
           e.stopPropagation()
         }}
@@ -130,7 +130,7 @@ const Header = forwardRef(function ({ minimized, onToggleSize, startDrag }: Prop
                   className="mr-1.5 text-$color-text-secondary hover:text-$color-text cursor-pointer"
                 />
               </DropdownMenuTrigger>
-              <DropdownMenuContent className="w-56 z-1001 border-1 border-solid border-border font-['Inter']">
+              <DropdownMenuContent className="w-56 z-1001 border-1 border-solid border-border font-[Inter]">
                 <DropdownMenuLabel className="cursor-default">Settings</DropdownMenuLabel>
 
                 <DropdownMenuSeparator />

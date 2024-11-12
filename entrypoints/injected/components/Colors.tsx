@@ -121,11 +121,11 @@ export const Colors = memo((props: { minimized?: boolean }) => {
               type="text"
               readOnly
               value={formatColor(c)}
-              className="ml-4 w-full font-400 text-xs font-['Inter'] bg-transparent text-$color-text hover:underline"
+              className="ml-4 w-full font-400 text-xs font-[Inter] bg-transparent text-$color-text hover:underline"
             />
             {colorVars[index]?.name && (
               <CopyContent>
-                <span className="font-400 text-xs font-['Inter'] bg-transparent text-$color-text">
+                <span className="font-400 text-xs font-[Inter] bg-transparent text-$color-text">
                   {colorVars[index]?.name.split('/').join('-').toLocaleLowerCase()}
                 </span>
               </CopyContent>
