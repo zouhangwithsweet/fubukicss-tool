@@ -110,7 +110,7 @@ const Header = forwardRef(function ({ minimized, onToggleSize, startDrag }: Prop
           onClick={() => setEngine('unocss')}
         ></span>
       )}
-      <span className="flex-1 font-700 text-sm">Fubukicss Tool</span>
+      <span className="flex-1 font-550 text-sm">Fubukicss Tool</span>
       <div
         className="p-.5 flex-center rounded"
         onMouseDown={(e) => {

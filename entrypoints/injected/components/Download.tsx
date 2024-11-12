@@ -74,7 +74,7 @@ export const Download = memo((props: { minimized?: boolean }) => {
       className={`${props.minimized ? 'hidden' : 'block'} p-4 border-t border-$color-border border-solid text-13px space-y-4`}
     >
       <div className="flex items-center gap-2">
-        <span className="flex-1 font-600">Export</span>
+        <span className="flex-1 font-550">Export</span>
         <span
           className="flex items-center gap-.5 text-xs text-$color-text-secondary cursor-pointer"
           onClick={() => setShow(!show)}

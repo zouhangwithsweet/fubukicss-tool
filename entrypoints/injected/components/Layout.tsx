@@ -8,7 +8,7 @@ export const Layout = memo((props: { minimized?: boolean }) => {
 
   return (
     <div
-      className={`${props.minimized ? 'hidden' : 'block'} p-4 border-t border-$color-border border-solid font-600 text-13px`}
+      className={`${props.minimized ? 'hidden' : 'block'} p-4 border-t border-$color-border border-solid font-550 text-13px`}
     >
       <div className="flex items-center gap-2">
         <span className="flex-1">Layout</span>
