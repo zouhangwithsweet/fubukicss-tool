@@ -1087,15 +1087,15 @@ const transformToAtomic = (style, options) => {
 //#endregion
 //#region plugin/index.ts
 var plugin_default = definePlugin({
-	name: "fubukicss",
+	name: "@fubukicss/unocss",
 	code: {
 		css: {
-			title: "unocss",
-			lang: "rust",
-			transform({ style }) {
+			title: "UnoCSS",
+			lang: "text",
+			transform({ style, options: { useRem } }) {
 				return transformToAtomic(style, {
 					engine: "unocss",
-					isRem: true,
+					isRem: useRem,
 					prefix: ""
 				}).uno;
 			}
