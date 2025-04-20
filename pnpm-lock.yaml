@@ -54,11 +54,11 @@ importers:
         specifier: ^2.2.1
         version: 2.2.1
       transform-to-tailwindcss-core:
-        specifier: ^0.0.21
-        version: 0.0.21
+        specifier: ^0.0.24
+        version: 0.0.24
       transform-to-unocss-core:
-        specifier: ^0.0.40
-        version: 0.0.40
+        specifier: ^0.0.46
+        version: 0.0.46
       unocss:
         specifier: ^0.58.5
         version: 0.58.5(postcss@8.4.41)(rollup@4.20.0)(vite@5.4.0(@types/node@22.3.0))
@@ -3670,12 +3670,12 @@ packages:
     resolution: {integrity: sha512-sf4i37nQ2LBx4m3wB74y+ubopq6W/dIzXg0FDGjsYnZHVa1Da8FH853wlL2gtUhg+xJXjfk3kUZS3BRoQeoQBQ==}
     engines: {node: '>=6'}
 
-  transform-to-tailwindcss-core@0.0.21:
-    resolution: {integrity: sha512-VZdO3walZXSnVO2Sv8skwXeYklQP9oo+ZGqZ+2PWeSBDkbaAgmnxLG11UXG1RCB/KkkvfsdcFn0uQLYFg/e+Aw==}
+  transform-to-tailwindcss-core@0.0.24:
+    resolution: {integrity: sha512-66ldavqRTQH7kRxBMT+5gFcP/mu4myo4RwGuBsr21/L/aQgyTzUJ+X369KYIaLsQSFatwVIh17H0/3nhY3OSYQ==}
     hasBin: true
 
-  transform-to-unocss-core@0.0.40:
-    resolution: {integrity: sha512-rMXpvBDpnFD4qjNt1irefi+DzWxNk/vz3ErBJZWDNq9z+cIvWUdf+Bluv4Y5ZOuCEvISExQiIwsIvWWNckk3Pg==}
+  transform-to-unocss-core@0.0.46:
+    resolution: {integrity: sha512-78oE61/ufk7rAGdV3psyJXNkNRobIG+Il2pb3o/nzQGyBkO1KcPWGpgKXNNi8rkJriosSJFN+o3HForg2DucfQ==}
     hasBin: true
 
   ts-api-utils@1.2.1:
@@ -7715,9 +7715,9 @@ snapshots:
 
   totalist@3.0.1: {}
 
-  transform-to-tailwindcss-core@0.0.21: {}
+  transform-to-tailwindcss-core@0.0.24: {}
 
-  transform-to-unocss-core@0.0.40: {}
+  transform-to-unocss-core@0.0.46: {}
 
   ts-api-utils@1.2.1(typescript@5.3.3):
     dependencies:
