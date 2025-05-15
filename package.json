@@ -55,8 +55,8 @@
     "react-inlinesvg": "^4.1.3",
     "shiki": "^1.1.7",
     "tailwind-merge": "^2.2.1",
-    "transform-to-tailwindcss-core": "^0.0.24",
-    "transform-to-unocss-core": "^0.0.46",
+    "transform-to-tailwindcss-core": "^0.0.33",
+    "transform-to-unocss-core": "^0.0.63",
     "unocss": "^0.58.5",
     "usehooks-ts": "^2.15.0"
   }
