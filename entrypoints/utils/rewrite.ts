@@ -1,9 +1,11 @@
-export const REWRITE_PATTERN = /({userID:(\w+)}=(\w+),(\w+)=(\w+)\|\|!!\2&&(\w+);)if\(!\4\){([\s\S]+?);\4&&/
+export const SRC_PATTERN = /\/figma_app/
 
-export const REWRITE_REPLACER = '$1if(false){$7;true&&'
+export const REWRITE_PATTERN = /\.appModel\.isReadOnly/g
 
-const MARKERS = ['.resetGlobalPluginAPI', '.createAPI()']
+export const REWRITE_REPLACER = '.appModel.__isReadOnly__'
 
-export function matchFile(content: string) {
-  return MARKERS.every((marker) => content.includes(marker))
+const MARKERS = ['.appModel.isReadOnly']
+
+export function matchFile(src: string, content: string) {
+  return SRC_PATTERN.test(src) && MARKERS.every((marker) => content.includes(marker))
 }

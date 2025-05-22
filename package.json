@@ -1,6 +1,6 @@
 {
   "name": "fubukicss-tool",
-  "version": "1.0.20",
+  "version": "1.0.21",
   "description": "",
   "main": "index.js",
   "scripts": {
@@ -37,7 +37,7 @@
     "typescript": "^5.3.3",
     "unocss-preset-animations": "^1.0.1",
     "unocss-preset-shadcn": "^0.2.3",
-    "wxt": "^0.19.4"
+    "wxt": "^0.20.6"
   },
   "dependencies": {
     "@radix-ui/react-dropdown-menu": "^2.0.6",
