@@ -54,11 +54,11 @@ importers:
         specifier: ^2.2.1
         version: 2.2.1
       transform-to-tailwindcss-core:
-        specifier: ^0.0.33
-        version: 0.0.33
+        specifier: ^0.0.39
+        version: 0.0.39
       transform-to-unocss-core:
-        specifier: ^0.0.63
-        version: 0.0.63
+        specifier: ^0.0.68
+        version: 0.0.68
       unocss:
         specifier: ^0.58.5
         version: 0.58.5(postcss@8.5.3)(rollup@4.41.0)(vite@6.3.5(@types/node@22.3.0)(jiti@2.4.2))
@@ -2738,9 +2738,6 @@ packages:
     resolution: {integrity: sha512-Jo6dJ04CmSjuznwJSS3pUeWmd/H0ffTlkXXgwZi+eq1UCmqQwCh+eLsYOYCwY991i2Fah4h1BEMCx4qThGbsiA==}
     engines: {node: '>=10'}
 
-  magic-string@0.30.11:
-    resolution: {integrity: sha512-+Wri9p0QHMy+545hKww7YAu5NyzF8iomPL/RQazugQ9+Ez4Ic3mERMd8ZTX5rfK944j+560ZJi8iAwgak1Ac7A==}
-
   magic-string@0.30.17:
     resolution: {integrity: sha512-sNPKHvyjVf7gyjwS4xGTaW/mCnF8wnjtifKBEhxfZ7E/S8tQ0rssrwGNn6q8JH/ohItJfSQp9mBtQYuTlH5QnA==}
 
@@ -3605,12 +3602,13 @@ packages:
     resolution: {integrity: sha512-sf4i37nQ2LBx4m3wB74y+ubopq6W/dIzXg0FDGjsYnZHVa1Da8FH853wlL2gtUhg+xJXjfk3kUZS3BRoQeoQBQ==}
     engines: {node: '>=6'}
 
-  transform-to-tailwindcss-core@0.0.33:
-    resolution: {integrity: sha512-Ktt0HnW3OW9kBmnNmmdW2MHPZR81wsKHtTeUfFxahkSaFY4jfp/XFj1jwTF7fK9gApPw/eQ0MAraeahbobdd4w==}
+  transform-to-tailwindcss-core@0.0.39:
+    resolution: {integrity: sha512-UZS1mDZ2bM3etfbZJ3v+ZbVVG4ZdUpOtoSYbYN6tHXx66h7w6S53gSwHqFmj79c6rLZqNfzDYU0gPkAOvMFBYg==}
+    engines: {node: '>=14.0.0'}
     hasBin: true
 
-  transform-to-unocss-core@0.0.63:
-    resolution: {integrity: sha512-C5nHSURFtiVA1QlxEnzy193D5LOkutB9piLJBQs0w0Ku25JlFJgewzqjHMGYcd3I2iCEc0v2uQDHRtaWRKKeaQ==}
+  transform-to-unocss-core@0.0.68:
+    resolution: {integrity: sha512-dZwzj7gVFL3z9GOt/PAaf3/BlWqdy1smkPwVkiYotw5tCILnCBQ3473bGdmQvHePPS87Elt5S1yRX5I+xi6euw==}
     hasBin: true
 
   ts-api-utils@1.2.1:
@@ -5130,7 +5128,7 @@ snapshots:
   '@unocss/rule-utils@0.62.1':
     dependencies:
       '@unocss/core': 0.62.1
-      magic-string: 0.30.11
+      magic-string: 0.30.17
 
   '@unocss/scope@0.58.5': {}
 
@@ -6659,10 +6657,6 @@ snapshots:
     dependencies:
       yallist: 4.0.0
 
-  magic-string@0.30.11:
-    dependencies:
-      '@jridgewell/sourcemap-codec': 1.5.0
-
   magic-string@0.30.17:
     dependencies:
       '@jridgewell/sourcemap-codec': 1.5.0
@@ -7600,9 +7594,9 @@ snapshots:
 
   totalist@3.0.1: {}
 
-  transform-to-tailwindcss-core@0.0.33: {}
+  transform-to-tailwindcss-core@0.0.39: {}
 
-  transform-to-unocss-core@0.0.63: {}
+  transform-to-unocss-core@0.0.68: {}
 
   ts-api-utils@1.2.1(typescript@5.3.3):
     dependencies:
