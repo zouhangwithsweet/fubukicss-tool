@@ -88,7 +88,7 @@ export const Colors = memo((props: { minimized?: boolean }) => {
           <SelectTrigger className="w-auto h-auto p-0 uppercase [&_span]:uppercase !shadow-[none] text-xs text-$color-text">
             <SelectValue placeholder={mode} className="uppercase" />
           </SelectTrigger>
-          <SelectContent className="z-1002 border-1 border-solid border-border">
+          <SelectContent className="z-1002 border-1 border-solid border-$color-border">
             <SelectGroup>
               {(['rgb', 'hex', 'hsl'] as const).map((m) => (
                 <SelectItem key={m} value={m} className="w-30 uppercase text-xs">

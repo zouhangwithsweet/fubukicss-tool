@@ -130,7 +130,7 @@ const Header = forwardRef(function ({ minimized, onToggleSize, startDrag }: Prop
                   className="mr-1.5 text-$color-text-secondary hover:text-$color-text cursor-pointer"
                 />
               </DropdownMenuTrigger>
-              <DropdownMenuContent className="w-56 z-1001 border-1 border-solid border-border font-[Inter]">
+              <DropdownMenuContent className="w-56 z-1001 border-1 border-solid border-$color-border font-[Inter]">
                 <DropdownMenuLabel className="cursor-default">Settings</DropdownMenuLabel>
 
                 <DropdownMenuSeparator />
@@ -139,7 +139,7 @@ const Header = forwardRef(function ({ minimized, onToggleSize, startDrag }: Prop
                   <DropdownMenuSub>
                     <DropdownMenuSubTrigger>{engine}</DropdownMenuSubTrigger>
                     <DropdownMenuPortal>
-                      <DropdownMenuSubContent className="z-1002 border-1 border-solid border-border">
+                      <DropdownMenuSubContent className="z-1002 border-1 border-solid border-$color-border">
                         {(['unocss', 'tailwind'] as const).map((item) => (
                           <DropdownMenuItem
                             key={item}
@@ -156,7 +156,7 @@ const Header = forwardRef(function ({ minimized, onToggleSize, startDrag }: Prop
                   <DropdownMenuSub>
                     <DropdownMenuSubTrigger>{unit}</DropdownMenuSubTrigger>
                     <DropdownMenuPortal>
-                      <DropdownMenuSubContent className="z-1002 border-1 border-solid border-border">
+                      <DropdownMenuSubContent className="z-1002 border-1 border-solid border-$color-border">
                         {(['rem', 'px'] as const).map((item) => (
                           <DropdownMenuItem
                             key={item}
@@ -178,7 +178,7 @@ const Header = forwardRef(function ({ minimized, onToggleSize, startDrag }: Prop
                   <DropdownMenuSub>
                     <DropdownMenuSubTrigger>{scale}x</DropdownMenuSubTrigger>
                     <DropdownMenuPortal>
-                      <DropdownMenuSubContent className="z-1002 border-1 border-solid border-border">
+                      <DropdownMenuSubContent className="z-1002 border-1 border-solid border-$color-border">
                         {([1, 1.5, 2, 3, 4] as const).map((item) => (
                           <DropdownMenuItem
                             key={item}
@@ -195,7 +195,7 @@ const Header = forwardRef(function ({ minimized, onToggleSize, startDrag }: Prop
                   <DropdownMenuSub>
                     <DropdownMenuSubTrigger className="uppercase">{ext}</DropdownMenuSubTrigger>
                     <DropdownMenuPortal>
-                      <DropdownMenuSubContent className="z-1002 border-1 border-solid border-border">
+                      <DropdownMenuSubContent className="z-1002 border-1 border-solid border-$color-border">
                         {(['png', 'jpg', 'svg'] as const).map((item) => (
                           <DropdownMenuItem
                             key={item}
