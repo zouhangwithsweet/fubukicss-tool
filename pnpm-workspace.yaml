@@ -1,0 +1,2 @@
+patchedDependencies:
+  unocss-preset-shadcn: patches/unocss-preset-shadcn.patch

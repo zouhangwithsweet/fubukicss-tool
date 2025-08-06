@@ -1,0 +1,30 @@
+diff --git a/dist/index.cjs b/dist/index.cjs
+index 7b98529b46f248437aa09978c3690dafd9a2c19b..105ad38618f28fc49544b61fa854012b11c8d1b5 100644
+--- a/dist/index.cjs
++++ b/dist/index.cjs
+@@ -738,10 +738,6 @@ function presetShadcn(options = {}) {
+ 
+           ${generateCSSVars(options)}
+ 
+-          * {
+-            border-color: hsl(var(--border));
+-          }
+-
+           body {
+             color: hsl(var(--foreground));
+             background: hsl(var(--background));
+diff --git a/dist/index.mjs b/dist/index.mjs
+index 631ee1819f2497cd5a20d507f432f83e8af13e61..96a7393bece4e809600dc5461692d6cbf95febc5 100644
+--- a/dist/index.mjs
++++ b/dist/index.mjs
+@@ -734,10 +734,6 @@ function presetShadcn(options = {}) {
+ 
+           ${generateCSSVars(options)}
+ 
+-          * {
+-            border-color: hsl(var(--border));
+-          }
+-
+           body {
+             color: hsl(var(--foreground));
+             background: hsl(var(--background));

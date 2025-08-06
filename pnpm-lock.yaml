@@ -4,6 +4,11 @@ settings:
   autoInstallPeers: true
   excludeLinksFromLockfile: false
 
+patchedDependencies:
+  unocss-preset-shadcn:
+    hash: 6bdfb71fceee92f470a625d9f6b962c0d08d53dc680d9709ee1cb6e482481f84
+    path: patches/unocss-preset-shadcn.patch
+
 importers:
 
   .:
@@ -125,7 +130,7 @@ importers:
         version: 1.0.1(@unocss/preset-wind@0.62.1)(unocss@0.58.5(postcss@8.5.3)(rollup@4.41.0)(vite@6.3.5(@types/node@22.3.0)(jiti@2.4.2)))
       unocss-preset-shadcn:
         specifier: ^0.2.3
-        version: 0.2.3(unocss-preset-animations@1.0.1(@unocss/preset-wind@0.62.1)(unocss@0.58.5(postcss@8.5.3)(rollup@4.41.0)(vite@6.3.5(@types/node@22.3.0)(jiti@2.4.2))))(unocss@0.58.5(postcss@8.5.3)(rollup@4.41.0)(vite@6.3.5(@types/node@22.3.0)(jiti@2.4.2)))
+        version: 0.2.3(patch_hash=6bdfb71fceee92f470a625d9f6b962c0d08d53dc680d9709ee1cb6e482481f84)(unocss-preset-animations@1.0.1(@unocss/preset-wind@0.62.1)(unocss@0.58.5(postcss@8.5.3)(rollup@4.41.0)(vite@6.3.5(@types/node@22.3.0)(jiti@2.4.2))))(unocss@0.58.5(postcss@8.5.3)(rollup@4.41.0)(vite@6.3.5(@types/node@22.3.0)(jiti@2.4.2)))
       wxt:
         specifier: ^0.20.6
         version: 0.20.6(@types/node@22.3.0)(jiti@2.4.2)(rollup@4.41.0)
@@ -7705,7 +7710,7 @@ snapshots:
       '@unocss/preset-wind': 0.62.1
       unocss: 0.58.5(postcss@8.5.3)(rollup@4.41.0)(vite@6.3.5(@types/node@22.3.0)(jiti@2.4.2))
 
-  unocss-preset-shadcn@0.2.3(unocss-preset-animations@1.0.1(@unocss/preset-wind@0.62.1)(unocss@0.58.5(postcss@8.5.3)(rollup@4.41.0)(vite@6.3.5(@types/node@22.3.0)(jiti@2.4.2))))(unocss@0.58.5(postcss@8.5.3)(rollup@4.41.0)(vite@6.3.5(@types/node@22.3.0)(jiti@2.4.2))):
+  unocss-preset-shadcn@0.2.3(patch_hash=6bdfb71fceee92f470a625d9f6b962c0d08d53dc680d9709ee1cb6e482481f84)(unocss-preset-animations@1.0.1(@unocss/preset-wind@0.62.1)(unocss@0.58.5(postcss@8.5.3)(rollup@4.41.0)(vite@6.3.5(@types/node@22.3.0)(jiti@2.4.2))))(unocss@0.58.5(postcss@8.5.3)(rollup@4.41.0)(vite@6.3.5(@types/node@22.3.0)(jiti@2.4.2))):
     dependencies:
       unocss: 0.58.5(postcss@8.5.3)(rollup@4.41.0)(vite@6.3.5(@types/node@22.3.0)(jiti@2.4.2))
       unocss-preset-animations: 1.0.1(@unocss/preset-wind@0.62.1)(unocss@0.58.5(postcss@8.5.3)(rollup@4.41.0)(vite@6.3.5(@types/node@22.3.0)(jiti@2.4.2)))

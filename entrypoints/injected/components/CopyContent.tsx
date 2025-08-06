@@ -25,7 +25,7 @@ export const CopyContent: FC<PropsWithChildren> = (props) => {
   return (
     <div
       onClick={handleClick}
-      className="shrink-0 max-w-30 truncate px-1.25 py-.5 border-border border-1 border-solid rounded-sm bg-$color-bg-secondary hover:bg-$color-bg-tertiary"
+      className="shrink-0 max-w-30 truncate px-1.25 py-.5 border-$color-border border-1 border-solid rounded-sm bg-$color-bg-secondary hover:bg-$color-bg-tertiary"
     >
       {children}
     </div>

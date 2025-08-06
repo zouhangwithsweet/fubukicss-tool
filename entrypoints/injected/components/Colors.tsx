@@ -112,7 +112,7 @@ export const Colors = memo((props: { minimized?: boolean }) => {
             onClick={handleCopy(formatColor(c))}
           >
             <span
-              className="w-4 h-4 shrink-0 rounded-sm border-1 border-border border-solid box-border"
+              className="w-4 h-4 shrink-0 rounded-sm border-1 border-$color-border border-solid box-border"
               style={{
                 backgroundColor: formatColor(c),
               }}
