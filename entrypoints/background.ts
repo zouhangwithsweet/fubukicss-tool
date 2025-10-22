@@ -1,27 +1,43 @@
-const RULE_URL = 'https://raw.githubusercontent.com/ecomfe/tempad-dev/refs/heads/main/public/rules/figma.json'
+// fork from https://github.com/ecomfe/tempad-dev
+import rules from '@/public/rules/figma.json'
+import { RULES_URL } from '@/rewrite/shared'
+
+import type { Rules } from '../types/rewrite'
 
 const SYNC_ALARM = 'sync-rules'
 const SYNC_INTERVAL_MINUTES = 10
 
 async function fetchRules() {
-  const res = await fetch(RULE_URL, { cache: 'no-store' })
-  if (!res.ok) {
-    console.error('[tempad-dev] Failed to fetch rules:', res.statusText)
+  try {
+    let newRules: Rules
+
+    if (import.meta.env.DEV) {
+      newRules = rules as Rules
+      console.log('[tempad-dev] Loaded local rules (dev).')
+    } else {
+      const res = await fetch(RULES_URL, { cache: 'no-store' })
+      if (!res.ok) {
+        console.error('[tempad-dev] Failed to fetch rules:', res.statusText)
+        return
+      }
+
+      newRules = (await res.json()) as Rules
+    }
+
+    const oldIds = (await browser.declarativeNetRequest.getDynamicRules()).map(({ id }) => id)
+
+    await browser.declarativeNetRequest.updateEnabledRulesets({
+      disableRulesetIds: ['figma'],
+    })
+
+    await browser.declarativeNetRequest.updateDynamicRules({
+      removeRuleIds: oldIds,
+      addRules: newRules,
+    })
+    console.log(`[tempad-dev] Updated ${newRules.length} rule${newRules.length === 1 ? '' : 's'}.`)
+  } catch (error) {
+    console.error('[tempad-dev] Error fetching rules:', error)
   }
-
-  const newRules = await res.json()
-  const oldIds = (await browser.declarativeNetRequest.getDynamicRules()).map(({ id }) => id)
-
-  await browser.declarativeNetRequest.updateEnabledRulesets({
-    disableRulesetIds: ['figma'],
-  })
-
-  await browser.declarativeNetRequest.updateDynamicRules({
-    removeRuleIds: oldIds,
-    addRules: newRules,
-  })
-
-  console.log(`[tempad-dev] Updated ${newRules.length} rule${newRules.length === 1 ? '' : 's'}.`)
 }
 
 export default defineBackground(() => {

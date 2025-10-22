@@ -49,3 +49,4 @@ pnpm build
 
 - [figma-viewer-chrome-plugin](https://github.com/leadream/figma-viewer-chrome-plugin)
 - [transform-to-unocss-core](https://github.com/Simon-He95/transform-to-unocss-core)
+- [tempad-dev](https://github.com/ecomfe/tempad-dev) for rewrite logic

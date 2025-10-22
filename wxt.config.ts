@@ -14,10 +14,6 @@ export default defineConfig({
         resources: ['/injected.js', '/assets/injected.css'],
         matches: ['https://figma.com/*', 'https://www.figma.com/*'],
       },
-      {
-        resources: ['/figma.js'],
-        matches: ['https://www.figma.com/*'],
-      },
     ],
     permissions: ['declarativeNetRequest', 'declarativeNetRequestWithHostAccess', 'alarms'],
     host_permissions: [
