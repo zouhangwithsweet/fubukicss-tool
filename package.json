@@ -37,7 +37,7 @@
     "typescript": "^5.3.3",
     "unocss-preset-animations": "^1.0.1",
     "unocss-preset-shadcn": "^0.2.3",
-    "wxt": "^0.20.6"
+    "wxt": "^0.20.11"
   },
   "dependencies": {
     "@radix-ui/react-dropdown-menu": "^2.0.6",

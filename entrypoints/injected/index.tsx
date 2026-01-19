@@ -9,14 +9,12 @@ import 'uno.css'
 
 const sleep = (ms: number) => new Promise<true>((resolve) => setTimeout(() => resolve(true), ms))
 
-export default defineUnlistedScript(() => {
-  window.onload = async function () {
-    await waitFor(() => !!(window as any).figma && getCanvas() !== null && getLeftPanel() !== null)
-    await waitFor(() => sleep(50))
+export default defineUnlistedScript(async () => {
+  await waitFor(() => !!(window as any).figma && getCanvas() !== null && getLeftPanel() !== null)
+  await waitFor(() => sleep(50))
 
-    const app = document.createElement('div')
-    const root = ReactDOM.createRoot(app)
-    root.render(<App />)
-    document.querySelector('fubukicss')!.append(app)
-  }
+  const app = document.createElement('div')
+  const root = ReactDOM.createRoot(app)
+  root.render(<App />)
+  document.querySelector('fubukicss')!.append(app)
 })

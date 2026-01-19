@@ -11,7 +11,7 @@ export default defineConfig({
     description: 'one step to get css from figma',
     web_accessible_resources: [
       {
-        resources: ['/injected.js', '/assets/injected.css'],
+        resources: ['/injected.js', '/loader.js', '/assets/injected.css'],
         matches: ['https://figma.com/*', 'https://www.figma.com/*'],
       },
     ],
